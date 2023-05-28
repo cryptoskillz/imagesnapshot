@@ -1,0 +1,19 @@
+************
+Hi,
+************
+
+Your request for {{ tranches }} tranches of {{ product_name }} has been accepted. Please pay now.
+Amount Due: {{total}}
+
+
+Pay this Invoice ( {{ action_url }} )
+
+
+Total
+
+{{total}}
+
+
+Cheers,
+The {{ product_name }} Team
+

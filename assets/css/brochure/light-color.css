@@ -1,0 +1,129 @@
+
+
+body {
+    background-color: #fff;
+}
+nav ul li a,
+.feature-icon > span i,
+.feature-info h3,
+p,
+.about-num span,
+.abt-info h3,
+.about-list > a,
+.service-info h3,
+.service-main-info h3,
+.price-head h4,
+.price-head ul li h3,
+.price-head ul li > span,
+.price > a,
+.heading h3,
+.user-comment p,
+.user-info h3,
+.user-info > span,
+.blog-info h3 a,
+.blog-info h3,
+.blog-catgs li a,
+.cms-links li,
+.widget-title,
+.widget > p,
+.widget-contact ul li span,
+.mobile-menu-btn a,
+.banner-text h3,
+.banner-text h2,
+.banner-text p,
+.banner-text > a,
+.up-social-links ul li a,
+.form-group,
+.js-ajax-form label,
+.btn-sbmt {
+	color: #333333;
+}
+.lyr4,
+.about-list > a,
+.price > a,
+.btn-sbmt {
+	border-color: #333333;
+}
+.banner-text > a:hover,
+.about-list > a:hover {
+	background-color: #897ffd;
+	color: #fff;
+	border-color: transparent;
+}
+.feature-icon > span{
+	background-color: #b6e5e6;
+}
+.features:before {
+	background-color: rgba(255,255,255,0.90);
+	box-shadow: 0 0 40px rgba(196,204,245,0.35);
+}
+.bg3 {
+	background-image: url(../../images/brochure/brochure/bg3.png);
+}
+.about-num:before {
+	background-image: url(../../images/brochure/brochure/poly.png);
+}
+.bg4 {
+	background-image: url(../../images/brochure/brochure/bg4.png);
+}
+.service-details > span {
+	color: #b6e5e6;
+}
+.price:hover {
+	background-image: url(../../images/brochure/price-bg.png);
+}
+.user-comment:before {
+	background-image: url(../../images/brochure/comm.png);
+}
+.testimonial-nav:after {
+	background-color: #7fdcda;
+}
+.bg6 {
+	background-image: url(../../images/brochure/bg6.png);
+}
+.bg5 {
+	background-image: url(../../images/brochure/bg5.png);
+}
+.wait-sec {
+	background-color: #b6e5e6;
+	box-shadow: 0 0 45px rgba(196,204,245,0.35);
+}
+.footer-bg {
+	background-image: url(../../images/brochure/footer-bg.png);
+}
+.contact-form form input,
+.contact-form form textarea {
+	background-color: rgba(255,255,255,0.80);
+	box-shadow: 2px 2px 20px rgba(196,204,245,0.35);
+	color: #333333;
+}
+.testimonial-nav:before {
+	background-color: #3c3c44;
+}
+
+header.sticky {
+	background-color: rgba(255,255,255,0.80);
+}
+
+.blog-info h3 a:hover {
+	color: #897ffd;
+}
+
+.double-bounce1,
+.double-bounce2 {
+	background-color: #897ffd;
+}
+nav ul li.active a {
+	color: #897ffd;
+}
+.mobile-menu ul li a:hover,
+.mobile-menu ul li.active a,
+.up-social-links ul li a:hover,
+nav ul li a:hover,
+.mb-social-links li a:hover {
+	color: #897ffd;
+}
+
+.main-section {
+	background-image: url(../../images/brochure/main-sec-bg.png);
+}

@@ -1,0 +1,188 @@
+🚧 'wrangler pages <command>' is a beta command. Please report any issues to https://github.com/cloudflare/wrangler2/issues/new/choose
+Compiling worker to "/var/folders/9j/42kmzbhx6vdbwq_w7k4vdvr00000gn/T/functionsWorker-0.8565744169734062.js"...
+Compiled Worker successfully.
+Serving at http://localhost:8788/
+GET / 200 OK (103.12ms)
+GET /assets/css/brochure/animate.css 200 OK (22.24ms)
+GET /assets/css/brochure/bootstrap.min.css 200 OK (2.85ms)
+GET /assets/css/brochure/font-awesome.min.css 200 OK (7.13ms)
+GET /assets/css/brochure/materialdesignicons.min.css 200 OK (1.37ms)
+GET /assets/css/brochure/light-color.css 200 OK (5.36ms)
+GET /assets/css/brochure/style.css 200 OK (0.99ms)
+GET / 200 OK (5.65ms)
+GET /assets/css/brochure/responsive.css 200 OK (4.60ms)
+GET /assets/css/brochure/animate.css 200 OK (1.45ms)
+GET /assets/css/brochure/bootstrap.min.css 200 OK (1.33ms)
+GET /assets/css/brochure/font-awesome.min.css 200 OK (1.21ms)
+GET /assets/js/brochure/jquery.min.js 200 OK (13.26ms)
+GET /assets/js/brochure/popper.js 200 OK (3.15ms)
+GET /assets/js/brochure/script.js 200 OK (6.60ms)
+GET /assets/js/brochure/bootstrap.min.js 200 OK (9.87ms)
+GET /assets/js/brochure/html5lightbox.js 200 OK (7.60ms)
+GET /assets/js/brochure/jquery.validate.min.js 200 OK (3.72ms)
+GET /assets/js/brochure/validator.js 200 OK (1.88ms)
+GET /assets/images/brochure/banner-img.png 200 OK (1.38ms)
+GET /assets/css/brochure/materialdesignicons-webfont.woff2?v=2.3.54 200 OK (1.47ms)
+GET / 200 OK (1.79ms)
+GET /assets/images/brochure/srv-img1.png 200 OK (1.18ms)
+GET /assets/images/brochure/main-sec-bg.png 200 OK (1.01ms)
+GET /assets/images/brochure/brochure/bg3.png 200 OK (1.03ms)
+GET /assets/images/brochure/brochure/poly.png 200 OK (1.87ms)
+GET /assets/js/brochure/froogaloop2.min.js 200 OK (1.03ms)
+GET /assets/css/brochure/animate.css 200 OK (1.02ms)
+GET /assets/css/brochure/bootstrap.min.css 200 OK (0.93ms)
+GET /assets/css/brochure/font-awesome.min.css 200 OK (0.89ms)
+GET /assets/css/brochure/materialdesignicons.min.css 200 OK (2.10ms)
+GET /assets/css/brochure/light-color.css 200 OK (2.06ms)
+GET /assets/css/brochure/style.css 200 OK (4.00ms)
+GET /assets/css/brochure/light-color.css 200 OK (5.68ms)
+GET /assets/css/brochure/materialdesignicons.min.css 200 OK (2.45ms)
+GET /assets/css/brochure/style.css 200 OK (2.25ms)
+GET /assets/css/brochure/responsive.css 200 OK (1.94ms)
+GET /assets/css/brochure/bootstrap.min.css.map 200 OK (1.98ms)
+GET /assets/css/brochure/responsive.css 200 OK (2.37ms)
+GET /assets/js/brochure/jquery.min.js 200 OK (3.13ms)
+GET /assets/js/brochure/popper.js 200 OK (2.44ms)
+GET /assets/js/brochure/bootstrap.min.js 200 OK (3.98ms)
+GET /assets/js/brochure/html5lightbox.js 200 OK (2.44ms)
+GET /assets/js/brochure/jquery.validate.min.js 200 OK (2.65ms)
+GET /assets/js/brochure/validator.js 200 OK (3.64ms)
+GET /assets/js/brochure/script.js 200 OK (0.72ms)
+GET /assets/images/brochure/banner-img.png 200 OK (1.40ms)
+GET /assets/images/brochure/srv-img1.png 200 OK (3.04ms)
+GET /assets/images/brochure/banner-img.png 200 OK (4.48ms)
+GET /assets/images/brochure/main-sec-bg.png 200 OK (1.58ms)
+GET /assets/css/brochure/materialdesignicons.min.css.map 200 OK (4.13ms)
+GET /assets/css/brochure/fontawesome-webfont.woff2?v=4.7.0 200 OK (2.90ms)
+GET /assets/images/brochure/brochure/bg3.png 200 OK (2.14ms)
+GET /assets/js/brochure/froogaloop2.min.js 200 OK (2.30ms)
+GET /assets/images/brochure/brochure/poly.png 200 OK (3.49ms)
+GET /assets/css/brochure/materialdesignicons-webfont.woff2?v=2.3.54 200 OK (2.43ms)
+GET /assets/images/brochure/main-sec-bg.png 200 OK (6.00ms)
+GET /assets/images/brochure/srv-img1.png 200 OK (3.00ms)
+GET /assets/css/brochure/materialdesignicons-webfont.woff2?v=2.3.54 200 OK (1.97ms)
+GET /assets/js/brochure/jquery.min.js 200 OK (2.34ms)
+GET /assets/js/brochure/bootstrap.min.js 200 OK (2.27ms)
+GET /assets/js/brochure/popper.js 200 OK (1.78ms)
+GET /assets/js/brochure/html5lightbox.js 200 OK (1.29ms)
+GET /assets/js/brochure/jquery.validate.min.js 200 OK (0.83ms)
+GET /assets/js/brochure/validator.js 200 OK (3.36ms)
+GET /assets/js/brochure/script.js 200 OK (1.98ms)
+GET /assets/images/brochure/brochure/bg3.png 200 OK (1.59ms)
+GET /assets/images/brochure/brochure/poly.png 200 OK (1.43ms)
+GET /assets/js/brochure/froogaloop2.min.js 200 OK (1.34ms)
+🚧 'wrangler pages <command>' is a beta command. Please report any issues to https://github.com/cloudflare/wrangler2/issues/new/choose
+Compiling worker to "/var/folders/9j/42kmzbhx6vdbwq_w7k4vdvr00000gn/T/functionsWorker-0.12555953667988895.js"...
+Compiled Worker successfully.
+/usr/local/lib/node_modules/wrangler/wrangler-dist/cli.js:16264
+            throw ex;
+            ^
+
+Error: listen EADDRINUSE: address already in use :::8788
+    at Server.setupListenHandle [as _listen2] (node:net:1334:16)
+    at listenInCluster (node:net:1382:12)
+    at Server.listen (node:net:1469:7)
+    at /usr/local/lib/node_modules/wrangler/node_modules/@miniflare/http-server/src/index.ts:424:12
+    at new Promise (<anonymous>)
+    at startServer (/usr/local/lib/node_modules/wrangler/node_modules/@miniflare/http-server/src/index.ts:423:10)
+    at Object.handler (/usr/local/lib/node_modules/wrangler/wrangler-dist/cli.js:123861:22)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1361:8)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 8788
+}
+🚧 'wrangler pages <command>' is a beta command. Please report any issues to https://github.com/cloudflare/wrangler2/issues/new/choose
+Compiling worker to "/var/folders/9j/42kmzbhx6vdbwq_w7k4vdvr00000gn/T/functionsWorker-0.6374742834442606.js"...
+Compiled Worker successfully.
+/usr/local/lib/node_modules/wrangler/wrangler-dist/cli.js:16264
+            throw ex;
+            ^
+
+Error: listen EADDRINUSE: address already in use :::8788
+    at Server.setupListenHandle [as _listen2] (node:net:1334:16)
+    at listenInCluster (node:net:1382:12)
+    at Server.listen (node:net:1469:7)
+    at /usr/local/lib/node_modules/wrangler/node_modules/@miniflare/http-server/src/index.ts:424:12
+    at new Promise (<anonymous>)
+    at startServer (/usr/local/lib/node_modules/wrangler/node_modules/@miniflare/http-server/src/index.ts:423:10)
+    at Object.handler (/usr/local/lib/node_modules/wrangler/wrangler-dist/cli.js:123861:22)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1361:8)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 8788
+}
+GET / 200 OK (290.44ms)
+GET / 200 OK (72.41ms)
+
+<--- Last few GCs --->
+
+[3874:0x130008000]    60190 ms: Mark-sweep (reduce) 1952.4 (2089.4) -> 1951.4 (2089.7) MB, 6741.1 / 0.5 ms  (average mu = 0.145, current mu = 0.007) allocation failure scavenge might not succeed
+[3874:0x130008000]    71695 ms: Mark-sweep (reduce) 1953.7 (2090.2) -> 1947.8 (2090.7) MB, 10718.4 / 0.7 ms  (average mu = 0.095, current mu = 0.068) allocation failure scavenge might not succeed
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+ 1: 0x100d5636c node::Abort() [/usr/local/bin/node]
+ 2: 0x100d564f4 node::errors::TryCatchScope::~TryCatchScope() [/usr/local/bin/node]
+ 3: 0x100ea3378 v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [/usr/local/bin/node]
+ 4: 0x100ea330c v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [/usr/local/bin/node]
+ 5: 0x101026afc v8::internal::Heap::GarbageCollectionReasonToString(v8::internal::GarbageCollectionReason) [/usr/local/bin/node]
+ 6: 0x10102561c v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/usr/local/bin/node]
+ 7: 0x1010308f8 v8::internal::Heap::AllocateRawWithLightRetrySlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/usr/local/bin/node]
+ 8: 0x10103098c v8::internal::Heap::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/usr/local/bin/node]
+ 9: 0x101003844 v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType, v8::internal::AllocationOrigin) [/usr/local/bin/node]
+10: 0x101338b20 v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [/usr/local/bin/node]
+11: 0x10164d08c Builtins_CEntry_Return1_DontSaveFPRegs_ArgvOnStack_NoBuiltinExit [/usr/local/bin/node]
+12: 0x10160c12c Builtins_ArrayIteratorPrototypeNext [/usr/local/bin/node]
+13: 0x1015e0d18 Builtins_InterpreterEntryTrampoline [/usr/local/bin/node]
+14: 0x1015e0d18 Builtins_InterpreterEntryTrampoline [/usr/local/bin/node]
+15: 0x1015e0d18 Builtins_InterpreterEntryTrampoline [/usr/local/bin/node]
+16: 0x1015e0d18 Builtins_InterpreterEntryTrampoline [/usr/local/bin/node]
+17: 0x1015e0d18 Builtins_InterpreterEntryTrampoline [/usr/local/bin/node]
+18: 0x1015e0d18 Builtins_InterpreterEntryTrampoline [/usr/local/bin/node]
+19: 0x1015e0d18 Builtins_InterpreterEntryTrampoline [/usr/local/bin/node]
+20: 0x1016124ec Builtins_GeneratorPrototypeNext [/usr/local/bin/node]
+21: 0x1015deb0c Builtins_JSEntryTrampoline [/usr/local/bin/node]
+22: 0x1015de7a4 Builtins_JSEntry [/usr/local/bin/node]
+23: 0x100fb3220 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/usr/local/bin/node]
+24: 0x100fb361c v8::internal::(anonymous namespace)::InvokeWithTryCatch(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/usr/local/bin/node]
+25: 0x100fb35a8 v8::internal::Execution::TryCall(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*, v8::internal::Execution::MessageHandling, v8::internal::MaybeHandle<v8::internal::Object>*, bool) [/usr/local/bin/node]
+26: 0x101261a64 v8::internal::SourceTextModule::ExecuteModule(v8::internal::Isolate*, v8::internal::Handle<v8::internal::SourceTextModule>) [/usr/local/bin/node]
+27: 0x101261270 v8::internal::SourceTextModule::InnerModuleEvaluation(v8::internal::Isolate*, v8::internal::Handle<v8::internal::SourceTextModule>, v8::internal::ZoneForwardList<v8::internal::Handle<v8::internal::SourceTextModule> >*, unsigned int*) [/usr/local/bin/node]
+28: 0x101260dc8 v8::internal::SourceTextModule::Evaluate(v8::internal::Isolate*, v8::internal::Handle<v8::internal::SourceTextModule>) [/usr/local/bin/node]
+29: 0x101260cac v8::internal::SourceTextModule::EvaluateMaybeAsync(v8::internal::Isolate*, v8::internal::Handle<v8::internal::SourceTextModule>) [/usr/local/bin/node]
+30: 0x100eacdec v8::Module::Evaluate(v8::Local<v8::Context>) [/usr/local/bin/node]
+31: 0x100d22388 node::loader::ModuleWrap::Evaluate(v8::FunctionCallbackInfo<v8::Value> const&) [/usr/local/bin/node]
+32: 0x1015e33f4 Builtins_CallApiCallback [/usr/local/bin/node]
+33: 0x105f89474 
+34: 0x101610314 Builtins_AsyncFunctionAwaitResolveClosure [/usr/local/bin/node]
+35: 0x1016951b8 Builtins_PromiseFulfillReactionJob [/usr/local/bin/node]
+36: 0x1016026f4 Builtins_RunMicrotasks [/usr/local/bin/node]
+37: 0x1015de9e4 Builtins_JSRunMicrotasksEntry [/usr/local/bin/node]
+38: 0x100fb31e8 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/usr/local/bin/node]
+39: 0x100fb361c v8::internal::(anonymous namespace)::InvokeWithTryCatch(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/usr/local/bin/node]
+40: 0x100fb36e4 v8::internal::Execution::TryRunMicrotasks(v8::internal::Isolate*, v8::internal::MicrotaskQueue*, v8::internal::MaybeHandle<v8::internal::Object>*) [/usr/local/bin/node]
+41: 0x100fd648c v8::internal::MicrotaskQueue::RunMicrotasks(v8::internal::Isolate*) [/usr/local/bin/node]
+42: 0x100fd6d20 v8::internal::MicrotaskQueue::PerformCheckpoint(v8::Isolate*) [/usr/local/bin/node]
+43: 0x100ca5d8c node::InternalCallbackScope::Close() [/usr/local/bin/node]
+44: 0x100ca57c4 node::InternalCallbackScope::~InternalCallbackScope() [/usr/local/bin/node]
+45: 0x100d592c4 node::fs::FileHandle::CloseReq::Resolve() [/usr/local/bin/node]
+46: 0x100d6c008 node::fs::FileHandle::ClosePromise()::$_0::__invoke(uv_fs_s*) [/usr/local/bin/node]
+47: 0x1015bf144 uv__work_done [/usr/local/bin/node]
+48: 0x1015c28a4 uv__async_io [/usr/local/bin/node]
+49: 0x1015d45b8 uv__io_poll [/usr/local/bin/node]
+50: 0x1015c2d34 uv_run [/usr/local/bin/node]
+51: 0x100ca6e00 node::SpinEventLoop(node::Environment*) [/usr/local/bin/node]
+52: 0x100d8f6f4 node::NodeMainInstance::Run(int*, node::Environment*) [/usr/local/bin/node]
+53: 0x100d8f3c0 node::NodeMainInstance::Run(node::EnvSerializeInfo const*) [/usr/local/bin/node]
+54: 0x100d282dc node::Start(int, char**) [/usr/local/bin/node]
+55: 0x1054690f4 

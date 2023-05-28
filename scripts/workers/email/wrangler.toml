@@ -1,0 +1,8 @@
+name = "email"
+main = "src/index.js"
+compatibility_date = "2023-01-14"
+
+[vars]
+EMAILFROM = "info@cjmtrading.xyz"
+EMAILAPI = "https://api.postmarkapp.com/"
+EMAILTOKEN = "3be36b11-3ed4-416c-9a69-e10cd84b8c6c"

@@ -1,0 +1,10 @@
+---
+layout: layout.njk
+permalink: /project/data/new/
+---
+<script>
+  let theFields = "name,url";
+  //main settings array to handle all the variations of rendering.
+  const theSettings = {"checkAdmin":1,"tableSchema":0,"allowOnlyOne":0,"editButton":1,"deleteButton":1,"customButton":"","customSelect":"","localDropDown":"","localReplace":"","table":"projectData","formatFields":"","fields":theFields,"crumb":"{{ crumb }}","foreignKey":"","lookUps":"","title":""}
+</script>
+{% include "admin/table-new.njk" %}

@@ -1,0 +1,54 @@
+---
+layout: layout.njk
+permalink: /projects/
+crumb : /project/
+fields : ["id","name","createdAt"]
+headerFields : ["id","Name","Date Created"]
+title : projects
+---
+
+
+<script>
+
+    /*
+    This custom select is used to render a drop down of options items. Currenlty is it only used on level 1 index
+    */
+    let customSelect = `
+            <select onchange="projectSelectChange([id],this)" class="form-select" aria-label="Project select" name="propertySelect-[counter]" id="propertySelect-[counter]">
+                <option value="0">Please select</option>
+                <option value="/project/data/">Data</option>
+        </select>`;
+        //Local look up takes a field from the returned API call and replaces with something that is easier to understand
+         
+        let localReplace =  [
+        {"field": "state",
+        "values": ['0','1','2'],
+        "replaceValues": ['Crowdfund','Sold','Rented']},
+        {"field": "currentlyRented",
+        "values": ['0','1'],
+        "replaceValues": ['No','Yes']}
+    ]
+
+        let formatFields = [{"field":"internationalCost","function":"formatCurencyUSD(tmpValue)"}]
+
+        //these are the fields that we want to return, it gets this from the front matter data at the top of this file. 
+        //note : we could do this cleaner
+        let theFields = "{% for field in fields %}{% if loop.last %}{{ field }}{% else %}{{ field }},{% endif %}{% endfor %}";
+        let title = `{{env.LEVEL1NAME | capitalize }}`;
+
+        //main settings array to handle all the variations of rendering.
+        const theSettings = {"checkAdmin":1,"tableSchema":0,"allowOnlyOne":0,"editButton":1,"deleteButton":1,"customButton":"","customSelect":customSelect,"localDropDown":"","localReplace":localReplace,"table":"projects","formatFields":formatFields,"fields":theFields,"crumb":"{{ crumb }}","foreignKey":"","lookUps":"","title":title}
+  
+    
+    
+
+   
+</script>
+{% set theJs %}
+    {% include 'admin/table-index.js' %}
+{% endset %}
+<script>
+    //clear the currentDataItem
+    window.localStorage.currentDataItemId = "";
+</script>
+{%  include "admin/table-index.njk" %}

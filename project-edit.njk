@@ -1,0 +1,10 @@
+---
+layout: layout.njk
+permalink: /project/edit/
+---
+<script>
+   let theFields = "id,name"
+   const theSettings = {"checkAdmin":0,"tableSchema":0,"allowOnlyOne":0,"editButton":1,"deleteButton":1,"customButton":"","customSelect":"","localDropDown":"","localReplace":"","table":"projects","formatFields":"","fields":theFields,"crumb":"{{ crumb }}","foreignKey":"propertyId","lookUps":"","title":"edit project"}
+ </script>
+{% include "admin/table-edit.njk" %}
+

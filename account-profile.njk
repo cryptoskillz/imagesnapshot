@@ -1,0 +1,28 @@
+---
+layout: layout.njk
+permalink: /profile/
+---
+{% set theJs %}
+        {% include 'admin/users-generic.js' %}
+
+{% endset %}
+<!-- Page Heading -->
+<h1 class="h3 mb-4 text-gray-800">Profile</h1>
+<p class="mb-4">
+</p>
+<div class="alert alert-success  d-none" role="alert" id="accountsSuccess">
+</div>
+<div class="alert alert-danger  d-none" role="alert" id="accountsAlert">
+</div>
+<div class="form-group">
+    <input type="email" class="form-control form-control-user" id="inp-username" aria-describedby="emailHelp" placeholder="Enter Username...">
+   	<span class="text-danger d-none" id="error-username">Invalid Username </span>  
+</div>
+<button class="btn btn-primary btn-user btn-block" id="btn-profile-update">
+    Update
+</button>
+{% if env.ENVIRONMENT == 'local' %}
+    <script type="text/javascript">{{theJs | safe}}</script>
+{% else %}
+    <script type="text/javascript">{{theJs | jsmin | safe}}</script>
+{% endif %}

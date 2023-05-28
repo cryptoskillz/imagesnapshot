@@ -1,0 +1,9 @@
+---
+layout: login-layout.njk
+permalink: /create-account/
+---
+{% if env.CANCREATEACCOUNT == 1 %}
+    {% include "account-create.njk" %}
+{% else %}
+    {% include "account-not-allowed.njk" %}
+{% endif %}
