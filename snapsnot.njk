@@ -1,0 +1,30 @@
+---
+layout: layout.njk
+permalink: /project/data/snapshot/
+---
+{% set theJs %}
+    {% include 'snapshot.js' %}
+{% endset %}
+<div class="alert alert-success  d-none" role="alert" id="accountsSuccess">
+</div>
+<div class="alert alert-danger  d-none" role="alert" id="accountsAlert">
+</div>
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800" id="data-header">processing Snapshot(s)</h1>
+        <a href="/dashboard/" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-backward fa-sm text-white-50"></i> Back</a>
+    </div>
+<p class="mb-4">
+</p>
+<div class="form-group">
+<div id="imageDetails"></div>
+
+<div id="imageDiv"></div>
+</div>
+
+{% if env.ENVIRONMENT == 'local' %}
+    <script type="text/javascript">{{theJs | safe}}</script>
+{% else %}
+    <script type="text/javascript">{{theJs | jsmin | safe}}</script>
+{% endif %}
+

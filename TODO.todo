@@ -11,85 +11,30 @@ dashboard
 
  ✔ add a new project @done (23-05-27 17:46)
 
+timeline
+
+ ☐ show all the images we have took for the user in a timeline
+ ☐ set the second to last image as the baseline
+ ☐ compare from baseline to new image
+
+
  FUNCTIONS API
 
- projects.js
 
- ✔ port from KV to database @done (23-05-27 17:47)
- ✔ build table to store the project @done (23-05-27 17:47)
+snapshot
 
- table.js
-
- ✔ add an admin clone of table js that returns everything for all the projects.  We still want to keep it single tenant for create / edit / delete @done (23-05-27 17:47)
-
-projectdata.js
-
-
- ✔ update all the functions to use a bearer token (do we want to make edit etc admin only?) @done (23-05-27 17:47)
- ✔ set the correct data id on the edit @done (23-05-25 14:36)
- ✔ make the back button just go back to project data it does not have to use history back @done (23-05-25 14:36)
- ✔ code the delete method in projectdata @done (23-05-25 18:13)
- ✔ code the view method @done (23-05-25 16:31)
- ✔ update the import function so we store it in this format. @done (23-05-25 21:00)
- ✔ return the table schema as part of the call or a seperate endpoint @done (23-05-23 14:02)
- ✔ recode the get query so it pulls all the records by project id and groups by projectDataId this is weird and recursive but allows to re poll the table @done (23-05-23 14:02)
- ✔ add a loop for the above query and pull the query again and this time pull everything that matches this id @done (23-05-23 14:02)
- ✔ build a results object that is the schema (could be another end point) and the data flattened based on the schema @done (23-05-23 14:02)
- ✔ recode the render table function to use this new format. @done (23-05-25 01:46)
- ✔ Check the edit button works renderTable @done (23-05-25 21:50)
- ✔ Check the delete buttons works on renderTable @done (23-05-25 21:50)
- ✔ Check the view button works on renderTable @done (23-05-25 01:58)
- ✔ project data edit code the update method @done (23-05-25 14:25)
- ✔ add a put element to the projectdata.js API @done (23-05-25 14:26)
-
- export.js
-
- ☐ user the secret to verify
- ☐ add the field headers to the data (maybe)
- ☐ in the dropdown case we may not need to fetch the data to do the checks we could do this all at the export phase which would speed things up a litte (next version)
-
- schema
-
- ✔ refactor the schema.js @done (23-05-26 14:05)
- ✔ add the api method @done (23-05-26 14:05)
-
- template
-
- ☐ add a template library
- ☐ add AI template generation
- ☐ clean up the design
- ☐ maybe add a template name as well as template render name ie "awesome template 1" and "//${{id}_{{name}}"
- ☐ make codemirror show as right now you have to click it, it is something to do with the refresh i think.
- ☐ update place holder for template name
- ☐ add a hide preview button
- ☐ add a show mobile button
- ☐ add a hide code button
-
- download
-
- add record
-
- publish
-
- ☐ publish to s3
- ☐ publish to github pages
- ☐ publish to cloudflare
-
-
-
- Login
-
- ✔ port to d1 @done (23-05-19 22:31)
-
-
- SQL
-
- ✔ clean up sql file @done (23-05-19 22:31)
- ☐ add it to the readme
- ✔ add the project table (make this a primitive going forward) @done (23-05-19 22:31)
-
- MISC
-
- ☐ change the cypress local data if (window.location.pathname != `/${level1name}/`) {
-
-
+ ✔ call it from the view @done (23-05-30 14:32)
+ ✔ store the image id in the database @done (23-05-30 14:32)
+ ✔ let the user view it in the browser @done (23-05-30 14:32)
+ ✔ snapshot all the images for the project @done (23-05-31 17:57)
+ ✔ get the settings as the firt call in snapshot @done (23-05-31 17:57)
+ ✔ snapshot all the image variants and design it better @done (23-05-31 17:57)
+ ✔ add the useragents to a sql table for the project @done (23-05-31 17:57)
+ ✔ return the data not as an image but as an array of images / sizes so we can render them out. @done (23-05-31 17:57)
+ ✔ make it get all the images if you dont pass up a height and width and / or useragent @done (23-05-31 17:57)
+ ✔ update the screen shot in the include file to show the dymanic view port sizes and or multipile images @done (23-05-31 17:57)
+ ☐ add the useragent and viewport in the return
+ ☐ chnage the repsonse to json 
+ ☐ replace the custome XHR (no longer required) and use the generic one 
+ ☐ create the view to show each image site / browser have thumbnail for each size and an icon for each browser type
+ ☐ show return / the baseline

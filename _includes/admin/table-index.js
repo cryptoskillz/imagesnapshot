@@ -12,7 +12,8 @@ let lookUpData = "";
 let level1Data;
 
 /*
-This function handles the property select
+This function handles the project select
+
 */
 let projectSelectChange = (id, theElement) => {
     //clear the current element
@@ -45,6 +46,7 @@ let projectSelectChange = (id, theElement) => {
 
     }
 }
+
 
 whenDocumentReady(isReady = () => {
     /*

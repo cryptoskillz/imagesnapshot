@@ -77,6 +77,19 @@ curl "http://127.0.0.1:8787" \
 }'
 
 
+curl  "https://chrome.browserless.io/screenshot?token=62803a1e-84c3-48a6-b3e1-505c4fad2e22" \
+ -X POST \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "url": "https://purdyandfigg.com/",
+  "gotoOptions": {
+    "waitUntil": "networkidle2",
+  }
+}'
+
+
+
  */
 
 

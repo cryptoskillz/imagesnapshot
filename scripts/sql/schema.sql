@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS projects;
+DROP TABLE IF EXISTS projectSnapShots;
 DROP TABLE IF EXISTS projectData;
-
 DROP TABLE IF EXISTS projectImages;
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS userAccess;
@@ -18,7 +18,25 @@ CREATE TABLE "projects" (
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
-INSERT INTO "projects" ("id","guid","name") VALUES(1, '99ad01ac-062d-44f1-3c9d-69e1bf815700','Project 1');
+INSERT INTO "projects" ("id","guid","name") VALUES (1, '99ad01ac-062d-44f1-3c9d-69e1bf815700','Purdy');
+
+CREATE TABLE "projectSnapShots" (
+	"id"	INTEGER,
+	"projectId" INTEGER,
+	"screenWidth" INTEGER,
+	"screenHeight" INTEGER,	
+	"userAgentId" INTEGER,
+	"isDeleted" INTEGER DEFAULT 0,
+	"createdAt" TEXT DEFAULT CURRENT_TIMESTAMP,
+	"updatedAt" TEXT,
+	"publishedAt" TEXT DEFAULT CURRENT_TIMESTAMP,
+	"deletedAt" TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userAgentId") VALUES(1,800,360,1);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userAgentId") VALUES(1,1024,1280,1);
+
 
 CREATE TABLE "projectData" (
 	"id" INTEGER,
@@ -38,18 +56,19 @@ INSERT INTO "projectData" ("projectId","name","url") VALUES(1,'purdy home page',
 
 CREATE TABLE "projectImages" (
 	"id"	INTEGER,
-	"propertyId" INTEGER,
+	"projectId" INTEGER,
+	"projectDataId" INTEGER,
+	"kvId" INTEGER,
 	"cfid"	INTEGER,
 	"filename"	TEXT,
 	"url" TEXT,
+	"baseUrl" TEXT,
 	"draft" INTEGER DEFAULT 1,
 	"isDeleted" INTEGER DEFAULT 0,
 	"deletedAt" TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
-
-INSERT INTO "project_images" ("propertyId","cfid","filename","url") VALUES(1, '99ad01ac-062d-44f1-3c9d-69e1bf815700','Dcondo-Sign-Chiang-Mai-rental-condos-1.webp','https://imagedelivery.net/9dYZtR12J2uzlEZe4Joa5w/99ad01ac-062d-44f1-3c9d-69e1bf815700/public');
 
 
 
