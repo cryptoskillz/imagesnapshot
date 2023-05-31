@@ -16,11 +16,20 @@ permalink: /project/data/snapshot/
     </div>
 <p class="mb-4">
 </p>
-<div class="form-group">
-<div id="imageDetails"></div>
+    <div id="imageDetails" class="d-none">
+        <a href="javascript:clickBrowser('Chrome')"><i class="fa-brands fa-chrome" alt="Chrome"></i></a>
+        <a href="javascript:clickBrowser('Edge')"><i class="fa-brands fa-edge" alt="Edge"></i></a>
+        <a href="javascript:clickBrowser('Firefox')"><i class="fa-brands fa-firefox" alt="Firefox"></i></a>
+        <a href="javascript:clickBrowser('Safari')"><i class="fa-brands fa-safari" alt="Safari"></i></a>
+    </div>
+    <div id="osDetails" class="d-none">
+        <label for="cars">Choose an OS:</label>
+        <select onchange="osSelectChange(this)" name="osSelect" id="osSelect">
+        </select>
+    </div>
+    <div id="thumbnailDiv"></div>
 
-<div id="imageDiv"></div>
-</div>
+    <div id="imageDiv"></div>
 
 {% if env.ENVIRONMENT == 'local' %}
     <script type="text/javascript">{{theJs | safe}}</script>

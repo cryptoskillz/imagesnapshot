@@ -1,16 +1,69 @@
 //get the project
 let project = JSON.parse(window.localStorage.currentDataItem);
+//store the browser types
+let userAgents;
+let snapShots = [];
 
 let whenDocumentReady = (f) => {
     /in/.test(document.readyState) ? setTimeout('whenDocumentReady(' + f + ')', 9) : f()
 }
 
+//thumbnail click function
+const clickThumbnail = (id) => {
+    //get the element id
+    const thumbnailElement = document.getElementById("imageDiv");
+    //show the image
+    thumbnailElement.innerHTML = `No baseline selected<br><img src="${apiUrl}image/image/?imageId=${snapShots[id].imageId}" />`;
+}
+
+const osSelectChange = (theElement) => {
+    //render thumbnails
+    const thumbnailElement = document.getElementById("thumbnailDiv");
+    //set the image html element
+    let imageHtml = "";
+    //loop through the image results
+    for (var i = 0; i < snapShots.length; ++i) {       
+        //render out the thumb nails
+        imageHtml = imageHtml + `<a href="javascript:clickThumbnail(${i})"><img src="https://placehold.co/100x100?text=${snapShots[i].width}x${snapShots[i].height}"/> </a>`; 
+    }
+    //update the dom
+    thumbnailElement.innerHTML = imageHtml;
+}
+
+//this handles the browser click
+const clickBrowser = (browser) => {
+    // Get a reference to the select element
+    const selectElement = document.getElementById("osSelect");
+    // Remove all existing options
+    while (selectElement.options.length > 0) {
+        selectElement.remove(0);
+    }
+
+    // Create a new option element for the please select
+    const option = document.createElement("option");
+    option.value = ""; // Set the value of the option
+    option.text = "Please select"; // Set the text displayed for the option
+    selectElement.appendChild(option);
+    //loop through the user aagents
+    for (var i = 0; i < userAgents.length; ++i) {
+        if (userAgents[i].browserDefault == browser) {
+            //make an option
+            const option = document.createElement("option");
+            option.value = userAgents[i].browserName; // Set the value of the option
+            option.text = userAgents[i].browserName; // Set the text displayed for the option
+            // Append the option element to the select element
+            selectElement.appendChild(option);
+
+        }
+        //add it to the dropdowns
+        document.getElementById('osDetails').classList.remove('d-none')
+    }
+}
+
 whenDocumentReady(isReady = () => {
-    //set the browser type
-    //const tmpDetail = "Browers type : Chrome/94.0.<br>Width :800px<br>Height: 360px<br>";
-    //document.getElementById('imageDetails').innerHTML = tmpDetail;
+
     document.getElementById('showBody').classList.remove('d-none');
-    // Get the reference to the dara header
+    // Get the reference to the data header
     const divElement = document.getElementById('data-header');
 
     // Function to update the div's innerHTML
@@ -23,44 +76,28 @@ whenDocumentReady(isReady = () => {
             divElement.innerHTML = divElement.innerHTML + "."
     };
 
+
+
     // Call the updateDiv function every second and store the interval identifier
     const intervalId = setInterval(updateDiv, 1000);
 
-    //done function
-    const xhrDone = (res) => {
-        console.log(res)
-        res = res.split(",")
-        console.log(res)
-        //res = JSON.parse(res)
-        //stop the timer
-        clearInterval(intervalId);
-        //update the header
-        document.getElementById('data-header').innerHTML = "Snapshot processing complete"
-        //build the images
-        let imageHtml = "";
-        for (var i = 0; i < res.length; ++i) {
-            imageHtml = imageHtml + `<img src="http://localhost:8789/api/image/image/?imageId=${res[i]}" />`;
-        }
-        //update the dom
-        document.getElementById('imageDiv').innerHTML = imageHtml;
-    };
-
-
-
-    // Make the XHR call to fetch the image data
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `${apiUrl}image/snapshot/?projectId=${project.id}&userAgentIndex=1&projectDataId=${window.localStorage.currentDataItemId}`, true);
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            xhrDone(xhr.response);
-        }
-        //error
-        if (xhr.status === 400) {
+    //process browsers done
+    const browsersDone = (res) => {
+        //store the user agents
+        userAgents = JSON.parse(res);
+        //process the snapshot done
+        const snapshotDone = (res) => {
+            document.getElementById('imageDetails').classList.remove('d-none');
+            //stop the processing animation
             clearInterval(intervalId);
-            document.getElementById('data-header').innerHTML = "Unable to process Snapshot"
+            snapShots = JSON.parse(res);
+            //snaop shot is complete
+            document.getElementById('data-header').innerHTML = "Snapshot processing complete"
         }
+        //make the snapshot xhr call
+        xhrcall(1, `${apiUrl}image/snapshot/?projectId=${project.id}&userAgentIndex=1&projectDataId=${window.localStorage.currentDataItemId}`, "", "json", "", snapshotDone, token);
     };
-    //make the call.
-    xhr.send();
+    //fetch the different user agents for the project
+    xhrcall(1, `${apiUrl}admin/userbrowsers?projectId=${project.id}`, "", "json", "", browsersDone, token);
+
 })

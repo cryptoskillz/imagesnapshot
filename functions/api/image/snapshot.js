@@ -53,8 +53,6 @@ export async function onRequestGet(context) {
         next, // used for middleware or to fetch assets
         data, // arbitrary space for passing data between middlewares
     } = context;
-
-
     //decode the token
     let token = await decodeJwt(request.headers, env.SECRET);
     //check its valid
@@ -63,12 +61,10 @@ export async function onRequestGet(context) {
     } else {
         //get the search paramaters
         const { searchParams } = new URL(request.url);
-
-        //get th project dataid
+        //get the project dataid
         const projectDataId = searchParams.get('projectDataId');
         //get the project ID
         const projectId = searchParams.get('projectId');
-
         //set the URL
         const headlessUrl = `https://chrome.browserless.io/screenshot?token=${env.BROWSERLESSTOKEN}`;
         if (env.BROWSERLESSTOKEN == undefined)
@@ -78,24 +74,33 @@ export async function onRequestGet(context) {
         const queryResult = await query.first();
         //set a snapshot array
         let snapshotArray = [];
-        const query2 = context.env.DB.prepare(`SELECT screenWidth,screenHeight,userAgentId from projectSnapShots where projectId = '${projectId}' and isDeleted = 0`);
-        //note change this to all when we updae 
+        const query2 = context.env.DB.prepare(`SELECT userBrowserId,screenWidth,screenHeight from projectSnapShots where projectSnapShots.projectId = '${projectId}' and projectSnapShots.isDeleted = 0`);
         const viewportResults = await query2.all();
+        //loop through the results and build the pages / viewports to be fetched
         for (var i = 0; i < viewportResults.results.length; ++i) {
+            //get the browser data
+            const theQuery = `SELECT userBrowsers.browserDefault,userBrowsers.browserName,userBrowsers.browserOs,userAgents.agentName from userBrowsers LEFT JOIN userAgents ON userAgents.userBrowserId = userBrowsers.id where userBrowsers.isDeleted = 0 and userBrowsers.id = ${viewportResults.results[i].userBrowserId} and userAgents.isActive = 1`;
+            const query2 = context.env.DB.prepare(theQuery);
+            const queryResult2 = await query2.first();
+            //set the snapshot
             let snapshot = {};
-            //if ((height == "")
             snapshot.height = viewportResults.results[i].screenHeight;
             snapshot.width = viewportResults.results[i].screenWidth;
-            //set the user agent
-            snapshot.userAgentIndex = userAgents[viewportResults.results[i].userAgentId];
+            //add the browser info to it
+            snapshot.browserDefault = queryResult2.browserDefault;
+            snapshot.browserName = queryResult2.browserName;
+            snapshot.browserOs = queryResult2.browserOs;
+            snapshot.agentName = queryResult2.agentName;
+            //add it to the array
             snapshotArray.push(snapshot);
-            //console.log(snapshot);
         }
-
-        let imageIds = [];
+        //set an array
+        let finArray = [];
+        //loop through them
         for (var i = 0; i < snapshotArray.length; ++i) {
-
-            console.log(`processing ${snapshotArray[i].height} : ${snapshotArray[i].width} : ${snapshotArray[i].userAgentIndex}`)
+            //output
+            console.log(`processing ${snapshotArray[i].browserDefault} : ${snapshotArray[i].height} : ${snapshotArray[i].width} : ${snapshotArray[i].agentName}`)
+            //build the call
             const jsonData = {
                 url: queryResult.url,
                 "options": {
@@ -109,40 +114,36 @@ export async function onRequestGet(context) {
                     height: snapshotArray[i].width,
                 }
             };
-
+            //make the call
             const response = await fetch(headlessUrl, {
                 method: 'POST',
                 headers: {
                     'Cache-Control': 'no-cache',
                     "Content-Type": "application/json",
-                    'User-Agent': snapshotArray[i].userAgentIndex
+                    'User-Agent': snapshotArray[i].agentName
                 },
                 body: JSON.stringify(jsonData)
-
             });
             //get the repsonse
             const imageArrayBuffer = await response.arrayBuffer();
             const imageUint8Array = new Uint8Array(imageArrayBuffer);
-            //const cfresponse = await response();
-            //console.log(imageUint8Array);
+            //save it to KV
             const KV = context.env.backpage;
             const KvId = `${projectId}-${uuid.v4()}`;
             await KV.put(KvId, imageUint8Array);
-
-
+            //add it to the database
             const theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft') VALUES ('${projectId}','${projectDataId}','${KvId}','${queryResult.url}',0)`
-            //console.log(theSQL);
             const insertResult = await context.env.DB.prepare(theSQL).run();
-            //console.log(insertResult);
-            // Set the response headers
-            imageIds.push(KvId);
+           
+            //add the id the snapshot 
+            //we could add it directly but we may use this array somewhere else so good to keep it all together
+            snapshotArray[i].kvId = KvId
+            //add it to the return array
+            const theJson = {"width":snapshotArray[i].width,"height":snapshotArray[i].height,"browserDefault": snapshotArray[i].browserDefault,"browserName": snapshotArray[i].browserName,"browserOs": snapshotArray[i].browserOs,"agentName": snapshotArray[i].agentName,"imageId": snapshotArray[i].kvId}
+            //add it to the array
+            finArray.push(theJson)   
         }
-        //const headers = {
-        //    'Content-Type': 'image/png',
-        //};
-
         // Return the image as the response
-        return new Response(imageIds, { status: 200 });
+        return new Response(JSON.stringify(finArray), { status: 200 });
     }
-
 }

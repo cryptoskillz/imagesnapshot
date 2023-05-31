@@ -33,8 +33,11 @@ snapshot
  ✔ return the data not as an image but as an array of images / sizes so we can render them out. @done (23-05-31 17:57)
  ✔ make it get all the images if you dont pass up a height and width and / or useragent @done (23-05-31 17:57)
  ✔ update the screen shot in the include file to show the dymanic view port sizes and or multipile images @done (23-05-31 17:57)
- ☐ add the useragent and viewport in the return
- ☐ chnage the repsonse to json 
- ☐ replace the custome XHR (no longer required) and use the generic one 
- ☐ create the view to show each image site / browser have thumbnail for each size and an icon for each browser type
+ ✔ add the useragent and viewport in the return @done (23-06-01 00:35)
+ ✔ chnage the repsonse to json @done (23-06-01 00:35)
+ ✔ replace the custome XHR (no longer required) and use the generic one @done (23-06-01 00:35)
+ ✔ create the view to show each image site / browser have thumbnail for each size and an icon for each browser type @done (23-06-01 00:36)
  ☐ show return / the baseline
+ ☐ let the user select a base line
+ ☐ let the user turn off snapshots they dont want to do
+ 
