@@ -14,7 +14,7 @@ export async function onRequestGet(context) {
     //get the image id
     const imageId = searchParams.get('imageId');
     //set up kv
-    const KV = context.env.backpage;
+    const KV = context.env.snapshot;
     //pull out the image
     const imageData = await KV.get(imageId, 'arrayBuffer');
     //set the headers

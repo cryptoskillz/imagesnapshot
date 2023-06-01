@@ -14,7 +14,7 @@ export async function onRequestGet(context) {
     const baselineId = searchParams.get('baselineId');
     const snapshotId = searchParams.get('snapshotId');
     //set up kv
-    const KV = context.env.backpage;
+    const KV = context.env.snapshot;
     //pull out the image
     const baselineData = await KV.get(baselineId, 'arrayBuffer');
     const snapshotData = await KV.get(snapshotId, 'arrayBuffer');
