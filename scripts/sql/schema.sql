@@ -28,6 +28,11 @@ CREATE TABLE "projectSnapShots" (
 	"screenWidth" INTEGER,
 	"screenHeight" INTEGER,	
 	"userBrowserId" INTEGER,
+	"browserOs" TEXT,
+	"browserName"	TEXT,
+	"browserDefault" TEXT,
+	"agent" TEXT,
+	"isActive" INTEGER DEFAULT 1,
 	"isDeleted" INTEGER DEFAULT 0,
 	"createdAt" TEXT DEFAULT CURRENT_TIMESTAMP,
 	"updatedAt" TEXT,
@@ -36,13 +41,13 @@ CREATE TABLE "projectSnapShots" (
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
-INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId") VALUES(1,1920,1080,1);
-INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId") VALUES(1,1920,1080,2);
-INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId") VALUES(1,1284,2778,3);
-INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId") VALUES(1,2778,2732,4);
-INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId") VALUES(1,1440,1920,5);
-INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId") VALUES(1,1440,1920,6);
-INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId") VALUES(1,1440,1920,7);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,1,'Windows 10','Chrome','Chrome (Standard)',1);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,2,'macOS','Chrome','Chrome on MacOs',0);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1284,2778,3,'Iphone','Chrome','Chrome on Iphone',0);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,2778,2732,4,'Ipad','Chrome','Chrome on Ipad',0);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,5,'Android','Chrome','Chrome on Android',0);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,6,'Android','Chrome','Chrome on Samsung',0);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,7,'Android','Chrome','Chrome on LG',0);
 
 
 CREATE TABLE "projectData" (
@@ -68,6 +73,12 @@ CREATE TABLE "projectImages" (
 	"kvId" INTEGER,
 	"cfid"	INTEGER,
 	"filename"	TEXT,
+	"screenWidth" INTEGER,
+	"screenHeight" INTEGER,	
+	"userBrowserId" INTEGER,
+	"browserOs" TEXT,
+	"browserName"	TEXT,
+	"browserDefault" TEXT,
 	"url" TEXT,
 	"baseUrl" TEXT,
 	"draft" INTEGER DEFAULT 1,

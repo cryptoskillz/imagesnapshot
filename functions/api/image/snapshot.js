@@ -1,25 +1,6 @@
 const jwt = require('@tsndr/cloudflare-worker-jwt')
 //include the UUID generator
 var uuid = require('uuid');
-/*
-    this is a list of user agents we may add this to the settings or a database later 
-    but for now it is ok here
-*/
-const userAgents = [
-    // Chrome
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36",
-    // Firefox
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:93.0) Gecko/20100101 Firefox/93.0",
-    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/93.0",
-    // Safari
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15",
-    // Edge
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36 Edg/94.0.992.50",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36 OPR/80.0.4170.72",
-];
 
 //jwt decoder
 let decodeJwt = async (req, secret) => {
@@ -74,7 +55,7 @@ export async function onRequestGet(context) {
         const queryResult = await query.first();
         //set a snapshot array
         let snapshotArray = [];
-        const query2 = context.env.DB.prepare(`SELECT userBrowserId,screenWidth,screenHeight from projectSnapShots where projectSnapShots.projectId = '${projectId}' and projectSnapShots.isDeleted = 0`);
+        const query2 = context.env.DB.prepare(`SELECT userBrowserId,screenWidth,screenHeight from projectSnapShots where projectSnapShots.projectId = '${projectId}' and projectSnapShots.isDeleted = 0 and projectSnapShots.isActive=1`);
         const viewportResults = await query2.all();
         //loop through the results and build the pages / viewports to be fetched
         for (var i = 0; i < viewportResults.results.length; ++i) {
@@ -132,13 +113,24 @@ export async function onRequestGet(context) {
             const KvId = `${projectId}-${uuid.v4()}`;
             await KV.put(KvId, imageUint8Array);
             //add it to the database
-            const theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft') VALUES ('${projectId}','${projectDataId}','${KvId}','${queryResult.url}',0)`
+                        /*
+      snapshot.height = viewportResults.results[i].screenHeight;
+            snapshot.width = viewportResults.results[i].screenWidth;
+            //add the browser info to it
+            snapshot.browserDefault = queryResult2.browserDefault;
+            snapshot.browserName = queryResult2.browserName;
+            snapshot.browserOs = queryResult2.browserOs;
+            snapshot.agentName = queryResult2.agentName;
+
+            */
+            const theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','screenWidth','screenHeight','browserDefault','browserName','browserOs') VALUES ('${projectId}','${projectDataId}','${KvId}','${queryResult.url}',0,'${snapshotArray[i].width}','${snapshotArray[i].height}','${snapshotArray[i].browserDefault}','${snapshotArray[i].browserName}','${snapshotArray[i].browserOs}')`
             const insertResult = await context.env.DB.prepare(theSQL).run();
            
             //add the id the snapshot 
             //we could add it directly but we may use this array somewhere else so good to keep it all together
             snapshotArray[i].kvId = KvId
             //add it to the return array
+
             const theJson = {"width":snapshotArray[i].width,"height":snapshotArray[i].height,"browserDefault": snapshotArray[i].browserDefault,"browserName": snapshotArray[i].browserName,"browserOs": snapshotArray[i].browserOs,"agentName": snapshotArray[i].agentName,"imageId": snapshotArray[i].kvId}
             //add it to the array
             finArray.push(theJson)   

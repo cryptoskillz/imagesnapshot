@@ -10,10 +10,33 @@ let whenDocumentReady = (f) => {
 
 //thumbnail click function
 const clickThumbnail = (id) => {
-    //get the element id
-    const thumbnailElement = document.getElementById("imageDiv");
-    //show the image
-    thumbnailElement.innerHTML = `No baseline selected<br><img src="${apiUrl}image/image/?imageId=${snapShots[id].imageId}" />`;
+    //console.log(snapShots)
+    let theJson = JSON.stringify(snapShots[id]);
+    let baselineDone = (res) => {
+        res = JSON.parse(res)
+                console.log(res)
+
+        //get the element id
+        const thumbnailElement = document.getElementById("imageDiv");
+        //show the image
+        thumbnailElement.innerHTML = `SNAPSHOT<img src="${apiUrl}image/image/?imageId=${snapShots[id].imageId}" style="width:500px" class="img-snapshot"/>`;
+        const baselineElement = document.getElementById("baselineImageDiv");
+
+        if (res.kvId == undefined)
+        {
+            baselineElement.innerHTML = `NO BASELINE`
+            showAlert(`${res.error}`, 2, 0);
+        }
+        else
+        {
+            baselineElement.innerHTML = `BASELINE<img src="${apiUrl}image/image/?imageId=${res.kvId}" style="width:500px" class="img-snapshot"/>`;
+        }    
+    }
+    //get the baseline 
+    
+    xhrcall(1, `${apiUrl}image/baseline?projectId=${project.id}&snapshot=${theJson}`, "", "json", "", baselineDone, token);
+    
+
 }
 
 const osSelectChange = (theElement) => {
@@ -22,9 +45,12 @@ const osSelectChange = (theElement) => {
     //set the image html element
     let imageHtml = "";
     //loop through the image results
-    for (var i = 0; i < snapShots.length; ++i) {       
-        //render out the thumb nails
-        imageHtml = imageHtml + `<a href="javascript:clickThumbnail(${i})"><img src="https://placehold.co/100x100?text=${snapShots[i].width}x${snapShots[i].height}"/> </a>`; 
+    for (var i = 0; i < snapShots.length; ++i) {
+        //check if we should show it
+        if (theElement.value == snapShots[i].browserName) {
+            //render out the thumb nails
+            imageHtml = imageHtml + `<a href="javascript:clickThumbnail(${i})"><img src="https://placehold.co/100x100?text=${snapShots[i].width}x${snapShots[i].height}"/> </a>`;
+        }
     }
     //update the dom
     thumbnailElement.innerHTML = imageHtml;
@@ -87,10 +113,38 @@ whenDocumentReady(isReady = () => {
         userAgents = JSON.parse(res);
         //process the snapshot done
         const snapshotDone = (res) => {
-            document.getElementById('imageDetails').classList.remove('d-none');
+
+
             //stop the processing animation
             clearInterval(intervalId);
             snapShots = JSON.parse(res);
+            let theHtml = "";
+            let addedChrome = 0;
+            let addedEdge = 0;
+            let addedFirefox = 0;
+            let addedSafari = 0;
+            for (var i = 0; i < snapShots.length; ++i) {
+                if ((snapShots[i].browserDefault == "Chrome") && (addedChrome == 0)) {
+                    addedChrome = 1;
+                    theHtml = theHtml + `<a href="javascript:clickBrowser('Chrome')"><i class="fa-brands fa-chrome" alt="Chrome"></i></a>`
+                }
+                if ((snapShots[i].browserDefault == "Edge") && (addedEdge == 0)) {
+                    addedChrome = 1;
+                    theHtml = theHtml + `<a href = "javascript:clickBrowser('Edge')" > <i class="fa-brands fa-edge" alt="Edge"></i> </a>`
+                }
+                if ((snapShots[i].browserDefault == "Firefox") && (addedFirefox == 0)) {
+                    addedChrome = 1;
+                    theHtml = theHtml + `<a href = "javascript:clickBrowser('Firefox')" > <i class="fa-brands fa-firefox" alt="Firefox"></i> </a> `
+                }
+
+                if ((snapShots[i].browserDefault == "Safari") && (addedSafari == 0)) {
+                    addedChrome = 1;
+                    theHtml = theHtml + `<a href = "javascript:clickBrowser('Safari')" > <i class="fa-brands fa-safari" alt="Safari"></i> </a>`
+                }
+            }
+            document.getElementById('imageDetails').innerHTML = theHtml
+            document.getElementById('imageDetails').classList.remove('d-none');
+
             //snaop shot is complete
             document.getElementById('data-header').innerHTML = "Snapshot processing complete"
         }

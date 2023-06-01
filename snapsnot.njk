@@ -11,16 +11,13 @@ permalink: /project/data/snapshot/
 </div>
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800" id="data-header">processing Snapshot(s)</h1>
-        <a href="/dashboard/" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <a href="/project/data/" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
         <i class="fas fa-backward fa-sm text-white-50"></i> Back</a>
     </div>
 <p class="mb-4">
 </p>
     <div id="imageDetails" class="d-none">
-        <a href="javascript:clickBrowser('Chrome')"><i class="fa-brands fa-chrome" alt="Chrome"></i></a>
-        <a href="javascript:clickBrowser('Edge')"><i class="fa-brands fa-edge" alt="Edge"></i></a>
-        <a href="javascript:clickBrowser('Firefox')"><i class="fa-brands fa-firefox" alt="Firefox"></i></a>
-        <a href="javascript:clickBrowser('Safari')"><i class="fa-brands fa-safari" alt="Safari"></i></a>
+        
     </div>
     <div id="osDetails" class="d-none">
         <label for="cars">Choose an OS:</label>
@@ -28,7 +25,7 @@ permalink: /project/data/snapshot/
         </select>
     </div>
     <div id="thumbnailDiv"></div>
-
+    <div id="baselineImageDiv"></div>
     <div id="imageDiv"></div>
 
 {% if env.ENVIRONMENT == 'local' %}

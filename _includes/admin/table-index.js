@@ -177,6 +177,7 @@ whenDocumentReady(isReady = () => {
                 }
 
                 tmpValue = processlocalReplace(key, theSettings.localReplace, tmpValue)
+               // tmpValue = tmpValue.replace("{{id}}",theData.id)
 
                 //check if it is a look up
                 if (lookUpData != "") {

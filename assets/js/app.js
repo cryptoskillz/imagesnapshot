@@ -76,6 +76,34 @@ let checkElement = (element) => {
 START OF TABLE PROCESSING FUCNTIONS
 */
 
+const setActiveState = (theTable, theField, theState, theRecordId) => {
+    console.log(theTable)
+    console.log(theField)
+    console.log(theState)
+    const theJson = `{"${theField}":"${theState}"`;
+    console.log(theJson)
+    let xhrDone = (res) => {
+        //parse the response
+        res = JSON.parse(res);
+        //show the message
+        showAlert(res.message, 1, 0, 1);
+
+    }
+    //get the form data
+    if (theJson != false) {
+        let bodyObj = {
+            table: theTable,
+            tableData: theJson,
+        }
+        //console.log(bodyObj)
+        let bodyObjectJson = JSON.stringify(bodyObj);
+        //check we have valid data to submit
+        //post the record
+        xhrcall(4, apiUrl + `database/table/`, bodyObjectJson, "json", "", xhrDone, token)
+    }
+
+}
+
 let createPaymentLink = (userId, leadId, tranchesRequested, email) => {
     let leadPropertyDone = (res) => {
         res = JSON.parse(res);

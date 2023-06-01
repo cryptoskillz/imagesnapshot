@@ -1,3 +1,4 @@
+
 export async function onRequestGet(context) {
     //build the paramaters
     const {
@@ -15,7 +16,7 @@ export async function onRequestGet(context) {
     //set up kv
     const KV = context.env.backpage;
     //pull out the image
-    const imageData = await KV.get( imageId, 'arrayBuffer');
+    const imageData = await KV.get(imageId, 'arrayBuffer');
     //set the headers
     const headers = {
         'Content-Type': 'image/png',

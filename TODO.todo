@@ -37,7 +37,12 @@ snapshot
  ✔ chnage the repsonse to json @done (23-06-01 00:35)
  ✔ replace the custome XHR (no longer required) and use the generic one @done (23-06-01 00:35)
  ✔ create the view to show each image site / browser have thumbnail for each size and an icon for each browser type @done (23-06-01 00:36)
- ☐ show return / the baseline
- ☐ let the user select a base line
- ☐ let the user turn off snapshots they dont want to do
- 
+ ✔ show return / the baseline make it get the latest one before we do the insert and set that to the baseline @done (23-06-01 15:58)
+ ✔ let the user select a base line @done (23-06-01 15:58)
+ ✔ let the user turn off snapshots they dont want to do @done (23-06-01 15:42)
+ ✔ add a baseline and useragent id to the  the images table @done (23-06-01 17:02)
+ ✔ in snapshot return the baseline info. @done (23-06-01 15:58)
+ ☐ work on set active state code
+ ✔ in project image store the snapshot id @done (23-06-01 17:02)
+ ☐ style on snapshot page
+
