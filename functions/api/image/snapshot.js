@@ -109,7 +109,7 @@ export async function onRequestGet(context) {
             const imageArrayBuffer = await response.arrayBuffer();
             const imageUint8Array = new Uint8Array(imageArrayBuffer);
             //save it to KV
-            const KV = context.env.backpage;
+            const KV = context.env.datastore;
             const KvId = `${projectId}-${uuid.v4()}`;
             await KV.put(KvId, imageUint8Array);
             //add it to the database

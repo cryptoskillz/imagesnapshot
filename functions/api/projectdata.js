@@ -204,7 +204,7 @@ export async function onRequestGet(context) {
         //set the template
         const getTemplate = searchParams.get('getTemplate');
         //set up the KV
-        const KV = context.env.snapshot;
+        const KV = context.env.datastore;
         //debug
         //console.log(getTemplate);
         //console.log(projectDataId)

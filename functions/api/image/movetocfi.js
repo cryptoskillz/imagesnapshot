@@ -23,7 +23,7 @@ export async function onRequestGet(context) {
         //get the image id
         const imageId = searchParams.get('imageId');
         //set up kv
-        const KV = context.env.snapshot;
+        const KV = context.env.datastore;
         //pull out the image
         const imageData = await KV.get(imageId, 'arrayBuffer');
         // Convert the Uint8Array image to base64
