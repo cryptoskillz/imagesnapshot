@@ -1,0 +1,40 @@
+---
+layout: layout.njk
+permalink: /project/settings/
+fields : ["id","screenWidth","screenHeight","browserOs","browserName","browserDefault","isActive"]
+headerFields : ["id","Width","Height","OS","Browser","Variant","Active"]
+title : projectsettings
+crumb : /project/settings
+
+---
+
+
+<script>
+        //these are the fields that we want to return, it gets this from the front matter data at the top of this file. 
+        //note : we could do this cleaner
+        let theFields = "{% for field in fields %}{% if loop.last %}{{ field }}{% else %}{{ field }},{% endif %}{% endfor %}";
+        let title = `{{env.LEVEL1NAME | capitalize }}`;
+        /*
+        let localReplace =  [
+        {"field": "isActive",
+        "values": ['0','1'],
+        "replaceValues": [`<a href="javascript:setActiveState('projectSnapShots','isActive',1)">No</a>`,`<a href="javascript:setActiveState('projectSnapShots','isActive',0)">Yes</a>`]}
+        ]
+        */
+
+        let localReplace =  [
+        {"field": "isActive",
+        "values": ['0','1'],
+        "replaceValues": [`No`,`Yes`]}
+        ]
+        //main settings array to handle all the variations of rendering.
+        const theSettings = {"checkAdmin":1,"tableSchema":0,"allowOnlyOne":1,"editButton":1,"deleteButton":0,"customButton":"","customSelect":"","localDropDown":"","localReplace":localReplace,"table":"projectSnapShots","formatFields":"","fields":theFields,"crumb":"{{ crumb }}","foreignKey":"userBrowserId","lookUps":"","title":title}
+</script>
+{% set theJs %}
+    {% include 'admin/table-index.js' %}
+{% endset %}
+<script>
+    //clear the currentDataItem
+    window.localStorage.currentDataItemId = "";
+</script>
+{%  include "admin/table-index.njk" %}

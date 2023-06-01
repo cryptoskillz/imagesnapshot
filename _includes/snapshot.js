@@ -14,12 +14,12 @@ const clickThumbnail = (id) => {
     let theJson = JSON.stringify(snapShots[id]);
     let baselineDone = (res) => {
         res = JSON.parse(res)
-                console.log(res)
+        //console.log(res)
 
         //get the element id
         const thumbnailElement = document.getElementById("imageDiv");
         //show the image
-        thumbnailElement.innerHTML = `SNAPSHOT<img src="${apiUrl}image/image/?imageId=${snapShots[id].imageId}" style="width:500px" class="img-snapshot"/>`;
+        thumbnailElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${snapShots[id].imageId}" style="width:500px" class="img-snapshot"/>`;
         const baselineElement = document.getElementById("baselineImageDiv");
 
         if (res.kvId == undefined)
@@ -29,8 +29,10 @@ const clickThumbnail = (id) => {
         }
         else
         {
-            baselineElement.innerHTML = `BASELINE<img src="${apiUrl}image/image/?imageId=${res.kvId}" style="width:500px" class="img-snapshot"/>`;
-        }    
+            baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.kvId}" style="width:500px" class="img-snapshot"/>`;
+        }  
+
+        document.getElementById("imagesWrapper").classList.remove("d-none")  
     }
     //get the baseline 
     

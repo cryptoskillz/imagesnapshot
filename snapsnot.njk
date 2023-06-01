@@ -25,8 +25,24 @@ permalink: /project/data/snapshot/
         </select>
     </div>
     <div id="thumbnailDiv"></div>
-    <div id="baselineImageDiv"></div>
-    <div id="imageDiv"></div>
+    <div id="imagesWrapper" class="d-none">
+        <div class="row">
+            <div class="col-sm-6" >
+                <h1>BASELINE</h1>
+            </div>
+            <div class="col-sm-6 other" >
+                <h1>SNAPSHOT</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6" id="baselineImageDiv">
+               
+            </div>
+            <div class="col-sm-6 other" id="imageDiv">
+                
+            </div>
+        </div>
+  </div>
 
 {% if env.ENVIRONMENT == 'local' %}
     <script type="text/javascript">{{theJs | safe}}</script>

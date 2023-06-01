@@ -1,0 +1,16 @@
+---
+layout: layout.njk
+permalink: /project/settings/edit/
+---
+<script>
+   let theFields = "id,isActive"
+   //let lookUps = [{"table":"rental_agreement","key":"rentalId","foreignKey":"","value":""},{"table":"payment_types","key":"paidBy","foreignKey":"","value":""}]
+let localDropDown =  [
+        {"field": "isActive",
+        "values": ['0','1'],
+        "displayValues": ['No','Yes']}
+    ]
+   const theSettings = {"checkAdmin":0,"tableSchema":0,"allowOnlyOne":0,"editButton":1,"deleteButton":1,"customButton":"","customSelect":"","localDropDown":localDropDown,"localReplace":"","table":"projectSnapShots","formatFields":"","fields":theFields,"crumb":"{{ crumb }}","foreignKey":"propertyId","lookUps":"","title":"edit project"}
+ </script>
+{% include "admin/table-edit.njk" %}
+
