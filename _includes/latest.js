@@ -16,7 +16,7 @@ const clickThumbnail = (id) => {
     let latestImagesDone = (res) => {
         res = JSON.parse(res)
         //console.log(res)
-
+ showAlert(`no snapshot image`, 2);
         //get the element id
         const snapshotElement = document.getElementById("imageDiv");
         //get the baseline
@@ -24,7 +24,7 @@ const clickThumbnail = (id) => {
         //check if we have a baseline
         if (res.baselineId == undefined || res.baselineId == "") {
             baselineElement.innerHTML = `NO BASELINE`
-            showAlert(`${res.error}`, 2, 0);
+            showAlert(`No baseline image`, 2);
         } else {
             //render it
             baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.baselineId}" style="width:500px" class="img-snapshot"/>`;
@@ -32,7 +32,7 @@ const clickThumbnail = (id) => {
         //check if a snapshot has been run
         if (res.latestId == undefined || res.latestId == "") {
             snapshotElement.innerHTML = `NO SNAPSHOT`
-            showAlert(`${res.error}`, 2, 0);
+            showAlert(`no snapshot image`, 2);
         } else {
             //render it
             snapshotElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.latestId}" style="width:500px" class="img-snapshot"/>`;
