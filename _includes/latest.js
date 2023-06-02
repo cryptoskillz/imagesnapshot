@@ -16,7 +16,6 @@ const clickThumbnail = (id) => {
     let latestImagesDone = (res) => {
         res = JSON.parse(res)
         //console.log(res)
- showAlert(`no snapshot image`, 2);
         //get the element id
         const snapshotElement = document.getElementById("imageDiv");
         //get the baseline
