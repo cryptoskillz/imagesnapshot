@@ -1,0 +1,46 @@
+---
+layout: layout.njk
+permalink: /project/data/history/
+primaryFields : ["id","name","url","createdAt"]
+foreignFields : ["id","name","url","createdAt"]
+headerFields : ["id","Name","URL","Date Created","id","Name","URL","Date Created"]
+title : projectdata
+---
+
+
+<script>
+        //these are the fields that we want to return, it gets this from the front matter data at the top of this file. 
+        //note : we could do this cleaner
+        let primaryFields = "{% for field in primaryFields %}{% if loop.last %}{{ field }}{% else %}{{ field }},{% endif %}{% endfor %}";
+        let foreignFields = "{% for field in foreignFields %}{% if loop.last %}{{ field }}{% else %}{{ field }},{% endif %}{% endfor %}";
+
+        let title = `{{env.LEVEL1NAME | capitalize }}`;
+        let joinFields =  {"primary": "id","foreign": "projectDataId"}
+        
+        //main settings array to handle all the variations of rendering.
+        const theSettings = {
+            "tableSchema":0, //return the table schema or not
+            "allowOnlyOne":0, //lets you add only one record
+            "editButton":1, //display the edit button
+            "deleteButton":1, //display the delete button
+            "customButton":"", //display a custom button
+            "customSelect":"", //display a custom select
+            "primaryTable":"projectData", //the main table
+            "foriegnTable":"projectImages", //the table to join
+            "joiIds":joinFields, //the primary and foreign key
+            "currentDataItem":1, // get the id from the current data item
+            "currentDataItemId":1, // set the id for the current data item (we may hto so the field here)
+            "primaryFields":primaryFields, //the fields
+            "foreignFields":foreignFields, //the fields
+            "crumb":"{{ crumb }}", //the crumb
+            "title":title //the title
+        }
+</script>
+{% set theJs %}
+    {% include 'admin/table-join.js' %}
+{% endset %}
+<script>
+    //clear the currentDataItem
+    window.localStorage.currentDataItemId = "";
+</script>
+{%  include "admin/table-join.njk" %}

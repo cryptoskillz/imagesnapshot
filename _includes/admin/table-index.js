@@ -1,7 +1,4 @@
-/*
-todo 
-
-*/
+let project = JSON.parse(window.localStorage.currentDataItem);
 //add a ready function
 let whenDocumentReady = (f) => {
     /in/.test(document.readyState) ? setTimeout('whenDocumentReady(' + f + ')', 9) : f()
@@ -26,17 +23,24 @@ let projectSelectChange = (id, theElement) => {
             window.localStorage.currentDataItem = JSON.stringify(level1Data.data[i])
         }
     }
+
     //store the ID
     window.localStorage.currentDataItemId = id;
     //console.log(window.localStorage.currentDataItemId)
     //store the table
     window.localStorage.mainTable = theSettings.table;
+
+    let result = theElement.value.replace("[[PDID]]", window.localStorage.currentDataItemId);
+    result =result.replace("[[PID]]", project.id);
+    console.log(theElement.value)
     //load the URL
     if (theElement.value != 0) {
         //check if we want it in a new window
         if (theElement.value.indexOf("&target=_blank") > 0) {
             //remove the blank
-            const result = theElement.value.replace("&target=_blank", "");
+            result = result.replace("&target=_blank", "");
+
+
             //open it
             window.open(result, '_blank');
         } else {
@@ -268,8 +272,9 @@ whenDocumentReady(isReady = () => {
         tmpUrl = tmpUrl + `tablename=${theSettings.table}&`
         //set the fields
         tmpUrl = tmpUrl + `fields=${theSettings.fields}&`
-        //set the schema
-        //tmpUrl = tmpUrl + `getOnlyTableSchema=${getOnlyTableSchema}&`
+        //set the join ids
+        tmpUrl = tmpUrl + `joinids=${theSettings.joiIds}&`
+
         //set the id
         if (theSettings.foreignKey == "")
             tmpUrl = tmpUrl + `recordId=${window.localStorage.currentDataItemId}`

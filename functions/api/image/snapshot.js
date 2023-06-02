@@ -113,19 +113,8 @@ export async function onRequestGet(context) {
             const KvId = `${projectId}-${uuid.v4()}`;
             await KV.put(KvId, imageUint8Array);
             //add it to the database
-                        /*
-      snapshot.height = viewportResults.results[i].screenHeight;
-            snapshot.width = viewportResults.results[i].screenWidth;
-            //add the browser info to it
-            snapshot.browserDefault = queryResult2.browserDefault;
-            snapshot.browserName = queryResult2.browserName;
-            snapshot.browserOs = queryResult2.browserOs;
-            snapshot.agentName = queryResult2.agentName;
-
-            */
             const theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','screenWidth','screenHeight','browserDefault','browserName','browserOs') VALUES ('${projectId}','${projectDataId}','${KvId}','${queryResult.url}',0,'${snapshotArray[i].width}','${snapshotArray[i].height}','${snapshotArray[i].browserDefault}','${snapshotArray[i].browserName}','${snapshotArray[i].browserOs}')`
             const insertResult = await context.env.DB.prepare(theSQL).run();
-           
             //add the id the snapshot 
             //we could add it directly but we may use this array somewhere else so good to keep it all together
             snapshotArray[i].kvId = KvId

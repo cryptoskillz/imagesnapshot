@@ -1,0 +1,50 @@
+---
+layout: layout.njk
+permalink: /project/data/latest/
+---
+{% set theJs %}
+    {% include 'latest.js' %}
+{% endset %}
+<div class="alert alert-success  d-none" role="alert" id="accountsSuccess">
+</div>
+<div class="alert alert-danger  d-none" role="alert" id="accountsAlert">
+</div>
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800" id="data-header"></h1>
+        <a href="/project/data/" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-backward fa-sm text-white-50"></i> Back</a>
+    </div>
+<p class="mb-4">
+</p>
+    <div id="imageDetails" class="d-none">     
+    </div>
+    <div id="osDetails" class="d-none">
+        <label for="cars">Choose an OS:</label>
+        <select onchange="osSelectChange(this)" name="osSelect" id="osSelect">
+        </select>
+    </div>
+    <div id="thumbnailDiv"></div>
+    <div id="imagesWrapper" class="d-none">
+        <div class="row">
+            <div class="col-sm-6" >
+                <h1>BASELINE</h1>
+            </div>
+            <div class="col-sm-6 other" >
+                <h1>SNAPSHOT</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6" id="baselineImageDiv">
+               
+            </div>
+            <div class="col-sm-6 other" id="imageDiv">
+                
+            </div>
+        </div>
+  </div>
+
+{% if env.ENVIRONMENT == 'local' %}
+    <script type="text/javascript">{{theJs | safe}}</script>
+{% else %}
+    <script type="text/javascript">{{theJs | jsmin | safe}}</script>
+{% endif %}

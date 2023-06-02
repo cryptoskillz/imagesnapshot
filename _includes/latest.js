@@ -15,7 +15,7 @@ const clickThumbnail = (id) => {
     let theJson = JSON.stringify(snapShots[id]);
     let latestImagesDone = (res) => {
         res = JSON.parse(res)
-        console.log(res)
+        //console.log(res)
 
         //get the element id
         const snapshotElement = document.getElementById("imageDiv");
@@ -54,6 +54,7 @@ const clickThumbnail = (id) => {
 const osSelectChange = (theElement) => {
     document.getElementById("imageDiv").innerHTML = "";
     document.getElementById("baselineImageDiv").innerHTML = "";
+
     //render thumbnails
     const thumbnailElement = document.getElementById("thumbnailDiv");
     //set the image html element
@@ -101,25 +102,10 @@ const clickBrowser = (browser) => {
 }
 
 whenDocumentReady(isReady = () => {
-    document.getElementById('showBody').classList.remove('d-none');
+
+    document.getElementById('data-header').innerHTML = `Latest results for ${project.name}<br><a href="${project.url}" target="_blank">${project.url}</a>`
     document.getElementById('showBody').classList.remove('d-none');
     // Get the reference to the data header
-    const divElement = document.getElementById('data-header');
-
-    // Function to update the div's innerHTML
-    const updateDiv = () => {
-        // Generate the content to be updated
-        const currentText = divElement.innerHTML
-        if (currentText == "processing Snapshot(s)...")
-            divElement.innerHTML = "processing Snapshot(s)";
-        else
-            divElement.innerHTML = divElement.innerHTML + "."
-    };
-
-
-
-    // Call the updateDiv function every second and store the interval identifier
-    const intervalId = setInterval(updateDiv, 1000);
 
     //process browsers done
     const browsersDone = (res) => {
@@ -127,10 +113,6 @@ whenDocumentReady(isReady = () => {
         userAgents = JSON.parse(res);
         //process the snapshot done
         const snapshotDone = (res) => {
-
-
-            //stop the processing animation
-            clearInterval(intervalId);
             snapShots = JSON.parse(res);
             let theHtml = "";
             let addedChrome = 0;
@@ -158,12 +140,9 @@ whenDocumentReady(isReady = () => {
             }
             document.getElementById('imageDetails').innerHTML = theHtml
             document.getElementById('imageDetails').classList.remove('d-none');
-
-            //snaop shot is complete
-            document.getElementById('data-header').innerHTML = "Snapshot processing complete"
         }
         //make the snapshot xhr call
-        xhrcall(1, `${apiUrl}image/snapshot/?projectId=${project.id}&projectDataId=${window.localStorage.currentDataItemId}`, "", "json", "", snapshotDone, token);
+        xhrcall(1, `${apiUrl}image/latest/?projectId=1&projectDataId=1`, "", "json", "", snapshotDone, token);
     };
     //fetch the different user agents for the project
     xhrcall(1, `${apiUrl}admin/userbrowsers?projectId=${project.id}`, "", "json", "", browsersDone, token);

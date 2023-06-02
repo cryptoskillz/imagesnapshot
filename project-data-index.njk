@@ -15,9 +15,11 @@ title : projectdata
     let customSelect = `
             <select onchange="projectSelectChange([id],this)" class="form-select" aria-label="Project select" name="propertySelect-[counter]" id="propertySelect-[counter]">
                 <option value="0">Please select</option>
-                <option value="/project/data/snapshot/">take snapshot</option>
-                <option value="/project/data/history/">History</option>
+                <option value="/project/data/snapshot/">Snapshot</option>
+                <option value="/project/data/latest/?projectId=[[PID]]&projectDataId=[[PDID]]&target=_blank">Latest</option>
+
         </select>`;
+//<option value="/project/data/history/">History</option>
         //Local look up takes a field from the returned API call and replaces with something that is easier to understand
          
 

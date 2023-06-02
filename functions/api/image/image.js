@@ -14,6 +14,7 @@ export async function onRequestGet(context) {
     //get the image id
     const imageId = searchParams.get('imageId');
     //set up kv
+    console.log(context.env)
     const KV = context.env.datastore;
     //pull out the image
     const imageData = await KV.get(imageId, 'arrayBuffer');
