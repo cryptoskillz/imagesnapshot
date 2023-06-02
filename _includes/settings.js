@@ -5,7 +5,6 @@ let whenDocumentReady = (f) => {
 
 whenDocumentReady(isReady = () => {
 
-
     //build the url
     let theUrl = apiUrl+'settings/';
     //get the token

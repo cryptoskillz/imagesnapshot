@@ -44,6 +44,6 @@ snapshot
  ✔ in snapshot return the baseline info. @done (23-06-01 15:58)
  ☐ work on set active state code
  ✔ in project image store the snapshot id @done (23-06-01 17:02)
- ☐ style on snapshot page
- ☐ when browser token not set clearinterval
+ ✔ style on snapshot page @done (23-06-02 20:00)
+ ✔ when browser token not set clearinterval @done (23-06-02 20:00)
 

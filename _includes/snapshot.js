@@ -22,7 +22,7 @@ const clickThumbnail = (id) => {
         //show the image
         const baselineElement = document.getElementById("baselineImageDiv");
 
-        if (res.baselineId == undefined)
+        if (res.baselineId == undefined || res.baselineId == "")
         {
             baselineElement.innerHTML = `NO BASELINE`
             showAlert(`${res.error}`, 2, 0);
@@ -32,7 +32,7 @@ const clickThumbnail = (id) => {
             baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.baselineId}" style="width:500px" class="img-snapshot"/>`;
         }  
 
-        if (res.latestId == undefined)
+        if (res.latestId == undefined || res.latestId == "")
         {
             snapshotElement.innerHTML = `NO SNAPSHOT`
             showAlert(`${res.error}`, 2, 0);
@@ -45,7 +45,6 @@ const clickThumbnail = (id) => {
         document.getElementById("imagesWrapper").classList.remove("d-none")  
     }
     //get the baseline 
-    
     xhrcall(1, `${apiUrl}image/latestimages?projectId=${project.id}&snapshot=${theJson}`, "", "json", "", latestImagesDone, token);
     
 
@@ -54,6 +53,7 @@ const clickThumbnail = (id) => {
 const osSelectChange = (theElement) => {
     document.getElementById("imageDiv").innerHTML = "";
     document.getElementById("baselineImageDiv").innerHTML = "";
+    document.getElementById("imagesWrapper").classList.add("d-none")
     //render thumbnails
     const thumbnailElement = document.getElementById("thumbnailDiv");
     //set the image html element
