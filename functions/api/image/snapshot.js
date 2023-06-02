@@ -6,7 +6,6 @@ var uuid = require('uuid');
 let decodeJwt = async (req, secret) => {
     //get the bearer token
     let bearer = req.get('authorization');
-    //console.log(bearer);
     //check they sent a bearer token
     if (bearer == null) {
         //send blank

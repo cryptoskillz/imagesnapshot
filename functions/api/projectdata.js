@@ -133,11 +133,9 @@ export async function onRequestPost(context) {
         if (contentType != null) {
             //get the data
             theData = await request.json();
-            //console.log(theData);
             const dataId = uuid.v4();
             for (var i = 0; i < theData.data.length; ++i) {
                 const theSQL = `INSERT INTO projectData ('projectId','projectDataId','SchemaId','fieldValue') VALUES ('${theData.projectId}','${dataId}','${theData.data[i].id}','${theData.data[i].fieldValue}')`
-                //console.log(theSQL);
                 const insertResult = await context.env.DB.prepare(theSQL).run();
             }
         }
@@ -205,27 +203,15 @@ export async function onRequestGet(context) {
         const getTemplate = searchParams.get('getTemplate');
         //set up the KV
         const KV = context.env.datastore;
-        //debug
-        //console.log(getTemplate);
-        //console.log(projectDataId)
-        //console.log(projectId)
         if ((projectId != null) && (projectId != "")) {
 
             //get the schema
             const query = context.env.DB.prepare(`SELECT id,isUsed,fieldName,originalFieldName from projectSchema where projectId = '${projectId}'`);
             const queryResults = await query.all();
-
-            //debug
-            //const querya = context.env.DB.prepare(`SELECT * from projectData`);
-            //get the results
-            //const queryResultsa = await querya.all();
-            //console.log(queryResultsa)
-
             //get the projects and group by id
             const query2 = context.env.DB.prepare(`SELECT projectData.projectDataId from projectData where projectData.projectId = '${projectId}' and isDeleted = 0 group by projectDataId `);
             //get the results
             const queryResults2 = await query2.all();
-            //console.log(queryResults2)
             //loop through the projectdata results
             for (var i = 0; i < queryResults2.results.length; ++i) {
                 //get the id
@@ -236,8 +222,6 @@ export async function onRequestGet(context) {
                 const queryResults3 = await query3.all();
                 //put them into our array
                 results.push(queryResults3.results);
-                //debugs
-                //console.log(queryResults3.results)
             }
             //get the template
             let tmpTemplate = {}
@@ -264,7 +248,6 @@ export async function onRequestGet(context) {
             finData.schema = queryResults.results;
             //store the results. 
             finData.data = results;
-            //console.log(finData)
         } else {
             //return the one project
             const queryData = context.env.DB.prepare(`SELECT projectData.projectId,projectData.id,projectData.projectDataId,projectData.schemaId,projectSchema.isUsed,projectSchema.originalFieldName,projectSchema.originalFieldName,projectSchema.fieldName,projectData.fieldValue from projectData LEFT JOIN projectSchema ON projectData.schemaId = projectSchema.id where projectData.projectDataId = '${projectDataId}' `);
@@ -292,12 +275,7 @@ export async function onRequestGet(context) {
                 tmpTemplate.name = ""
                 finData.template = tmpTemplate;
             }
-            //console.log(finData)
         }
-        //debug
-        //console.log(queryResults)
-        //console.log(queryResults2)
-        //console.log(finData);
         return new Response(JSON.stringify(finData), { status: 200 });
     } catch (error) {
         console.log(error)
