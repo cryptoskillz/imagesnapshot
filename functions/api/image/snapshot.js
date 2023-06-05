@@ -144,7 +144,7 @@ export async function onRequestGet(context) {
         let finArray = [];
         //loop through them
         for (var i = 0; i < snapshotArray.length; ++i) {
-            const kvId = getSnapShot(queryResult.url, snapshotArray[i], headlessUrl, 0, projectDataId, context, projectId);
+            const kvId = await getSnapShot(queryResult.url, snapshotArray[i], headlessUrl, 0, projectDataId, context, projectId);
             const theJson = { "width": snapshotArray[i].width, "height": snapshotArray[i].height, "browserDefault": snapshotArray[i].browserDefault, "browserName": snapshotArray[i].browserName, "browserOs": snapshotArray[i].browserOs, "agentName": snapshotArray[i].agentName, "imageId": kvId }
             //add it to the array
             finArray.push(theJson)
