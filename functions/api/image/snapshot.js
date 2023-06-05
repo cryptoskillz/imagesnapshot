@@ -64,26 +64,34 @@ let getSnapShot = async (theUrl, snapshotItem, headlessUrl, preview, projectData
     const KV = context.env.datastore
     const kvId = `${projectId}-${uuid.v4()}`;
     await KV.put(kvId, imageUint8Array);
-    //add it to the database
-    let theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','screenWidth','screenHeight','browserDefault','browserName','browserOs','preview') VALUES ('${projectId}','${projectDataId}','${kvId}','${theUrl}',0,'${snapshotItem.width}','${snapshotItem.height}','${snapshotItem.browserDefault}','${snapshotItem.browserName}','${snapshotItem.browserOs}','${preview}')`
-    const insertResult = await context.env.DB.prepare(theSQL).run();
-    //get the latest id and move it to previous
-    const query = context.env.DB.prepare(`SELECT snapshotId from projectData where projectId = '${projectId}' and id = '${projectDataId}' and isDeleted = 0`);
-    const queryResult = await query.first();
+    //update the one that is currently the lates to be the baseline
+    // '${snapshotItem.width}','${snapshotItem.height}','${snapshotItem.browserDefault}','${snapshotItem.browserName}','${snapshotItem.browserOs}
 
-    //update the project data id with the latest 
     if (preview == 0) {
-        //console.log(queryResult)
-        if (queryResult.snapshotId == null)
-            queryResult.snapshotId ="";
-        theSQL = `update projectData SET 'snapshotId' = '${kvId}','previousSnapshotId' = '${queryResult.snapshotId}' where id = '${projectDataId}'`
+        //reset the baseline
+        let theSQL = `update projectImages SET isBaseline = '0' where projectId = '${projectId}' and projectDataId = '${projectDataId}' and screenWidth ='${snapshotItem.width}' and screenHeight='${snapshotItem.height}' and browserDefault='${snapshotItem.browserDefault}' and browserName ='${snapshotItem.browserName}' and browserOs = '${snapshotItem.browserOs}'`
+        //console.log(theSQL);
+        const isBaselineResult = await context.env.DB.prepare(theSQL).run();
+
+        //set the baseline
+        theSQL = `update projectImages SET 'isLatest' = '0','isBaseline' = '1' where isLatest = '1' and projectId = '${projectId}' and projectDataId = '${projectDataId}' and screenWidth ='${snapshotItem.width}' and screenHeight='${snapshotItem.height}' and browserDefault='${snapshotItem.browserDefault}' and browserName ='${snapshotItem.browserName}' and browserOs = '${snapshotItem.browserOs}'`
+        //console.log(theSQL);
+        const isLatestResult = await context.env.DB.prepare(theSQL).run();
+
+        //add it to the database (make it the latest)
+        theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','screenWidth','screenHeight','browserDefault','browserName','browserOs','isLatest') VALUES ('${projectId}','${projectDataId}','${kvId}','${theUrl}',0,'${snapshotItem.width}','${snapshotItem.height}','${snapshotItem.browserDefault}','${snapshotItem.browserName}','${snapshotItem.browserOs}','1')`
+        const insertResult = await context.env.DB.prepare(theSQL).run();
+
     } else {
-        theSQL = `update projectData SET 'previewSnapshotId' = '${kvId}' where id = '${projectDataId}'`
-
+        //reset the preview
+        let theSQL = `update projectImages SET isPreview= '0' where projectId = '${projectId}' and projectDataId = '${projectDataId}' and screenWidth ='${snapshotItem.width}' and screenHeight='${snapshotItem.height}' and browserDefault='${snapshotItem.browserDefault}' and browserName ='${snapshotItem.browserName}' and browserOs = '${snapshotItem.browserOs}'`
+        //console.log(theSQL);
+        const isPreviewResult = await context.env.DB.prepare(theSQL).run();
+        //add it to the database (make it the latest)
+        theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','screenWidth','screenHeight','browserDefault','browserName','browserOs','isPreview') VALUES ('${projectId}','${projectDataId}','${kvId}','${theUrl}',0,'${snapshotItem.width}','${snapshotItem.height}','${snapshotItem.browserDefault}','${snapshotItem.browserName}','${snapshotItem.browserOs}','1')`
+        const insertResult = await context.env.DB.prepare(theSQL).run();
     }
-    const updateResult = await context.env.DB.prepare(theSQL).run();
 
-    //add it to the return array
     return (kvId)
 }
 
@@ -118,10 +126,12 @@ export async function onRequestGet(context) {
         //get the URL 
         const query = context.env.DB.prepare(`SELECT name,url,previewUrl from projectData where projectId = '${projectId}' and id = '${projectDataId}' and isDeleted = 0`);
         const queryResult = await query.first();
+        //console.log(`SELECT name,url,previewUrl from projectData where projectId = '${projectId}' and id = '${projectDataId}' and isDeleted = 0`)
         //set a snapshot array
         let snapshotArray = [];
         const query2 = context.env.DB.prepare(`SELECT userBrowserId,screenWidth,screenHeight from projectSnapShots where projectSnapShots.projectId = '${projectId}' and projectSnapShots.isDeleted = 0 and projectSnapShots.isActive=1`);
         const viewportResults = await query2.all();
+
         //loop through the results and build the pages / viewports to be fetched
         for (var i = 0; i < viewportResults.results.length; ++i) {
             //get the browser data
@@ -143,20 +153,19 @@ export async function onRequestGet(context) {
         //set an array
         let finArray = [];
         //loop through them
+
         for (var i = 0; i < snapshotArray.length; ++i) {
+
             const kvId = await getSnapShot(queryResult.url, snapshotArray[i], headlessUrl, 0, projectDataId, context, projectId);
             const theJson = { "width": snapshotArray[i].width, "height": snapshotArray[i].height, "browserDefault": snapshotArray[i].browserDefault, "browserName": snapshotArray[i].browserName, "browserOs": snapshotArray[i].browserOs, "agentName": snapshotArray[i].agentName, "imageId": kvId }
             //add it to the array
             finArray.push(theJson)
-            if ((preview == 1)  && (queryResult.previewUrl != null)) {
-                console.log(queryResult.previewUrl)
+            if ((preview == 1) && (queryResult.previewUrl != null)) {
                 const kvId = await getSnapShot(queryResult.previewUrl, snapshotArray[i], headlessUrl, 1, projectDataId, context, projectId);
                 const theJson = { "width": snapshotArray[i].width, "height": snapshotArray[i].height, "browserDefault": snapshotArray[i].browserDefault, "browserName": snapshotArray[i].browserName, "browserOs": snapshotArray[i].browserOs, "agentName": snapshotArray[i].agentName, "imageId": kvId }
                 //add it to the array
                 finArray.push(theJson)
-            }
-            else
-            {
+            } else {
                 console.log('no preview url set')
             }
         }
