@@ -12,7 +12,7 @@ let whenDocumentReady = (f) => {
 //thumbnail click function
 const clickThumbnail = (id) => {
     //console.log(snapShots)
-    //let theJson = JSON.stringify(snapShots[id]);
+    let theJson = JSON.stringify(snapShots[id]);
     let latestImagesDone = (res) => {
         res = JSON.parse(res)
         //console.log(res)
@@ -26,13 +26,13 @@ const clickThumbnail = (id) => {
             document.getElementById("leftImage").innerHTML = "BASELINE"
             document.getElementById("rightImage").innerHTML = "SNAPSHOT"
             //check if we have a baseline
-            if (res.previousSnapshotId == undefined || res.previousSnapshotId == "") {
+            if (res.baselineId == undefined || res.baselineId == "") {
                 baselineElement.innerHTML = `NO BASELINE`
                 showAlert(`No baseline image`, 2);
             } else {
                 //render it
 
-                baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.previousSnapshotId}" style="width:500px" class="img-snapshot"/>`;
+                baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.baselineId}" style="width:500px" class="img-snapshot"/>`;
             }
             //check if a snapshot has been run
             if (res.snapshotId == undefined || res.snapshotId == "") {
@@ -46,13 +46,13 @@ const clickThumbnail = (id) => {
             document.getElementById("leftImage").innerHTML = "PREVIEW"
             document.getElementById("rightImage").innerHTML = "SNAPSHOT"
             //check if we have a baseline
-            if (res.previewSnapshotId == undefined || res.previewSnapshotId == "") {
+            if (res.baselineId == undefined || res.baselineId == "") {
                 baselineElement.innerHTML = `NO PREVIEW `
                 showAlert(`No preview image`, 2);
             } else {
                 //render it
 
-                baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.previewSnapshotId}" style="width:500px" class="img-snapshot"/>`;
+                baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.baselineId}" style="width:500px" class="img-snapshot"/>`;
             }
             //check if a snapshot has been run
             if (res.snapshotId == undefined || res.snapshotId == "") {
@@ -67,7 +67,8 @@ const clickThumbnail = (id) => {
         document.getElementById("imagesWrapper").classList.remove("d-none")
     }
     //get the baseline 
-    xhrcall(1, `${apiUrl}image/latestimages?projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}`, "", "json", "", latestImagesDone, token);
+    //xhrcall(1, `${apiUrl}image/latestimages?projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}`, "", "json", "", latestImagesDone, token);
+    xhrcall(1, `${apiUrl}image/latestimages?projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}&snapshot=${theJson}`, "", "json", "", latestImagesDone, token);
 
 
 }

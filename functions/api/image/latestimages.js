@@ -10,6 +10,7 @@ export async function onRequestGet(context) {
     } = context;
 
     //get the search paramaters
+    /*
     const { searchParams } = new URL(request.url);
         //get the project data id
     const projectDataId = searchParams.get('projectDataId');
@@ -21,39 +22,53 @@ export async function onRequestGet(context) {
     const query = context.env.DB.prepare(theSQL);
     const queryResult = await query.first();
     return new Response(JSON.stringify(queryResult), { status: 200 });
+    */
 
-   /*
+    const { searchParams } = new URL(request.url);
+    //get the project data id
+    const projectDataId = searchParams.get('projectDataId');
+    //get the project ID
+    const projectId = searchParams.get('projectId');
+    //get the preview
+    const preview = searchParams.get('preview');
     //get the snapshot data
     let snapshot = searchParams.get('snapshot');
     snapshot = JSON.parse(snapshot);
-    //get the baseline
-    const theQuery = `SELECT kvId from projectImages where projectId = '${projectId}' and isDeleted = 0 and screenWidth = '${snapshot.width}' and screenHeight = '${snapshot.height}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
-    const query = context.env.DB.prepare(theQuery);
-    const queryResults = await query.all();
     let theJson = {}
-    //debug
-    //console.log(queryResults.results)
-    //console.log(queryResults.results.length)
-    //console.log(queryResults.results[queryResults.results.length-1])
-    //console.log(queryResults.results[queryResults.results.length-2])
-    //check we have some data
-    if (queryResults.results.length == 0)
-        return new Response(JSON.stringify({ error: "no snapshots" }), { status: 200 });
-    else {
-        //check if we have only one result and return snapshot
-        if (queryResults.results.length == 1) {
-            theJson.latestId = queryResults.results[queryResults.results.length-1].kvId
-            theJson.baselineId = ""
 
-        } else {
-            //else return the snapshot and the baseline
-            //note the baseline is always the second to last image maybe using an offset will work better here
-            theJson.latestId = queryResults.results[queryResults.results.length-1].kvId
-            theJson.baselineId = queryResults.results[queryResults.results.length-2].kvId
-        }
+    //get the baseline
+    let theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isDeleted = 0 and isBaseline = 1 and screenWidth = '${snapshot.width}' and screenHeight = '${snapshot.height}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
+    //console.log(theSQL)
+    const query = context.env.DB.prepare(theSQL);
+    const queryResult = await query.first();
+    //console.log(queryResult)
+    theJson.baselineId = ""
+    if (queryResult.kvId != null)
+        theJson.baselineId = queryResult.kvId
 
+    //get the latest
+    theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isLatest = 1 and screenWidth = '${snapshot.width}' and screenHeight = '${snapshot.height}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
+    //console.log(theSQL)
+    const query2 = context.env.DB.prepare(theSQL);
+    const queryResult2 = await query.first();
+    theJson.snapshotId = ""
+    if (queryResult2.kvId != null)
+        theJson.snapshotId = queryResult2.kvId
+
+
+    theJson.previewId = ""
+    //get the preview 
+    if (preview == 0) {
+        //get the latest
+        const theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isPreview = 1 and screenWidth = '${snapshot.width}' and screenHeight = '${snapshot.height}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
+        //console.log(theSQL)
+        const query3 = context.env.DB.prepare(theSQL);
+        const queryResult3 = await query.first();
+
+        if (queryResult3.kvId != null)
+            theJson.previewId = queryResult3.kvId
     }
     //return it
     return new Response(JSON.stringify(theJson), { status: 200 });
-    */
+
 }
