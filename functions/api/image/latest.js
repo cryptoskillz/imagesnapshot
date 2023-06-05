@@ -29,6 +29,8 @@ export async function onRequestGet(context) {
         const queryResult2 = await query2.first();
         //set the snapshot
         let snapshot = {};
+        snapshot.projectName = queryResult.name;
+        snapshot.projectUrl = queryResult.url;
         snapshot.height = viewportResults.results[i].screenHeight;
         snapshot.width = viewportResults.results[i].screenWidth;
         //add the browser info to it

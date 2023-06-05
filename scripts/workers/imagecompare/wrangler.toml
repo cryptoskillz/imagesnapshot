@@ -1,0 +1,7 @@
+name = "imagecompare"
+main = "src/index.js"
+compatibility_date = "2023-06-03"
+node_compat = true
+kv_namespaces = [
+    { binding = "DATASTORE", id = "fc654ecac84143cca1ac69d202ccf0a5" }
+]

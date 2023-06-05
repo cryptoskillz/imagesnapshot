@@ -15,8 +15,11 @@ title : projectdata
     let customSelect = `
             <select onchange="projectSelectChange([id],this)" class="form-select" aria-label="Project select" name="propertySelect-[counter]" id="propertySelect-[counter]">
                 <option value="0">Please select</option>
-                <option value="/project/data/snapshot/">Snapshot</option>
-                <option value="/project/data/latest/?projectId=[[PID]]&projectDataId=[[PDID]]&target=_blank">Latest</option>
+                <option value="/project/data/snapshot/?preview=0">Snapshot</option>
+                <option value="/project/data/latest/?projectId=[[PID]]&projectDataId=[[PDID]]&target=_blank&preview=0">Latest Snapshot</option>
+                <option value="/project/data/snapshot/?preview=1">Preview Snapshot</option>
+                <option value="/project/data/latest/?projectId=[[PID]]&projectDataId=[[PDID]]&target=_blank&preview=1">Latest Preview</option>
+
 
         </select>`;
 //<option value="/project/data/history/">History</option>

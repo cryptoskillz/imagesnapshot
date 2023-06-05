@@ -31,10 +31,10 @@ export async function onRequestGet(context) {
         data, // arbitrary space for passing data between middlewares
     } = context;
     try {
-        let token = await decodeJwt(request.headers, env.SECRET);
-        if (token == "") {
-            return new Response(JSON.stringify({ error: "not allowed to see the users browsers" }), { status: 400 });
-        } else {
+       // let token = await decodeJwt(request.headers, env.SECRET);
+       // if (token == "") {
+        //    return new Response(JSON.stringify({ error: "not allowed to see the users browsers" }), { status: 400 });
+        //} else {
             //get the search paramaters
             const { searchParams } = new URL(request.url);
             //get the project ID
@@ -56,7 +56,7 @@ export async function onRequestGet(context) {
             }
             //return them
             return new Response(JSON.stringify(queryResults.results), { status: 200 });
-        }
+      //  }
     } catch (error) {
         console.log(error)
         return new Response(JSON.stringify(error), { status: 200 });

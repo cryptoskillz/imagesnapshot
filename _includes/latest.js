@@ -1,5 +1,5 @@
 //get the project
-let project = JSON.parse(window.localStorage.currentDataItem);
+//let project = JSON.parse(window.localStorage.currentDataItem);
 //store the browser types
 let userAgents;
 let snapShots = [];
@@ -12,7 +12,7 @@ let whenDocumentReady = (f) => {
 //thumbnail click function
 const clickThumbnail = (id) => {
     //console.log(snapShots)
-    let theJson = JSON.stringify(snapShots[id]);
+    //let theJson = JSON.stringify(snapShots[id]);
     let latestImagesDone = (res) => {
         res = JSON.parse(res)
         //console.log(res)
@@ -20,27 +20,54 @@ const clickThumbnail = (id) => {
         const snapshotElement = document.getElementById("imageDiv");
         //get the baseline
         const baselineElement = document.getElementById("baselineImageDiv");
-        //check if we have a baseline
-        if (res.baselineId == undefined || res.baselineId == "") {
-            baselineElement.innerHTML = `NO BASELINE`
-            showAlert(`No baseline image`, 2);
+
+
+        if (getUrlParamater("preview") == 0) {
+            document.getElementById("leftImage").innerHTML = "BASELINE"
+            document.getElementById("rightImage").innerHTML = "SNAPSHOT"
+            //check if we have a baseline
+            if (res.previousSnapshotId == undefined || res.previousSnapshotId == "") {
+                baselineElement.innerHTML = `NO BASELINE`
+                showAlert(`No baseline image`, 2);
+            } else {
+                //render it
+
+                baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.previousSnapshotId}" style="width:500px" class="img-snapshot"/>`;
+            }
+            //check if a snapshot has been run
+            if (res.snapshotId == undefined || res.snapshotId == "") {
+                snapshotElement.innerHTML = `NO SNAPSHOT`
+                showAlert(`no snapshot image`, 2);
+            } else {
+                //render it
+                snapshotElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.snapshotId}" style="width:500px" class="img-snapshot"/>`;
+            }
         } else {
-            //render it
-            baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.baselineId}" style="width:500px" class="img-snapshot"/>`;
-        }
-        //check if a snapshot has been run
-        if (res.latestId == undefined || res.latestId == "") {
-            snapshotElement.innerHTML = `NO SNAPSHOT`
-            showAlert(`no snapshot image`, 2);
-        } else {
-            //render it
-            snapshotElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.latestId}" style="width:500px" class="img-snapshot"/>`;
+            document.getElementById("leftImage").innerHTML = "PREVIEW"
+            document.getElementById("rightImage").innerHTML = "SNAPSHOT"
+            //check if we have a baseline
+            if (res.previewSnapshotId == undefined || res.previewSnapshotId == "") {
+                baselineElement.innerHTML = `NO PREVIEW `
+                showAlert(`No preview image`, 2);
+            } else {
+                //render it
+
+                baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.previewSnapshotId}" style="width:500px" class="img-snapshot"/>`;
+            }
+            //check if a snapshot has been run
+            if (res.snapshotId == undefined || res.snapshotId == "") {
+                snapshotElement.innerHTML = `NO SNAPSHOT`
+                showAlert(`no snapshot image`, 2);
+            } else {
+                //render it
+                snapshotElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.snapshotId}" style="width:500px" class="img-snapshot"/>`;
+            }
         }
         //show the images
         document.getElementById("imagesWrapper").classList.remove("d-none")
     }
     //get the baseline 
-    xhrcall(1, `${apiUrl}image/latestimages?projectId=${project.id}&snapshot=${theJson}`, "", "json", "", latestImagesDone, token);
+    xhrcall(1, `${apiUrl}image/latestimages?projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}`, "", "json", "", latestImagesDone, token);
 
 
 }
@@ -98,7 +125,7 @@ const clickBrowser = (browser) => {
 
 whenDocumentReady(isReady = () => {
 
-    document.getElementById('data-header').innerHTML = `Latest results for ${project.name}<br><a href="${project.url}" target="_blank">${project.url}</a>`
+
     document.getElementById('showBody').classList.remove('d-none');
     // Get the reference to the data header
 
@@ -106,9 +133,12 @@ whenDocumentReady(isReady = () => {
     const browsersDone = (res) => {
         //store the user agents
         userAgents = JSON.parse(res);
+       
         //process the snapshot done
         const snapshotDone = (res) => {
             snapShots = JSON.parse(res);
+            document.getElementById('data-header').innerHTML = `Latest results for ${snapShots[0].projectName}<br><a href="${snapShots[0].projectUrl}" target="_blank">${snapShots[0].projectUrl}</a>`
+
             let theHtml = "";
             let addedChrome = 0;
             let addedEdge = 0;
@@ -130,6 +160,7 @@ whenDocumentReady(isReady = () => {
 
                 if ((snapShots[i].browserDefault == "Safari") && (addedSafari == 0)) {
                     addedChrome = 1;
+
                     theHtml = theHtml + `<a href = "javascript:clickBrowser('Safari')" > <i class="fa-brands fa-safari" alt="Safari"></i> </a>`
                 }
             }
@@ -137,9 +168,9 @@ whenDocumentReady(isReady = () => {
             document.getElementById('imageDetails').classList.remove('d-none');
         }
         //make the snapshot xhr call
-        xhrcall(1, `${apiUrl}image/latest/?projectId=1&projectDataId=1`, "", "json", "", snapshotDone, token);
+        xhrcall(1, `${apiUrl}image/latest/?projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}`, "", "json", "", snapshotDone, token);
     };
     //fetch the different user agents for the project
-    xhrcall(1, `${apiUrl}admin/userbrowsers?projectId=${project.id}`, "", "json", "", browsersDone, token);
+    xhrcall(1, `${apiUrl}admin/userbrowsers?projectId=${getUrlParamater("projectId")}`, "", "json", "", browsersDone, token);
 
 })

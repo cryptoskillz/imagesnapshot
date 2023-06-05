@@ -55,6 +55,10 @@ CREATE TABLE "projectData" (
 	"projectId" INTEGER,
 	"name" TEXT,
 	"url" TEXT,
+	"snapshotId" INTEGER,
+	"previewUrl" TEXT,
+	"previewSnapshotId" INTEGER,
+	"previousSnapshotId" INTEGER,
 	"isDeleted" INTEGER DEFAULT 0,
 	"createdAt" TEXT DEFAULT CURRENT_TIMESTAMP,
 	"updatedAt" TEXT,
@@ -63,7 +67,7 @@ CREATE TABLE "projectData" (
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
-INSERT INTO "projectData" ("projectId","name","url") VALUES(1,'purdy home page','https://purdyandfigg.com');
+INSERT INTO "projectData" ("projectId","name","url","previewUrl") VALUES(1,'purdy home page','https://purdyandfigg.com','https://purdyandfigg.com');
 
 
 CREATE TABLE "projectImages" (
@@ -76,6 +80,7 @@ CREATE TABLE "projectImages" (
 	"screenWidth" INTEGER,
 	"screenHeight" INTEGER,	
 	"userBrowserId" INTEGER,
+	"preview" INTEGER,
 	"browserOs" TEXT,
 	"browserName"	TEXT,
 	"browserDefault" TEXT,

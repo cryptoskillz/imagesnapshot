@@ -823,7 +823,9 @@ let logout = () => {
 
 let checkLogin = () => {
     //check if it is not a login page
-    if ((window.location.pathname == "/create-account") || (window.location.pathname == "/create-account/") || (window.location.pathname == "login") || (window.location.pathname == "/login/") || (window.location.pathname == "/forgot-password") || (window.location.pathname == "/forgot-password/")) {
+    
+
+    if ((window.location.pathname == "/project/data/latest/") ||  (window.location.pathname == "/create-account") || (window.location.pathname == "/create-account/") || (window.location.pathname == "login") || (window.location.pathname == "/login/") || (window.location.pathname == "/forgot-password") || (window.location.pathname == "/forgot-password/")) {
         //window.location = '/'
     } else {
         //get the user object

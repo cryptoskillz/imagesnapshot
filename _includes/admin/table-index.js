@@ -32,7 +32,7 @@ let projectSelectChange = (id, theElement) => {
 
     let result = theElement.value.replace("[[PDID]]", window.localStorage.currentDataItemId);
     result =result.replace("[[PID]]", project.id);
-    console.log(theElement.value)
+    //console.log(theElement.value)
     //load the URL
     if (theElement.value != 0) {
         //check if we want it in a new window

@@ -21,6 +21,71 @@ let decodeJwt = async (req, secret) => {
         }
 
     }
+
+
+}
+
+
+let getSnapShot = async (theUrl, snapshotItem, headlessUrl, preview, projectDataId, context, projectId) => {
+    //output
+    if (preview == 0)
+        console.log(`processing ${snapshotItem.browserDefault} : ${snapshotItem.height} : ${snapshotItem.width} : ${snapshotItem.agentName}`)
+    else
+        console.log(`processing preview ${snapshotItem.browserDefault} : ${snapshotItem.height} : ${snapshotItem.width} : ${snapshotItem.agentName}`)
+
+    //build the call
+    const jsonData = {
+        url: theUrl,
+        "options": {
+            "fullPage": true
+        },
+        "gotoOptions": {
+            "waitUntil": "networkidle2",
+        },
+        viewport: {
+            width: snapshotItem.height,
+            height: snapshotItem.width,
+        }
+    };
+    //make the call
+    const response = await fetch(headlessUrl, {
+        method: 'POST',
+        headers: {
+            'Cache-Control': 'no-cache',
+            "Content-Type": "application/json",
+            'User-Agent': snapshotItem.agentName
+        },
+        body: JSON.stringify(jsonData)
+    });
+    //get the repsonse
+    const imageArrayBuffer = await response.arrayBuffer();
+    const imageUint8Array = new Uint8Array(imageArrayBuffer);
+    //save it to KV
+    const KV = context.env.datastore
+    const kvId = `${projectId}-${uuid.v4()}`;
+    console.log(kvId)
+    await KV.put(kvId, imageUint8Array);
+    //add it to the database
+    let theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','screenWidth','screenHeight','browserDefault','browserName','browserOs','preview') VALUES ('${projectId}','${projectDataId}','${kvId}','${theUrl}',0,'${snapshotItem.width}','${snapshotItem.height}','${snapshotItem.browserDefault}','${snapshotItem.browserName}','${snapshotItem.browserOs}','${preview}')`
+    const insertResult = await context.env.DB.prepare(theSQL).run();
+    //get the latest id and move it to previous
+    const query = context.env.DB.prepare(`SELECT snapshotId from projectData where projectId = '${projectId}' and id = '${projectDataId}' and isDeleted = 0`);
+    const queryResult = await query.first();
+
+    //update the project data id with the latest 
+    if (preview == 0) {
+        //console.log(queryResult)
+        if (queryResult.snapshotId == null)
+            queryResult.snapshotId ="";
+        theSQL = `update projectData SET 'snapshotId' = '${kvId}','previousSnapshotId' = '${queryResult.snapshotId}' where id = '${projectDataId}'`
+    } else {
+        theSQL = `update projectData SET 'previewSnapshotId' = '${kvId}' where id = '${projectDataId}'`
+
+    }
+    const updateResult = await context.env.DB.prepare(theSQL).run();
+
+    //add it to the return array
+    return (kvId)
 }
 
 export async function onRequestGet(context) {
@@ -41,6 +106,8 @@ export async function onRequestGet(context) {
     } else {
         //get the search paramaters
         const { searchParams } = new URL(request.url);
+        //get the preview
+        const preview = searchParams.get('preview');
         //get the project dataid
         const projectDataId = searchParams.get('projectDataId');
         //get the project ID
@@ -50,7 +117,7 @@ export async function onRequestGet(context) {
         if (env.BROWSERLESSTOKEN == undefined)
             return new Response(JSON.stringify({ error: "browser token not set" }), { status: 400 });
         //get the URL 
-        const query = context.env.DB.prepare(`SELECT name,url from projectData where projectId = '${projectId}' and id = '${projectDataId}' and isDeleted = 0`);
+        const query = context.env.DB.prepare(`SELECT name,url,previewUrl from projectData where projectId = '${projectId}' and id = '${projectDataId}' and isDeleted = 0`);
         const queryResult = await query.first();
         //set a snapshot array
         let snapshotArray = [];
@@ -78,50 +145,17 @@ export async function onRequestGet(context) {
         let finArray = [];
         //loop through them
         for (var i = 0; i < snapshotArray.length; ++i) {
-            //output
-            console.log(`processing ${snapshotArray[i].browserDefault} : ${snapshotArray[i].height} : ${snapshotArray[i].width} : ${snapshotArray[i].agentName}`)
-            //build the call
-            const jsonData = {
-                url: queryResult.url,
-                "options": {
-                    "fullPage": true
-                },
-                "gotoOptions": {
-                    "waitUntil": "networkidle2",
-                },
-                viewport: {
-                    width: snapshotArray[i].height,
-                    height: snapshotArray[i].width,
-                }
-            };
-            //make the call
-            const response = await fetch(headlessUrl, {
-                method: 'POST',
-                headers: {
-                    'Cache-Control': 'no-cache',
-                    "Content-Type": "application/json",
-                    'User-Agent': snapshotArray[i].agentName
-                },
-                body: JSON.stringify(jsonData)
-            });
-            //get the repsonse
-            const imageArrayBuffer = await response.arrayBuffer();
-            const imageUint8Array = new Uint8Array(imageArrayBuffer);
-            //save it to KV
-            const KV = context.env.datastore;
-            const KvId = `${projectId}-${uuid.v4()}`;
-            await KV.put(KvId, imageUint8Array);
-            //add it to the database
-            const theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','screenWidth','screenHeight','browserDefault','browserName','browserOs') VALUES ('${projectId}','${projectDataId}','${KvId}','${queryResult.url}',0,'${snapshotArray[i].width}','${snapshotArray[i].height}','${snapshotArray[i].browserDefault}','${snapshotArray[i].browserName}','${snapshotArray[i].browserOs}')`
-            const insertResult = await context.env.DB.prepare(theSQL).run();
-            //add the id the snapshot 
-            //we could add it directly but we may use this array somewhere else so good to keep it all together
-            snapshotArray[i].kvId = KvId
-            //add it to the return array
-
-            const theJson = {"width":snapshotArray[i].width,"height":snapshotArray[i].height,"browserDefault": snapshotArray[i].browserDefault,"browserName": snapshotArray[i].browserName,"browserOs": snapshotArray[i].browserOs,"agentName": snapshotArray[i].agentName,"imageId": snapshotArray[i].kvId}
+            const kvId = getSnapShot(queryResult.url, snapshotArray[i], headlessUrl, 0, projectDataId, context, projectId);
+            const theJson = { "width": snapshotArray[i].width, "height": snapshotArray[i].height, "browserDefault": snapshotArray[i].browserDefault, "browserName": snapshotArray[i].browserName, "browserOs": snapshotArray[i].browserOs, "agentName": snapshotArray[i].agentName, "imageId": kvId }
             //add it to the array
-            finArray.push(theJson)   
+            finArray.push(theJson)
+            if (preview == 1) {
+                const kvId = getSnapShot(queryResult.previewUrl, snapshotArray[i], headlessUrl, 1, projectDataId, context, projectId);
+                const theJson = { "width": snapshotArray[i].width, "height": snapshotArray[i].height, "browserDefault": snapshotArray[i].browserDefault, "browserName": snapshotArray[i].browserName, "browserOs": snapshotArray[i].browserOs, "agentName": snapshotArray[i].agentName, "imageId": kvId }
+                //add it to the array
+                finArray.push(theJson)
+
+            }
         }
         // Return the image as the response
         return new Response(JSON.stringify(finArray), { status: 200 });

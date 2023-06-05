@@ -11,8 +11,18 @@ export async function onRequestGet(context) {
 
     //get the search paramaters
     const { searchParams } = new URL(request.url);
+        //get the project data id
+    const projectDataId = searchParams.get('projectDataId');
     //get the project ID
     const projectId = searchParams.get('projectId');
+
+    const theSQL = `SELECT name,url,previewUrl,snapshotId,previewSnapshotId,previousSnapshotId from projectData where projectId = '${projectId}' and id = '${projectDataId}' and isDeleted = 0`
+   console.log(theSQL)
+    const query = context.env.DB.prepare(theSQL);
+    const queryResult = await query.first();
+    return new Response(JSON.stringify(queryResult), { status: 200 });
+
+   /*
     //get the snapshot data
     let snapshot = searchParams.get('snapshot');
     snapshot = JSON.parse(snapshot);
@@ -45,4 +55,5 @@ export async function onRequestGet(context) {
     }
     //return it
     return new Response(JSON.stringify(theJson), { status: 200 });
+    */
 }

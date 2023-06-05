@@ -1,8 +1,7 @@
 {
-  "name": "snapshot",
+  "name": "imagecompare",
   "version": "0.0.0",
   "devDependencies": {
-    "@cloudflare/puppeteer": "^0.0.2-alpha",
     "jest": "^29.5.0",
     "wrangler": "2.6.2"
   },
@@ -13,6 +12,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "puppeteer-core": "^20.4.0"
+    "pixelmatch": "^5.3.0"
   }
 }
