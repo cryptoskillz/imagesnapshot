@@ -63,7 +63,6 @@ let getSnapShot = async (theUrl, snapshotItem, headlessUrl, preview, projectData
     //save it to KV
     const KV = context.env.datastore
     const kvId = `${projectId}-${uuid.v4()}`;
-    console.log(kvId)
     await KV.put(kvId, imageUint8Array);
     //add it to the database
     let theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','screenWidth','screenHeight','browserDefault','browserName','browserOs','preview') VALUES ('${projectId}','${projectDataId}','${kvId}','${theUrl}',0,'${snapshotItem.width}','${snapshotItem.height}','${snapshotItem.browserDefault}','${snapshotItem.browserName}','${snapshotItem.browserOs}','${preview}')`
@@ -150,7 +149,7 @@ export async function onRequestGet(context) {
             //add it to the array
             finArray.push(theJson)
             if (preview == 1) {
-                const kvId = getSnapShot(queryResult.previewUrl, snapshotArray[i], headlessUrl, 1, projectDataId, context, projectId);
+                const kvId = await getSnapShot(queryResult.previewUrl, snapshotArray[i], headlessUrl, 1, projectDataId, context, projectId);
                 const theJson = { "width": snapshotArray[i].width, "height": snapshotArray[i].height, "browserDefault": snapshotArray[i].browserDefault, "browserName": snapshotArray[i].browserName, "browserOs": snapshotArray[i].browserOs, "agentName": snapshotArray[i].agentName, "imageId": kvId }
                 //add it to the array
                 finArray.push(theJson)
