@@ -41,18 +41,22 @@ export async function onRequestGet(context) {
     //console.log(theSQL)
     const query = context.env.DB.prepare(theSQL);
     const queryResult = await query.first();
-    //console.log(queryResult)
+    console.log(queryResult)
     theJson.baselineId = ""
-    if (queryResult.kvId != null)
+    if (queryResult != undefined)
         theJson.baselineId = queryResult.kvId
 
     //get the latest
     theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isLatest = 1 and screenWidth = '${snapshot.width}' and screenHeight = '${snapshot.height}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
     //console.log(theSQL)
     const query2 = context.env.DB.prepare(theSQL);
-    const queryResult2 = await query.first();
+    const queryResult2 = await query2.first();
     theJson.snapshotId = ""
-    if (queryResult2.kvId != null)
+    
+        console.log("queryResult2")
+
+    console.log(queryResult2)
+    if (queryResult2 != undefined)
         theJson.snapshotId = queryResult2.kvId
 
 
@@ -63,9 +67,9 @@ export async function onRequestGet(context) {
         const theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isPreview = 1 and screenWidth = '${snapshot.width}' and screenHeight = '${snapshot.height}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
         //console.log(theSQL)
         const query3 = context.env.DB.prepare(theSQL);
-        const queryResult3 = await query.first();
+        const queryResult3 = await query3.first();
 
-        if (queryResult3.kvId != null)
+        if (queryResult3 != undefined)
             theJson.previewId = queryResult3.kvId
     }
     //return it

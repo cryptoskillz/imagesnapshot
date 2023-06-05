@@ -70,7 +70,7 @@ CREATE TABLE "projectImages" (
 	"id"	INTEGER,
 	"projectId" INTEGER,
 	"projectDataId" INTEGER,
-	"kvId" INTEGER,
+	"kvId" TEXT,
 	"cfid"	INTEGER,
 	"filename"	TEXT,
 	"screenWidth" INTEGER,

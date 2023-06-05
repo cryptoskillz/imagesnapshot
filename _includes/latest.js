@@ -46,13 +46,13 @@ const clickThumbnail = (id) => {
             document.getElementById("leftImage").innerHTML = "PREVIEW"
             document.getElementById("rightImage").innerHTML = "SNAPSHOT"
             //check if we have a baseline
-            if (res.baselineId == undefined || res.baselineId == "") {
+            if (res.previewId == undefined || res.previewId == "") {
                 baselineElement.innerHTML = `NO PREVIEW `
                 showAlert(`No preview image`, 2);
             } else {
                 //render it
 
-                baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.baselineId}" style="width:500px" class="img-snapshot"/>`;
+                baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.previewId}" style="width:500px" class="img-snapshot"/>`;
             }
             //check if a snapshot has been run
             if (res.snapshotId == undefined || res.snapshotId == "") {
