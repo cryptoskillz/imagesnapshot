@@ -148,12 +148,16 @@ export async function onRequestGet(context) {
             const theJson = { "width": snapshotArray[i].width, "height": snapshotArray[i].height, "browserDefault": snapshotArray[i].browserDefault, "browserName": snapshotArray[i].browserName, "browserOs": snapshotArray[i].browserOs, "agentName": snapshotArray[i].agentName, "imageId": kvId }
             //add it to the array
             finArray.push(theJson)
-            if (preview == 1) {
+            if ((preview == 1)  && (queryResult.previewUrl != null)) {
+                console.log(queryResult.previewUrl)
                 const kvId = await getSnapShot(queryResult.previewUrl, snapshotArray[i], headlessUrl, 1, projectDataId, context, projectId);
                 const theJson = { "width": snapshotArray[i].width, "height": snapshotArray[i].height, "browserDefault": snapshotArray[i].browserDefault, "browserName": snapshotArray[i].browserName, "browserOs": snapshotArray[i].browserOs, "agentName": snapshotArray[i].agentName, "imageId": kvId }
                 //add it to the array
                 finArray.push(theJson)
-
+            }
+            else
+            {
+                console.log('no preview url set')
             }
         }
         // Return the image as the response

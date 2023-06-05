@@ -67,7 +67,7 @@ CREATE TABLE "projectData" (
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
-INSERT INTO "projectData" ("projectId","name","url","previewUrl") VALUES(1,'purdy home page','https://purdyandfigg.com','https://purdyandfigg.com');
+INSERT INTO "projectData" ("projectId","name","url") VALUES(1,'purdy home page','https://purdyandfigg.com');
 
 
 CREATE TABLE "projectImages" (
