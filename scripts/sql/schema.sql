@@ -69,7 +69,7 @@ CREATE TABLE "projectData" (
 
 INSERT INTO "projectData" ("projectId","name","url","previewUrl") VALUES(1,'purdy home page','https://purdyandfigg.com','https://purdyandfigg.com');
 
-wrangler d1 migrations DB --local  --file=./scripts/sql/migration1.sql
+
 CREATE TABLE "projectImages" (
 	"id"	INTEGER,
 	"projectId" INTEGER,
