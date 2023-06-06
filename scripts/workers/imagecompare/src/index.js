@@ -9,7 +9,7 @@ async function handleRequest(request) {
     const height = 600; // Set the height of the images
 
     //set up kv
-  const datastore = DATASTORE; // Access the KV binding
+    const datastore = DATASTORE; // Access the KV binding
     const kv = await KV.get(datastore);
 
     //pull out the image
@@ -25,7 +25,7 @@ async function handleRequest(request) {
 
     // Compare the images using pixelmatch
     const numDiffPixels = pixelmatch(baselineData, snapshotData, diffImageData, width, height, { threshold: 0.1 });
-const diffImage = await compareImages(baselineData, snapshotData);
+    const diffImage = await compareImages(baselineData, snapshotData);
 
     // Log the number of different pixels
     console.log(`Number of different pixels: ${numDiffPixels}`);

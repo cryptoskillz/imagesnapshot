@@ -55,7 +55,7 @@ INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userB
 INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1284,2778,10,'Iphone','Safari','Safari on Iphone',0);
 INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,2778,2732,11,'Ipad','Safari','Safari on Ipad',0);
 
-INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,12,'Windows 10','Edge','Edge on LG',0);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,12,'Windows 10','Edge','Edge (Standard)',0);
 INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,13,'macOS','Edge','Edge on MacOs',0);
 INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,14,'Android','Edge','Edge on Android',0);
 

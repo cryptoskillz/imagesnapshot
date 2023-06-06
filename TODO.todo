@@ -5,17 +5,13 @@
 
 dashboard
 
- ☐ counter
 
  project 
 
- ✔ add a new project @done (23-05-27 17:46)
 
 timeline
 
  ☐ show all the images we have took for the user in a timeline
- ☐ set the second to last image as the baseline
- ☐ compare from baseline to new image
 
 
  FUNCTIONS API
@@ -23,29 +19,6 @@ timeline
 
 snapshot
 
- ✔ call it from the view @done (23-05-30 14:32)
- ✔ store the image id in the database @done (23-05-30 14:32)
- ✔ let the user view it in the browser @done (23-05-30 14:32)
- ✔ snapshot all the images for the project @done (23-05-31 17:57)
- ✔ get the settings as the firt call in snapshot @done (23-05-31 17:57)
- ✔ snapshot all the image variants and design it better @done (23-05-31 17:57)
- ✔ add the useragents to a sql table for the project @done (23-05-31 17:57)
- ✔ return the data not as an image but as an array of images / sizes so we can render them out. @done (23-05-31 17:57)
- ✔ make it get all the images if you dont pass up a height and width and / or useragent @done (23-05-31 17:57)
- ✔ update the screen shot in the include file to show the dymanic view port sizes and or multipile images @done (23-05-31 17:57)
- ✔ add the useragent and viewport in the return @done (23-06-01 00:35)
- ✔ chnage the repsonse to json @done (23-06-01 00:35)
- ✔ replace the custome XHR (no longer required) and use the generic one @done (23-06-01 00:35)
- ✔ create the view to show each image site / browser have thumbnail for each size and an icon for each browser type @done (23-06-01 00:36)
- ✔ show return / the baseline make it get the latest one before we do the insert and set that to the baseline @done (23-06-01 15:58)
- ✔ let the user select a base line @done (23-06-01 15:58)
- ✔ let the user turn off snapshots they dont want to do @done (23-06-01 15:42)
- ✔ add a baseline and useragent id to the  the images table @done (23-06-01 17:02)
- ✔ in snapshot return the baseline info. @done (23-06-01 15:58)
- ☐ work on set active state code
- ✔ in project image store the snapshot id @done (23-06-01 17:02)
- ✔ style on snapshot page @done (23-06-02 20:00)
- ✔ when browser token not set clearinterval @done (23-06-02 20:00)
 
 image
 
@@ -65,5 +38,10 @@ latest
 
 Breadcrumbs
 
- ☐ on project data you should be able to go back to projects
+ ☐ on project data / project settings you should be able to go back to projects
+
+ Table join
+
+ ☐ recode the table.js to be more elegant and handle joins better
+ ☐ replace table.js with table-join.js once we are happy it works as excepted. 
 

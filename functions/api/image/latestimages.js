@@ -42,8 +42,8 @@ export async function onRequestGet(context) {
     console.log(theSQL)
     const query = context.env.DB.prepare(theSQL);
     const queryResult = await query.first();
-    console.log("queryResult")
-    console.log(queryResult)
+    //console.log("queryResult")
+    //console.log(queryResult)
     theJson.baselineId = ""
     if (queryResult != undefined)
         theJson.baselineId = queryResult.kvId

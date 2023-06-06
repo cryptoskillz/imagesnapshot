@@ -8,24 +8,21 @@
 
 
  whenDocumentReady(isReady = () => {
-    /*
-        This is
-        for the unit testing it basically tells us that we are using cypress and to hard code the localstorage.
-    */
-    /*
-        This is
-        for the unit testing it basically tells us that we are using cypress and to hard code the localstorage.
-    */
-    var ua = window.navigator.userAgent;
-    if (ua == `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/10.11.0 Chrome/106.0.5249.51 Electron/21.0.0 Safari/537.36`) {
-        window.localStorage.currentDataItem = `{"id":1,"name":"DCONDO","currentlyRented":1,"state":0,"internationalCost":52087,"createdAt":"2023-01-24 13:08:31"}`
-        window.localStorage.currentDataItemId = '1';
-        window.localStorage.mainTable = "property";
-    }
-    //console.log("ua")
-    console.log(ua)
-
-
+     /*
+         This is
+         for the unit testing it basically tells us that we are using cypress and to hard code the localstorage.
+     */
+     /*
+         This is
+         for the unit testing it basically tells us that we are using cypress and to hard code the localstorage.
+     */
+     var ua = window.navigator.userAgent;
+     if (ua == `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/10.11.0 Chrome/106.0.5249.51 Electron/21.0.0 Safari/537.36`) {
+         window.localStorage.currentDataItem = `{"id":1,"name":"DCONDO","currentlyRented":1,"state":0,"internationalCost":52087,"createdAt":"2023-01-24 13:08:31"}`
+         window.localStorage.currentDataItemId = '1';
+         window.localStorage.mainTable = "property";
+     }
+     //console.log("ua")
      //set a url array
      let urls = [];
      //process the schema
@@ -37,7 +34,7 @@
      //process the look up 
      //note: not sure if this is required in the add new page. 
      let lookUpDone = (res) => {
-        lookUpData = JSON.parse(res);
+         lookUpData = JSON.parse(res);
      }
 
      //process the data.
@@ -75,14 +72,14 @@
              document.getElementById('data-header').innerHTML = `edit the ${tmpName}`
          }
 
-        //get the record Id
+         //get the record Id
          let recordId = getUrlParamater('id');
          //if its blank get it from local storage
          if (recordId == "")
              recordId = window.localStorage.currentDataItemId
          //end it.
          if (recordId == "") {
-            showAlert(`${level2name}  ID not set`, 2, 0)
+             showAlert(`${level2name}  ID not set`, 2, 0)
              return;
          }
 
