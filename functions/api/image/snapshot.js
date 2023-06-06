@@ -129,13 +129,13 @@ export async function onRequestGet(context) {
         //console.log(`SELECT name,url,previewUrl from projectData where projectId = '${projectId}' and id = '${projectDataId}' and isDeleted = 0`)
         //set a snapshot array
         let snapshotArray = [];
-        const query2 = context.env.DB.prepare(`SELECT userBrowserId,screenWidth,screenHeight from projectSnapShots where projectSnapShots.projectId = '${projectId}' and projectSnapShots.isDeleted = 0 and projectSnapShots.isActive=1`);
+        const query2 = context.env.DB.prepare(`SELECT userBrowserId,screenWidth,screenHeight,browserDefault,browserName,browserOs from projectSnapShots where projectSnapShots.projectId = '${projectId}' and projectSnapShots.isDeleted = 0 and projectSnapShots.isActive=1`);
         const viewportResults = await query2.all();
 
         //loop through the results and build the pages / viewports to be fetched
         for (var i = 0; i < viewportResults.results.length; ++i) {
             //get the browser data
-            const theQuery = `SELECT userBrowsers.browserDefault,userBrowsers.browserName,userBrowsers.browserOs,userAgents.agentName from userBrowsers LEFT JOIN userAgents ON userAgents.userBrowserId = userBrowsers.id where userBrowsers.isDeleted = 0 and userBrowsers.id = ${viewportResults.results[i].userBrowserId} and userAgents.isActive = 1`;
+            const theQuery = `SELECT agentName from userAgents where userBrowserId = '${viewportResults.results[i].userBrowserId}'`;
             const query2 = context.env.DB.prepare(theQuery);
             const queryResult2 = await query2.first();
             //set the snapshot
@@ -143,12 +143,14 @@ export async function onRequestGet(context) {
             snapshot.height = viewportResults.results[i].screenHeight;
             snapshot.width = viewportResults.results[i].screenWidth;
             //add the browser info to it
-            snapshot.browserDefault = queryResult2.browserDefault;
-            snapshot.browserName = queryResult2.browserName;
-            snapshot.browserOs = queryResult2.browserOs;
+            snapshot.browserDefault = viewportResults.results[i].browserDefault;
+            snapshot.browserName = viewportResults.results[i].browserName;
+            snapshot.browserOs = viewportResults.results[i].browserOs;
             snapshot.agentName = queryResult2.agentName;
             //add it to the array
             snapshotArray.push(snapshot);
+            //console.log(snapshot);
+            //return;
         }
         //set an array
         let finArray = [];

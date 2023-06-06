@@ -49,12 +49,23 @@ INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userB
 INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,6,'Android','Chrome','Chrome on Samsung',0);
 INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,7,'Android','Chrome','Chrome on LG',0);
 
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,8,'Windows 10','Firefox','Firefox (Standard)',0);
+
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,9,'macOS','Safari','Safari (Standard)',0);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1284,2778,10,'Iphone','Safari','Safari on Iphone',0);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,2778,2732,11,'Ipad','Safari','Safari on Ipad',0);
+
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,12,'Windows 10','Edge','Edge on LG',0);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,13,'macOS','Edge','Edge on MacOs',0);
+INSERT INTO "projectSnapShots"  ("projectId","screenWidth","screenHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,14,'Android','Edge','Edge on Android',0);
+
 
 CREATE TABLE "projectData" (
 	"id" INTEGER,
 	"projectId" INTEGER,
 	"name" TEXT,
 	"url" TEXT,
+	"previewUrl" TEXT,
 	"isDeleted" INTEGER DEFAULT 0,
 	"createdAt" TEXT DEFAULT CURRENT_TIMESTAMP,
 	"updatedAt" TEXT,
@@ -82,6 +93,9 @@ CREATE TABLE "projectImages" (
 	"url" TEXT,
 	"baseUrl" TEXT,
 	"draft" INTEGER DEFAULT 1,
+	"isLatest" INTEGER,
+	"isBaseline" INTEGER,
+	"isPreview" INTEGER,
 	"isDeleted" INTEGER DEFAULT 0,
 	"deletedAt" TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
@@ -109,8 +123,14 @@ INSERT INTO "userBrowsers" ("id","browserOs","browserDefault","browserName","age
 INSERT INTO "userBrowsers" ("id","browserOs","browserDefault","browserName","agent") VALUES(5,'Android','Chrome','Chrome on Android','');
 INSERT INTO "userBrowsers" ("id","browserOs","browserDefault","browserName","agent") VALUES(6,'Android','Chrome','Chrome on Samsung','');
 INSERT INTO "userBrowsers" ("id","browserOs","browserDefault","browserName","agent") VALUES(7,'Android','Chrome','Chrome on LG','');
+INSERT INTO "userBrowsers" ("id","browserOs","browserDefault","browserName","agent") VALUES(8,'Windows 10','Firefox','Firefox (Standard)','');
+INSERT INTO "userBrowsers" ("id","browserOs","browserDefault","browserName","agent") VALUES(9,'macOS','Safari','Safari (Standard)','');
+INSERT INTO "userBrowsers" ("id","browserOs","browserDefault","browserName","agent") VALUES(10,'Iphone','Safari','Safari on Iphone','');
+INSERT INTO "userBrowsers" ("id","browserOs","browserDefault","browserName","agent") VALUES(11,'Ipad','Chrome','Safari on Ipad','');
+INSERT INTO "userBrowsers" ("id","browserOs","browserDefault","browserName","agent") VALUES(12,'Windows 10','Edge','Edge (Standard)','');
+INSERT INTO "userBrowsers" ("id","browserOs","browserDefault","browserName","agent") VALUES(13,'macOS','Edge','Edge on MacOs','');
+INSERT INTO "userBrowsers" ("id","browserOs","browserDefault","browserName","agent") VALUES(14,'Android','Edge','Edge on Android','');
 
- 
 
 CREATE TABLE "userAgents" (
 	"id"	INTEGER,
@@ -128,24 +148,19 @@ CREATE TABLE "userAgents" (
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(1,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',1);
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(1,'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',0);
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(1,'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',0);
-
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(2,'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',1);
-
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(3,'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/114.0.5735.50 Mobile/15E148 Safari/604.1',1);
-
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(4,'Mozilla/5.0 (iPad; CPU OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/114.0.5735.50 Mobile/15E148 Safari/604.1',1);
-
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(5,'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.57 Mobile Safari/537.36',1);
-
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(6,'Mozilla/5.0 (Linux; Android 10; SM-A205U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.57 Mobile Safari/537.36',1);
-INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(6,'Mozilla/5.0 (Linux; Android 10; SM-A102U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.57 Mobile Safari/537.36',0);
-INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(6,'Mozilla/5.0 (Linux; Android 10; SM-G960U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.57 Mobile Safari/537.36',0);
-INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(6,'Mozilla/5.0 (Linux; Android 10; SM-N960U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.57 Mobile Safari/537.36',0);
-
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(7,'Mozilla/5.0 (Linux; Android 10; LM-Q720) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.57 Mobile Safari/537.36',1);
-INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(7,'Mozilla/5.0 (Linux; Android 10; LM-X420) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.57 Mobile Safari/537.36',0);
-INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(7,'Mozilla/5.0 (Linux; Android 10; LM-Q710(FGN)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.57 Mobile Safari/537.36',0);
-
+INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(8,'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0',0);
+INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(9,'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Safari/605.1.15',0);
+INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(10,'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1',0);
+INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(11,'Mozilla/5.0 (iPad; CPU OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1',0);
+INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(12,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/113.0.1774.57',0);
+INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(13,'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/113.0.1774.57',0);
+INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(14,'Mozilla/5.0 (Linux; Android 10; HD1913) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.60 Mobile Safari/537.36 EdgA/113.0.1774.63',0);
 
 
 

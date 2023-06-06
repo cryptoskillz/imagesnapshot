@@ -49,11 +49,21 @@ snapshot
 
 image
 
- ☐ figure out why this is not rendering correctly on production 1-788aa717-e0e1-4fcf-a4aa-de64a0c58acf it is in the KV data store
- ☐ make it fail gracefully
- ☐ hide left menu on latest
+ ✔ figure out why this is not rendering correctly on production 1-788aa717-e0e1-4fcf-a4aa-de64a0c58acf it is in the KV data store @done (23-06-06 16:58)
+ ✔ make it fail gracefully @done (23-06-06 16:58)
+ ✔ hide left menu on latest @done (23-06-06 16:58)
 
 latest images
 
- ☐ spitting out the env images.
+ ✔ spitting out the env images. @done (23-06-06 16:58)
+
+latest 
+
+ ☐ on the preview mode make it say preview instead of latest
+ ☐ when there is no baseline or snapshot the show alert should say so and not just no snapshot
+
+
+Breadcrumbs
+
+ ☐ on project data you should be able to go back to projects
 

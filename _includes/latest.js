@@ -12,7 +12,7 @@ let whenDocumentReady = (f) => {
 //thumbnail click function
 const clickThumbnail = (id) => {
     //console.log(snapShots)
-    let theJson = JSON.stringify(snapShots[id]);
+    let theJson = JSON.stringify(userAgents[id]);
     let latestImagesDone = (res) => {
         res = JSON.parse(res)
         //console.log(res)
@@ -74,6 +74,7 @@ const clickThumbnail = (id) => {
 }
 
 const osSelectChange = (theElement) => {
+    //console.log(userAgents)
     //clear the image wrapper
     document.getElementById("imageDiv").innerHTML = "";
     document.getElementById("baselineImageDiv").innerHTML = "";
@@ -83,11 +84,13 @@ const osSelectChange = (theElement) => {
     //set the image html element
     let imageHtml = "";
     //loop through the image results
-    for (var i = 0; i < snapShots.length; ++i) {
+    for (var i = 0; i < userAgents.length; ++i) {
+        //console.log(userAgents[i])
+        //console.log(theElement.value)
         //check if we should show it
-        if (theElement.value == snapShots[i].browserName) {
+        if (theElement.value == userAgents[i].browserDefault) {
             //render out the thumb nails
-            imageHtml = imageHtml + `<a href="javascript:clickThumbnail(${i})"><img src="https://placehold.co/100x100?text=${snapShots[i].width}x${snapShots[i].height}"/> </a>`;
+            imageHtml = imageHtml + `<a href="javascript:clickThumbnail(${i})"><img src="https://placehold.co/100x100?text=${userAgents[i].screenWidth}x${userAgents[i].screenHeight}"/> </a>`;
         }
     }
     //update the dom
@@ -110,11 +113,11 @@ const clickBrowser = (browser) => {
     selectElement.appendChild(option);
     //loop through the user aagents
     for (var i = 0; i < userAgents.length; ++i) {
-        if (userAgents[i].browserDefault == browser) {
+        if (userAgents[i].browserName == browser) {
             //make an option
             const option = document.createElement("option");
-            option.value = userAgents[i].browserName; // Set the value of the option
-            option.text = userAgents[i].browserName; // Set the text displayed for the option
+            option.value = userAgents[i].browserDefault; // Set the value of the option
+            option.text = userAgents[i].browserDefault; // Set the text displayed for the option
             // Append the option element to the select element
             selectElement.appendChild(option);
 
@@ -134,10 +137,11 @@ whenDocumentReady(isReady = () => {
     const browsersDone = (res) => {
         //store the user agents
         userAgents = JSON.parse(res);
-       
         //process the snapshot done
         const snapshotDone = (res) => {
             snapShots = JSON.parse(res);
+
+
             document.getElementById('data-header').innerHTML = `Latest results for ${snapShots[0].projectName}<br><a href="${snapShots[0].projectUrl}" target="_blank">${snapShots[0].projectUrl}</a>`
 
             let theHtml = "";
@@ -145,22 +149,22 @@ whenDocumentReady(isReady = () => {
             let addedEdge = 0;
             let addedFirefox = 0;
             let addedSafari = 0;
-            for (var i = 0; i < snapShots.length; ++i) {
-                if ((snapShots[i].browserDefault == "Chrome") && (addedChrome == 0)) {
+            for (var i = 0; i < userAgents.length; ++i) {
+                if ((userAgents[i].browserName == "Chrome") && (addedChrome == 0)) {
                     addedChrome = 1;
                     theHtml = theHtml + `<a href="javascript:clickBrowser('Chrome')"><i class="fa-brands fa-chrome" alt="Chrome"></i></a>`
                 }
-                if ((snapShots[i].browserDefault == "Edge") && (addedEdge == 0)) {
-                    addedChrome = 1;
+                if ((userAgents[i].browserName == "Edge") && (addedEdge == 0)) {
+                    addedEdge = 1;
                     theHtml = theHtml + `<a href = "javascript:clickBrowser('Edge')" > <i class="fa-brands fa-edge" alt="Edge"></i> </a>`
                 }
-                if ((snapShots[i].browserDefault == "Firefox") && (addedFirefox == 0)) {
-                    addedChrome = 1;
+                if ((userAgents[i].browserName == "Firefox") && (addedFirefox == 0)) {
+                    addedFirefox = 1;
                     theHtml = theHtml + `<a href = "javascript:clickBrowser('Firefox')" > <i class="fa-brands fa-firefox" alt="Firefox"></i> </a> `
                 }
 
-                if ((snapShots[i].browserDefault == "Safari") && (addedSafari == 0)) {
-                    addedChrome = 1;
+                if ((userAgents[i].browserName == "Safari") && (addedSafari == 0)) {
+                    addedSafari = 1;
 
                     theHtml = theHtml + `<a href = "javascript:clickBrowser('Safari')" > <i class="fa-brands fa-safari" alt="Safari"></i> </a>`
                 }

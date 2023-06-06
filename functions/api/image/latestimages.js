@@ -34,37 +34,37 @@ export async function onRequestGet(context) {
     //get the snapshot data
     let snapshot = searchParams.get('snapshot');
     snapshot = JSON.parse(snapshot);
+    console.log(snapshot);
     let theJson = {}
 
     //get the baseline
-    let theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isDeleted = 0 and isBaseline = 1 and screenWidth = '${snapshot.width}' and screenHeight = '${snapshot.height}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
-    //console.log(theSQL)
+    let theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isDeleted = 0 and isBaseline = 1 and screenWidth = '${snapshot.screenWidth}' and screenHeight = '${snapshot.screenHeight}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
+    console.log(theSQL)
     const query = context.env.DB.prepare(theSQL);
     const queryResult = await query.first();
+    console.log("queryResult")
     console.log(queryResult)
     theJson.baselineId = ""
     if (queryResult != undefined)
         theJson.baselineId = queryResult.kvId
 
     //get the latest
-    theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isLatest = 1 and screenWidth = '${snapshot.width}' and screenHeight = '${snapshot.height}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
+    theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isLatest = 1 and screenWidth = '${snapshot.screenWidth}' and screenHeight = '${snapshot.screenHeight}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
     //console.log(theSQL)
     const query2 = context.env.DB.prepare(theSQL);
     const queryResult2 = await query2.first();
     theJson.snapshotId = ""
     
-        console.log("queryResult2")
-
-    console.log(queryResult2)
+    //console.log("queryResult2")
+    //console.log(queryResult2)
     if (queryResult2 != undefined)
         theJson.snapshotId = queryResult2.kvId
-
 
     theJson.previewId = ""
     //get the preview 
     if (preview == 0) {
         //get the latest
-        const theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isPreview = 1 and screenWidth = '${snapshot.width}' and screenHeight = '${snapshot.height}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
+        const theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isPreview = 1 and screenWidth = '${snapshot.screenWidth}' and screenHeight = '${snapshot.screenHeight}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
         //console.log(theSQL)
         const query3 = context.env.DB.prepare(theSQL);
         const queryResult3 = await query3.first();
