@@ -137,7 +137,7 @@ const osSelectChange = (theElement) => {
     document.getElementById("snapshotImageDiv").innerHTML = "";
     document.getElementById("baselineImageDiv").innerHTML = "";
     document.getElementById("imagesWrapper").classList.add("d-none")
-    document.getElementById("comparsionDiv").classList.add("d-none")
+    document.getElementById("comparsionDiv").classList.add("d-none") 
     //render thumbnails
     const thumbnailElement = document.getElementById("thumbnailDiv");
     //set the image html element

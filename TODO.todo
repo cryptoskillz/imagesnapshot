@@ -19,6 +19,7 @@ timeline
 
 snapshot
 
+redo snapshot it has a whole list of image and it calls the api one at a time as this will let us make the UI function better.
 
 image
 
@@ -45,3 +46,9 @@ Breadcrumbs
  ☐ recode the table.js to be more elegant and handle joins better
  ☐ replace table.js with table-join.js once we are happy it works as excepted. 
 
+
+misc
+
+ ☐ change the project id and project data id to a guid to make it harder to guess results
+ ☐ add an api call to tie it into the CI's and such 
+ 

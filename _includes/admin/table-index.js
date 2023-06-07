@@ -81,6 +81,7 @@ whenDocumentReady(isReady = () => {
 
         //replace the title 
         if (theSettings.title != "") {
+            console.log(theSettings)
             document.getElementById('recordTitle').innerHTML = theSettings.title
         }
 
