@@ -22,6 +22,7 @@ permalink: /project/data/latest/
         </select>
     </div>
     <div id="thumbnailDiv"></div>
+    <div id="comparsionDiv" class="d-none"><a href="javascript:compareImages(1)" id="showDiff"/>Show Differences</a><a href="javascript:compareImages(0)" class="d-none" id="hideDiff"/>Hide Differences</a></div>
     <div id="imagesWrapper" class="d-none">
         <div class="row">
             <div class="col-sm-6" >
@@ -35,14 +36,19 @@ permalink: /project/data/latest/
             <div class="col-sm-6" id="baselineImageDiv">
                
             </div>
-            <div class="col-sm-6 other" id="imageDiv">
+            <div class="col-sm-6 other" id="snapshotImageDiv">
                 
             </div>
         </div>
+
+            <div id="comparisonResult"></div>
+
   </div>
+<script src="https://cdn.jsdelivr.net/npm/resemblejs@5.0.0/resemble.min.js"></script>
 
 {% if env.ENVIRONMENT == 'local' %}
     <script type="text/javascript">{{theJs | safe}}</script>
 {% else %}
     <script type="text/javascript">{{theJs | jsmin | safe}}</script>
 {% endif %}
+

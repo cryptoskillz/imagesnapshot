@@ -8,6 +8,49 @@ let whenDocumentReady = (f) => {
     /in/.test(document.readyState) ? setTimeout('whenDocumentReady(' + f + ')', 9) : f()
 }
 
+//set the different images
+let baselineImage = "";
+let snapshotImage = "";
+let differentImage = "";
+
+//compare images function 
+const compareImages = (setImageDifferent) => {
+    //check we have both a baseline and a snapshop imates
+    if (baselineImage != "" && snapshotImage != "") {
+        //check if we want to show the difference
+        if (setImageDifferent == 1) {
+            //check uf we have already processed the differences
+            if (differentImage == "") {
+                ///compare the images
+                resemble(baselineImage).compareTo(snapshotImage).onComplete(function(data) {
+                    // Display the image comparison data as an image
+                    var comparisonResultElement = document.getElementById('snapshotImageDiv');
+                    var image = new Image();
+                    image.src = data.getImageDataUrl();
+                    //add it to the element
+                    comparisonResultElement.innerHTML = `<img src="${image.src }" style="width:500px" class="img-snapshot"/>`;
+                    differentImage = image.src;
+                })
+            } else {
+                //use the saved differences image
+                var comparisonResultElement = document.getElementById('snapshotImageDiv');
+                comparisonResultElement.innerHTML = `<img src="${differentImage}" style="width:500px" class="img-snapshot"/>`;
+            }
+            //show the hide diff button
+            document.getElementById('showDiff').classList.add("d-none");
+            document.getElementById('hideDiff').classList.remove("d-none");
+        } else {
+            //show the normal sbnapshot image
+            var comparisonResultElement = document.getElementById('snapshotImageDiv');
+            comparisonResultElement.innerHTML = `<img src="${baselineImage}" style="width:500px" class="img-snapshot"/>`;
+            //show the show differences buttons
+            document.getElementById('showDiff').classList.remove("d-none");
+            document.getElementById('hideDiff').classList.add("d-none");
+        }
+    }
+}
+
+
 
 //thumbnail click function
 const clickThumbnail = (id) => {
@@ -17,12 +60,16 @@ const clickThumbnail = (id) => {
         res = JSON.parse(res)
         //console.log(res)
         //get the element id
-        const snapshotElement = document.getElementById("imageDiv");
+        const snapshotElement = document.getElementById("snapshotImageDiv");
         //get the baseline
         const baselineElement = document.getElementById("baselineImageDiv");
-
+        //clear the images
+        baselineImage = "";
+        snapshotImage = "";
+        differentImage = "";
 
         if (getUrlParamater("preview") == 0) {
+
             document.getElementById("leftImage").innerHTML = "BASELINE"
             document.getElementById("rightImage").innerHTML = "SNAPSHOT"
             //check if we have a baseline
@@ -31,8 +78,8 @@ const clickThumbnail = (id) => {
                 showAlert(`No baseline image`, 2);
             } else {
                 //render it
-
-                baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.baselineId}" style="width:500px" class="img-snapshot"/>`;
+                baselineImage = `${apiUrl}image/image/?imageId=${res.baselineId}`;
+                baselineElement.innerHTML = `<img src="${baselineImage}" style="width:500px" class="img-snapshot"/>`;
             }
             //check if a snapshot has been run
             if (res.snapshotId == undefined || res.snapshotId == "") {
@@ -40,28 +87,39 @@ const clickThumbnail = (id) => {
                 showAlert(`no snapshot image`, 2);
             } else {
                 //render it
-                snapshotElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.snapshotId}" style="width:500px" class="img-snapshot"/>`;
+                snapshotImage = `${apiUrl}image/image/?imageId=${res.snapshotId}`;
+                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:500px" class="img-snapshot"/>`;
             }
         } else {
             document.getElementById("leftImage").innerHTML = "PREVIEW"
             document.getElementById("rightImage").innerHTML = "SNAPSHOT"
             //check if we have a baseline
             if (res.previewId == undefined || res.previewId == "") {
+
                 baselineElement.innerHTML = `NO PREVIEW `
                 showAlert(`No preview image`, 2);
             } else {
                 //render it
-
-                baselineElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.previewId}" style="width:500px" class="img-snapshot"/>`;
+                baselineImage = `${apiUrl}image/image/?imageId=${res.previewId}`;
+                baselineElement.innerHTML = `<img src="${baselineImage}" style="width:500px" class="img-snapshot"/>`;
             }
             //check if a snapshot has been run
             if (res.snapshotId == undefined || res.snapshotId == "") {
                 snapshotElement.innerHTML = `NO SNAPSHOT`
                 showAlert(`no snapshot image`, 2);
             } else {
+                snapshotImage = `${apiUrl}image/image/?imageId=${res.snapshotId}`;
                 //render it
-                snapshotElement.innerHTML = `<img src="${apiUrl}image/image/?imageId=${res.snapshotId}" style="width:500px" class="img-snapshot"/>`;
+                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:500px" class="img-snapshot"/>`;
             }
+        }
+        //if we have a baseline and snapshot so the compare button
+        if (snapshotImage != "" && baselineImage != "") {
+            document.getElementById("comparsionDiv").classList.remove("d-none")
+        }
+        else
+        {
+            document.getElementById("comparsionDiv").classList.add("d-none")
         }
         //show the images
         document.getElementById("imagesWrapper").classList.remove("d-none")
@@ -76,9 +134,10 @@ const clickThumbnail = (id) => {
 const osSelectChange = (theElement) => {
     //console.log(userAgents)
     //clear the image wrapper
-    document.getElementById("imageDiv").innerHTML = "";
+    document.getElementById("snapshotImageDiv").innerHTML = "";
     document.getElementById("baselineImageDiv").innerHTML = "";
     document.getElementById("imagesWrapper").classList.add("d-none")
+    document.getElementById("comparsionDiv").classList.add("d-none")
     //render thumbnails
     const thumbnailElement = document.getElementById("thumbnailDiv");
     //set the image html element

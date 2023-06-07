@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Image Comparison</title>
+    <script src="https://cdn.jsdelivr.net/npm/resemblejs@5.0.0/resemble.min.js"></script>
+</head>
+
+<body>
+    <div id="comparisonResult"></div>
+    <script>
+    // Set the source URLs for the images
+    var sourceImage1 = 'http://localhost:8789/api/image/image/?imageId=1-cd2f84a1-8979-458b-9985-f6a11df3a588';
+    var sourceImage2 = 'http://localhost:8789/api/image/image/?imageId=1-f6652afd-be86-4aeb-988f-e5eb2287d6fb';
+    resemble(sourceImage1).compareTo(sourceImage2).onComplete(function(data) {
+        // Display the image comparison data as an image
+        var comparisonResultElement = document.getElementById('comparisonResult');
+        var image = new Image();
+        image.src = data.getImageDataUrl();
+        comparisonResultElement.appendChild(image);
+    })
+    </script>
+</body>
+
+</html>
