@@ -67,15 +67,13 @@ const clickThumbnail = (id) => {
         baselineImage = "";
         snapshotImage = "";
         differentImage = "";
-
         if (getUrlParamater("preview") == 0) {
-
             document.getElementById("leftImage").innerHTML = "BASELINE"
             document.getElementById("rightImage").innerHTML = "SNAPSHOT"
             //check if we have a baseline
             if (res.baselineId == undefined || res.baselineId == "") {
                 baselineElement.innerHTML = `NO BASELINE`
-                showAlert(`No baseline image`, 2);
+                //showAlert(`No baseline image`, 2);
             } else {
                 //render it
                 baselineImage = `${apiUrl}image/image/?imageId=${res.baselineId}`;
@@ -84,20 +82,21 @@ const clickThumbnail = (id) => {
             //check if a snapshot has been run
             if (res.snapshotId == undefined || res.snapshotId == "") {
                 snapshotElement.innerHTML = `NO SNAPSHOT`
-                showAlert(`no snapshot image`, 2);
+                //showAlert(`no snapshot image`, 2);
             } else {
                 //render it
                 snapshotImage = `${apiUrl}image/image/?imageId=${res.snapshotId}`;
                 snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:500px" class="img-snapshot"/>`;
             }
+
+
         } else {
             document.getElementById("leftImage").innerHTML = "PREVIEW"
             document.getElementById("rightImage").innerHTML = "SNAPSHOT"
             //check if we have a baseline
             if (res.previewId == undefined || res.previewId == "") {
-
                 baselineElement.innerHTML = `NO PREVIEW `
-                showAlert(`No preview image`, 2);
+                //showAlert(`No preview image`, 2);
             } else {
                 //render it
                 baselineImage = `${apiUrl}image/image/?imageId=${res.previewId}`;
@@ -106,7 +105,7 @@ const clickThumbnail = (id) => {
             //check if a snapshot has been run
             if (res.snapshotId == undefined || res.snapshotId == "") {
                 snapshotElement.innerHTML = `NO SNAPSHOT`
-                showAlert(`no snapshot image`, 2);
+                //showAlert(`no snapshot image`, 2);
             } else {
                 snapshotImage = `${apiUrl}image/image/?imageId=${res.snapshotId}`;
                 //render it
@@ -116,9 +115,21 @@ const clickThumbnail = (id) => {
         //if we have a baseline and snapshot so the compare button
         if (snapshotImage != "" && baselineImage != "") {
             document.getElementById("comparsionDiv").classList.remove("d-none")
-        }
-        else
-        {
+
+        } else {
+            if (snapshotImage == "" && baselineImage == "") {
+                showAlert('no baseline or snapshot image', 2);
+            } else {
+                if (snapshotImage == "") {
+                    showAlert(`no snapshot image`, 2);
+                }
+                if (baselineImage == "") {
+                    if (getUrlParamater("preview") == 0)
+                        showAlert(`No preview image`, 2);
+                    else
+                        showAlert(`No baseline image`, 2);
+                }
+            }
             document.getElementById("comparsionDiv").classList.add("d-none")
         }
         //show the images
@@ -137,7 +148,7 @@ const osSelectChange = (theElement) => {
     document.getElementById("snapshotImageDiv").innerHTML = "";
     document.getElementById("baselineImageDiv").innerHTML = "";
     document.getElementById("imagesWrapper").classList.add("d-none")
-    document.getElementById("comparsionDiv").classList.add("d-none") 
+    document.getElementById("comparsionDiv").classList.add("d-none")
     //render thumbnails
     const thumbnailElement = document.getElementById("thumbnailDiv");
     //set the image html element
@@ -179,7 +190,6 @@ const clickBrowser = (browser) => {
             option.text = userAgents[i].browserDefault; // Set the text displayed for the option
             // Append the option element to the select element
             selectElement.appendChild(option);
-
         }
         //add it to the dropdowns
         document.getElementById('osDetails').classList.remove('d-none')
@@ -200,8 +210,10 @@ whenDocumentReady(isReady = () => {
         const snapshotDone = (res) => {
             snapShots = JSON.parse(res);
 
-
-            document.getElementById('data-header').innerHTML = `Latest results for ${snapShots[0].projectName}<br><a href="${snapShots[0].projectUrl}" target="_blank">${snapShots[0].projectUrl}</a>`
+            if (getUrlParamater("preview") == 1)
+                document.getElementById('data-header').innerHTML = `Preview results for ${snapShots[0].projectName} (<a href="${snapShots[0].projectUrl}" target="_blank">${snapShots[0].projectUrl}</a>)`
+            else
+                document.getElementById('data-header').innerHTML = `Latest results for ${snapShots[0].projectName} (<a href="${snapShots[0].projectUrl}" target="_blank">${snapShots[0].projectUrl}</a>)`
 
             let theHtml = "";
             let addedChrome = 0;
@@ -224,7 +236,6 @@ whenDocumentReady(isReady = () => {
 
                 if ((userAgents[i].browserName == "Safari") && (addedSafari == 0)) {
                     addedSafari = 1;
-
                     theHtml = theHtml + `<a href = "javascript:clickBrowser('Safari')" > <i class="fa-brands fa-safari" alt="Safari"></i> </a>`
                 }
             }

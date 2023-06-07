@@ -33,13 +33,13 @@ latest images
 
 latest 
 
- ☐ on the preview mode make it say preview instead of latest
- ☐ when there is no baseline or snapshot the show alert should say so and not just no snapshot
+ ✔ on the preview mode make it say preview instead of latest @done (23-06-07 21:17)
+ ✔ when there is no baseline or snapshot the show alert should say so and not just no snapshot @done (23-06-07 21:29)
 
 
 Breadcrumbs
 
- ☐ on project data / project settings you should be able to go back to projects
+ ✔ on project data / project settings you should be able to go back to projects @done (23-06-07 20:59)
 
  Table join
 
