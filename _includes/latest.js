@@ -144,11 +144,14 @@ const clickThumbnail = (id) => {
 
 const osSelectChange = (theElement) => {
     //console.log(userAgents)
-    //clear the image wrapper
-    document.getElementById("snapshotImageDiv").innerHTML = "";
-    document.getElementById("baselineImageDiv").innerHTML = "";
-    document.getElementById("imagesWrapper").classList.add("d-none")
-    document.getElementById("comparsionDiv").classList.add("d-none")
+    //rest the state
+    hideAllTheThings();
+    //show the thumbnail
+    document.getElementById("thumbnailDiv").classList.remove("d-none");
+    //show the comparison div
+    document.getElementById("comparsionDiv").classList.remove("d-none");
+    //show the show difference button
+    document.getElementById("showDiff").classList.remove("d-none")
     //render thumbnails
     const thumbnailElement = document.getElementById("thumbnailDiv");
     //set the image html element
@@ -167,8 +170,19 @@ const osSelectChange = (theElement) => {
     thumbnailElement.innerHTML = imageHtml;
 }
 
+const hideAllTheThings = () => {
+    document.getElementById("snapshotImageDiv").innerHTML = "";
+    document.getElementById("baselineImageDiv").innerHTML = "";
+    document.getElementById("imagesWrapper").classList.add("d-none")
+    document.getElementById("comparsionDiv").classList.add("d-none")
+    document.getElementById("thumbnailDiv").classList.add("d-none")
+    document.getElementById("showDiff").classList.add("d-none")
+    document.getElementById("hideDiff").classList.add("d-none")
+}
+
 //this handles the browser click
 const clickBrowser = (browser) => {
+    hideAllTheThings();
     // Get a reference to the select element
     const selectElement = document.getElementById("osSelect");
     // Remove all existing options
