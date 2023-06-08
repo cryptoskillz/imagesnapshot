@@ -12,18 +12,21 @@ whenDocumentReady(isReady = () => {
     // Get the reference to the data header
     const timelineDone = (res) => {
         const results = JSON.parse(res);
-        //var timeline = new TimelineJS(document.getElementById('timeline'));
+        //set a html url url
         let finHtml = "";
-        //set the url and the name
+        //set the header
         document.getElementById('timelineHeader').innerHTML = `<a href="${project.url}" target="_blank">${project.name}</a>`
+        //loop through the results
         for (var i = 0; i < results.data.length; ++i) {
             // Create a new Date object from the timestamp
             const date = new Date(results.data[i].createdAt);
             // Convert the date to a human-readable format
             const humanReadableDate = date.toLocaleString();
+            //set the image
             const theImage = `<img src="${apiUrl}image/image/?imageId=${results.data[i].kvId}" style="width:300px;height:900px" class="img-snapshot"/>`;
+            //check if it is left or right
             if (i % 2 === 0) {
-
+                //right
                 finHtml = finHtml + `<!-- timeline item 1 -->
                       <div class="row no-gutters">
                         <div class="col-sm"> <!--spacer--> </div>
@@ -56,6 +59,7 @@ whenDocumentReady(isReady = () => {
                       <!--/row-->
                       `
             } else {
+                //left
                 finHtml = finHtml + `
                       <!-- timeline item 2 -->
                       <div class="row no-gutters">
@@ -85,12 +89,9 @@ whenDocumentReady(isReady = () => {
                       </div>
                       <!--/row-->`
             }
-
-
         }
-
+        //render the timeline
         document.getElementById("timeline").innerHTML = finHtml
-
     }
     //make the snapshot xhr call
     xhrcall(1, `${apiUrl}admin/timeline/?projectId=${project.id}&projectDataId=${window.localStorage.currentDataItemId}`, "", "json", "", timelineDone, token);

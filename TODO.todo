@@ -1,47 +1,10 @@
- Settings
-
- ✔ settings page throws an error on load @done (23-05-19 22:31)
- ✔ update company profile does not work as excepted @done (23-05-19 22:31)
-
-dashboard
-
-
- project 
-
-
-timeline
-
- ☐ show all the images we have took for the user in a timeline
-
-
- FUNCTIONS API
 
 
 snapshot
 
-redo snapshot it has a whole list of image and it calls the api one at a time as this will let us make the UI function better.
+ ☐ redo snapshot it has a whole list of image and it calls the api one at a time as this will let us make the UI function better.
 
-image
-
- ✔ figure out why this is not rendering correctly on production 1-788aa717-e0e1-4fcf-a4aa-de64a0c58acf it is in the KV data store @done (23-06-06 16:58)
- ✔ make it fail gracefully @done (23-06-06 16:58)
- ✔ hide left menu on latest @done (23-06-06 16:58)
-
-latest images
-
- ✔ spitting out the env images. @done (23-06-06 16:58)
-
-latest 
-
- ✔ on the preview mode make it say preview instead of latest @done (23-06-07 21:17)
- ✔ when there is no baseline or snapshot the show alert should say so and not just no snapshot @done (23-06-07 21:29)
-
-
-Breadcrumbs
-
- ✔ on project data / project settings you should be able to go back to projects @done (23-06-07 20:59)
-
- Table join
+ Table join (branch v2 / v3)
 
  ☐ recode the table.js to be more elegant and handle joins better
  ☐ replace table.js with table-join.js once we are happy it works as excepted. 
@@ -51,4 +14,7 @@ misc
 
  ☐ change the project id and project data id to a guid to make it harder to guess results
  ☐ add an api call to tie it into the CI's and such 
- 
+
+
+
+
