@@ -7,7 +7,6 @@ let whenDocumentReady = (f) => {
 
 whenDocumentReady(isReady = () => {
     document.getElementById('showBody').classList.remove('d-none');
-    document.getElementById('showBody').classList.remove('d-none');
     // Get the reference to the data header
     const divElement = document.getElementById('data-header');
 

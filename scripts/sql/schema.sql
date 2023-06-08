@@ -97,6 +97,9 @@ CREATE TABLE "projectImages" (
 	"isBaseline" INTEGER,
 	"isPreview" INTEGER,
 	"isDeleted" INTEGER DEFAULT 0,
+	"createdAt" TEXT DEFAULT CURRENT_TIMESTAMP,
+	"updatedAt" TEXT,
+	"publishedAt" TEXT DEFAULT CURRENT_TIMESTAMP,
 	"deletedAt" TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );

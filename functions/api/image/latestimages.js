@@ -39,7 +39,6 @@ export async function onRequestGet(context) {
 
     //get the baseline
     let theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isDeleted = 0 and isBaseline = 1 and screenWidth = '${snapshot.screenWidth}' and screenHeight = '${snapshot.screenHeight}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
-    console.log(theSQL)
     const query = context.env.DB.prepare(theSQL);
     const queryResult = await query.first();
     //console.log("queryResult")
