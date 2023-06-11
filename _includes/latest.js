@@ -153,20 +153,20 @@ const ssSelectChange = (theElement) => {
     //check if it is 0 and turn it off
     if (theElement.value == 0) {
         baselineElement.style.height = '';
-        baselineElement.style.width = resolutionWidth;
+        baselineElement.style.width = viewportHeight;
         baselineElement.style.overflow = '';
         snapshotElement.style.height = '';
-        snapshotElement.style.width = resolutionWidth;
+        snapshotElement.style.width = viewportHeight;
         snapshotElement.style.overflow = '';
     } else {
         //look for it
         for (var i = 0; i < displayResults.length; ++i) {
             if (theElement.value == displayResults[i].id) {
                 console.log(displayResults[i].model)
-                baselineElement.style.height = `${displayResults[i].resolutionHeight}px`;
+                baselineElement.style.height = `${displayResults[i].viewportHeight}px`;
                 baselineElement.style.width = resolutionWidth;
                 baselineElement.style.overflow = 'scroll';
-                snapshotElement.style.height = `${displayResults[i].resolutionHeight}px`
+                snapshotElement.style.height = `${displayResults[i].viewportHeight}px`
                 snapshotElement.style.width = resolutionWidth;
                 snapshotElement.style.overflow = 'scroll';
             }
