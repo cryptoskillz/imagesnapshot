@@ -21,6 +21,8 @@ npx @11ty/eleventy
 
 echo "killing rouge wrangler"
 kill -9 `lsof -t -i:8788`
+pkill esbuild
+
 
 echo "starting wrangler"
 #wrangler pages dev _site --binding SECRET=fdfdf --kv=backpage --local --live-reload  &
