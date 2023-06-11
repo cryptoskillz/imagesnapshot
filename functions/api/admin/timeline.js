@@ -35,7 +35,7 @@ export async function onRequestGet(context) {
         //get the project ID
         const projectId = searchParams.get('projectId');
 
-        let theSQL = `SELECT createdAt,kvId,screenWidth,screenHeight,browserOs,browserName,browserDefault,baseUrl from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isDeleted = 0`
+        let theSQL = `SELECT createdAt,kvId,viewportWidth,viewportHeight,browserOs,browserName,browserDefault,baseUrl from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isDeleted = 0`
         const query = context.env.DB.prepare(theSQL);
         const queryResults = await query.all();
         console.log(queryResults.results);

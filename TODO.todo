@@ -16,5 +16,13 @@ misc
  ☐ add an api call to tie it into the CI's and such 
 
 
+admin
+
+ ☐ feed in the other displays
+
+ latest
+
+ ☐ on the chose os make a XHRcall and get the displays based on the userbrowserid
+
 
 

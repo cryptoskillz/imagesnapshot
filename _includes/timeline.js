@@ -50,7 +50,7 @@ whenDocumentReady(isReady = () => {
                             <div class="card-body">
                               <div class="float-right text-muted small">${humanReadableDate}</div>
                               <h4 class="card-title">${results.data[i].browserDefault} </h4>
-                              <p class="card-text">${results.data[i].browserOs} ${results.data[i].screenWidth}x${results.data[i].screenHeight}</p>
+                              <p class="card-text">${results.data[i].browserOs} ${results.data[i].viewportWidth}x${results.data[i].viewportHeight}</p>
                               <p class="card-text">${theImage}</p>
                             </div>
                           </div>
@@ -68,7 +68,7 @@ whenDocumentReady(isReady = () => {
                             <div class="card-body">
                               <div class="float-right small">${humanReadableDate}</div>
                             <h4 class="card-title">${results.data[i].browserDefault} </h4>
-                              <p class="card-text">${results.data[i].browserOs} ${results.data[i].screenWidth}x${results.data[i].screenHeight}</p>                </div>
+                              <p class="card-text">${results.data[i].browserOs} ${results.data[i].viewportWidth}x${results.data[i].viewportHeight}</p>                </div>
                               <p class="card-text">${theImage}</p>
                           </div>
                         </div>

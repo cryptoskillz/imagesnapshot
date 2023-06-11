@@ -1,0 +1,10 @@
+---
+layout: layout.njk
+permalink: /admin/browsers/agents/new/
+---
+<script>
+   let theFields = "userBrowserId,agentName"
+  //main settings array to handle all the variations of rendering.
+  const theSettings = {"checkAdmin":1,"tableSchema":0,"allowOnlyOne":0,"editButton":1,"deleteButton":1,"customButton":"","customSelect":"","localDropDown":"","localReplace":"","table":"userAgents","formatFields":"","fields":theFields,"crumb":"{{ crumb }}","foreignKey":"userBrowserId","lookUps":"","title":"add new agent"}
+</script>
+{% include "admin/table-new.njk" %}

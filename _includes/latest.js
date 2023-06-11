@@ -24,7 +24,7 @@ const compareImages = (setImageDifferent) => {
                 ///compare the images
                 resemble(baselineImage).compareTo(snapshotImage).onComplete(function(data) {
                     // Display the image comparison data as an image
-                    var comparisonResultElement = document.getElementById('snapshotImageDiv');
+                    var comparisonResultElement = document.getElementById('snapshotImageScroller');
                     var image = new Image();
                     image.src = data.getImageDataUrl();
                     //add it to the element
@@ -33,7 +33,7 @@ const compareImages = (setImageDifferent) => {
                 })
             } else {
                 //use the saved differences image
-                var comparisonResultElement = document.getElementById('snapshotImageDiv');
+                var comparisonResultElement = document.getElementById('snapshosnapshotImageScrollertImageDiv');
                 comparisonResultElement.innerHTML = `<img src="${differentImage}" style="width:500px" class="img-snapshot"/>`;
             }
             //show the hide diff button
@@ -41,7 +41,7 @@ const compareImages = (setImageDifferent) => {
             document.getElementById('hideDiff').classList.remove("d-none");
         } else {
             //show the normal sbnapshot image
-            var comparisonResultElement = document.getElementById('snapshotImageDiv');
+            var comparisonResultElement = document.getElementById('snapshotImageScroller');
             comparisonResultElement.innerHTML = `<img src="${baselineImage}" style="width:500px" class="img-snapshot"/>`;
             //show the show differences buttons
             document.getElementById('showDiff').classList.remove("d-none");
@@ -60,9 +60,12 @@ const clickThumbnail = (id) => {
         res = JSON.parse(res)
         //console.log(res)
         //get the element id
-        const snapshotElement = document.getElementById("snapshotImageDiv");
+        const snapshotElement = document.getElementById("snapshotImageScroller");
         //get the baseline
-        const baselineElement = document.getElementById("baselineImageDiv");
+        const baselineElement = document.getElementById("baselineImageScroller");
+
+
+
         //clear the images
         baselineImage = "";
         snapshotImage = "";
@@ -142,6 +145,48 @@ const clickThumbnail = (id) => {
 
 }
 
+const ssSelectChange = (theElement) => {
+    //console.log(userAgents)
+    //rest the state
+    //hideAllTheThings();
+    //show the thumbnail
+
+    //get the element id
+    const snapshotElement = document.getElementById("snapshotImageScroller");
+    //get the baseline
+    const baselineElement = document.getElementById("baselineImageScroller");
+    //console.log(baselineElement)
+
+    if (theElement.value == 0) {
+        baselineElement.style.height = '';
+        baselineElement.style.width = '500px';
+        baselineElement.style.overflow = '';
+        snapshotElement.style.height = '';
+        snapshotElement.style.width = '500px';
+        snapshotElement.style.overflow = '';
+    }
+
+    if (theElement.value == 1) {
+        baselineElement.style.height = '720px';
+        baselineElement.style.width = '500px';
+        baselineElement.style.overflow = 'scroll';
+        snapshotElement.style.height = '720px';
+        snapshotElement.style.width = '500px';
+        snapshotElement.style.overflow = 'scroll';
+    }
+
+    if (theElement.value == 2) {
+        baselineElement.style.height = '1080px';
+        baselineElement.style.width = '500px';
+        baselineElement.style.overflow = 'scroll';
+        snapshotElement.style.height = '1080px';
+        snapshotElement.style.width = '500px';
+        snapshotElement.style.overflow = 'scroll';
+    }
+
+}
+
+
 const osSelectChange = (theElement) => {
     //console.log(userAgents)
     //rest the state
@@ -163,7 +208,7 @@ const osSelectChange = (theElement) => {
         //check if we should show it
         if (theElement.value == userAgents[i].browserDefault) {
             //render out the thumb nails
-            imageHtml = imageHtml + `<a href="javascript:clickThumbnail(${i})"><img src="https://placehold.co/100x100?text=${userAgents[i].screenWidth}x${userAgents[i].screenHeight}"/> </a>`;
+            imageHtml = imageHtml + `<a href="javascript:clickThumbnail(${i})"><img src="https://placehold.co/100x100?text=${userAgents[i].viewportWidth}x${userAgents[i].viewportHeight}"/> </a>`;
         }
     }
     //update the dom
@@ -171,8 +216,8 @@ const osSelectChange = (theElement) => {
 }
 
 const hideAllTheThings = () => {
-    document.getElementById("snapshotImageDiv").innerHTML = "";
-    document.getElementById("baselineImageDiv").innerHTML = "";
+    document.getElementById("snapshotImageScroller").innerHTML = "";
+    document.getElementById("baselineImageScroller").innerHTML = "";
     document.getElementById("imagesWrapper").classList.add("d-none")
     document.getElementById("comparsionDiv").classList.add("d-none")
     document.getElementById("thumbnailDiv").classList.add("d-none")
@@ -189,6 +234,7 @@ const clickBrowser = (browser) => {
     while (selectElement.options.length > 0) {
         selectElement.remove(0);
     }
+    console.log(selectElement)
 
     // Create a new option element for the please select
     const option = document.createElement("option");
@@ -208,6 +254,40 @@ const clickBrowser = (browser) => {
         //add it to the dropdowns
         document.getElementById('osDetails').classList.remove('d-none')
     }
+    console.log(selectElement)
+
+
+
+    const selectElement2 = document.getElementById("ssSelect");
+
+    // Create the "Please select" option
+    let option1 = document.createElement("option");
+    option1.value = "";
+    option1.text = "Please select";
+    selectElement2.appendChild(option1);
+
+    // Create the "no screensize" option
+    let option2 = document.createElement("option");
+    option2.value = "0";
+    option2.text = "no screensize";
+    selectElement2.appendChild(option2);
+
+    // Create the "7 inch monitor" option
+    let option3 = document.createElement("option");
+    option3.value = "1";
+    option3.text = "7 inch monitor";
+    selectElement2.appendChild(option3);
+
+        // Create the "7 inch monitor" option
+    let option4 = document.createElement("option");
+    option4.value = "2";
+    option4.text = "24 inch monitor";
+    selectElement2.appendChild(option4);
+
+    // Remove the "d-none" class from the ssDetails element
+    document.getElementById('ssDetails').classList.remove('d-none');
+
+
 }
 
 whenDocumentReady(isReady = () => {

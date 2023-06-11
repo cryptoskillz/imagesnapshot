@@ -1,0 +1,21 @@
+---
+layout: layout.njk
+permalink: /admin/browsers/new/
+---
+<script>
+let localDropDown =  [
+        {"field": "browserOs",
+        "values": ['Windows 10','macOS','Iphone','Ipad','Android'],
+        "displayValues": ['Windows 10','macOS','Iphone','Ipad','Android']},
+         {"field": "browserDefault",
+        "values": ['Chrome','Firefox','Safari','Edge'],
+        "displayValues": ['Chrome','Firefox','Safari','Edge']},
+        {"field": "browserName",
+        "values": ['Chrome (Standard)','Chrome on MacOs','Chrome on Iphone','Chrome on Ipad','Chrome on Android','Chrome on Samsung','Chrome on LG','Firefox (Standard)','Safari (Standard)','Safari on Iphone','Safari on Ipad','Edge (Standard)','Edge on MacOs','Edge on Android'],
+        "displayValues": ['Chrome (Standard)','Chrome on MacOs','Chrome on Iphone','Chrome on Ipad','Chrome on Android','Chrome on Samsung','Chrome on LG','Firefox (Standard)','Safari (Standard)','Safari on Iphone','Safari on Ipad','Edge (Standard)','Edge on MacOs','Edge on Android']}
+    ]
+   let theFields = "browserOs,browserDefault,browserName"
+  //main settings array to handle all the variations of rendering.
+  const theSettings = {"checkAdmin":1,"tableSchema":0,"allowOnlyOne":0,"editButton":1,"deleteButton":1,"customButton":"","customSelect":"","localDropDown":localDropDown,"localReplace":"","table":"userBrowsers","formatFields":"","fields":theFields,"crumb":"{{ crumb }}","foreignKey":"","lookUps":"","title":""}
+</script>
+{% include "admin/table-new.njk" %}

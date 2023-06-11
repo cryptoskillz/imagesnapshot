@@ -1,0 +1,66 @@
+---
+layout: layout.njk
+permalink: /admin/users/
+---
+<!--
+This is the top level nav page and it has a js file of the same name in the _includes directory. It uses dataname to generate the nav
+-->
+<script>
+    let theFields = "id,email,username,phone,isBlocked,isAdmin";
+    //main settings array to handle all the variations of rendering.
+    const theSettings = {"checkAdmin":0,"tableSchema":0,"allowOnlyOne":0,"editButton":1,"deleteButton":1,"customButton":"","customSelect":"","localLookUp":"","localReplace":"","table":"user","formatFields":"","fields":theFields,"crumb":"{{ crumb }}","foreignKey":"","lookUps":"","overRideTitle":""}    
+
+
+</script>
+{% set theJs %}
+    {% include 'admin/users-generic.js' %}
+{% endset %}
+<!-- Page Heading -->
+ <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">USERS</h1>
+    
+    <a href="/admin/users/new/" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="btn-create-cy">
+    <i class="fas fa-download fa-sm text-white-50"></i> Create New</a>
+    
+</div>
+<div class="card shadow mb-4">
+
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Current Users</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Phone</th>
+                        <th>Blocked</th>
+                        <th>Admin</th>
+                        <th width="30%">Action</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Phone</th>
+                        <th>Blocked</th>
+                        <th>Admin</th>
+                        <th width="30%">Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% if env.ENVIRONMENT == 'local' %}
+    <script type="text/javascript">{{theJs | safe}}</script>
+{% else %}
+    <script type="text/javascript">{{theJs | jsmin | safe}}</script>
+{% endif %}

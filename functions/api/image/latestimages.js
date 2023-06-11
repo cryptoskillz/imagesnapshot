@@ -38,7 +38,7 @@ export async function onRequestGet(context) {
     let theJson = {}
 
     //get the baseline
-    let theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isDeleted = 0 and isBaseline = 1 and screenWidth = '${snapshot.screenWidth}' and screenHeight = '${snapshot.screenHeight}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
+    let theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isDeleted = 0 and isBaseline = 1 and viewportWidth = '${snapshot.viewportWidth}' and viewportHeight = '${snapshot.viewportHeight}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
     const query = context.env.DB.prepare(theSQL);
     const queryResult = await query.first();
     //console.log("queryResult")
@@ -48,7 +48,7 @@ export async function onRequestGet(context) {
         theJson.baselineId = queryResult.kvId
 
     //get the latest
-    theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isLatest = 1 and screenWidth = '${snapshot.screenWidth}' and screenHeight = '${snapshot.screenHeight}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
+    theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isLatest = 1 and viewportWidth = '${snapshot.viewportWidth}' and viewportHeight = '${snapshot.viewportHeight}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
     //console.log(theSQL)
     const query2 = context.env.DB.prepare(theSQL);
     const queryResult2 = await query2.first();
@@ -63,7 +63,7 @@ export async function onRequestGet(context) {
     //get the preview 
     if (preview == 0) {
         //get the latest
-        const theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isPreview = 1 and screenWidth = '${snapshot.screenWidth}' and screenHeight = '${snapshot.screenHeight}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
+        const theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isPreview = 1 and viewportWidth = '${snapshot.viewportWidth}' and viewportHeight = '${snapshot.viewportHeight}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
         //console.log(theSQL)
         const query3 = context.env.DB.prepare(theSQL);
         const queryResult3 = await query3.first();

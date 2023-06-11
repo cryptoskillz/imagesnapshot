@@ -1,0 +1,10 @@
+---
+layout: layout.njk
+permalink: /admin/browsers/displays/new/
+---
+<script>
+   let theFields = "userBrowserId,model,platform,viewportWidth,viewportHeight,resolutionWidth,resolutionHeight"
+   const theSettings = {"checkAdmin":0,"tableSchema":0,"allowOnlyOne":0,"editButton":1,"deleteButton":1,"customButton":"","customSelect":"","localDropDown":"","localReplace":"","table":"displays","formatFields":"","fields":theFields,"crumb":"{{ crumb }}","foreignKey":"userBrowserId","lookUps":"userBrowserId","title":"add new display"}
+ </script>
+{% include "admin/table-edit.njk" %}
+

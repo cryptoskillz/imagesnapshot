@@ -36,7 +36,7 @@ export async function onRequestGet(context) {
         //get the project ID
         const projectId = searchParams.get('projectId');
         //get the useragents
-        const theQuery = `SELECT userBrowserId,screenWidth,screenHeight,browserDefault,browserName,browserOs from projectSnapShots where projectSnapShots.isDeleted = 0 and projectSnapShots.projectId = ${projectId} and isActive=1`
+        const theQuery = `SELECT userBrowserId,viewportWidth,viewportHeight,browserDefault,browserName,browserOs from projectSnapShots where projectSnapShots.isDeleted = 0 and projectSnapShots.projectId = ${projectId} and isActive=1`
         const query = context.env.DB.prepare(theQuery);
         const queryResults = await query.all();
         //return them

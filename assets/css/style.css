@@ -12650,3 +12650,16 @@ body.sidebar-toggled footer.sticky-footer {
 .CodeMirror { float: left; width: 50%; height:100vh; }
 iframe { width: 50%; float: left; height: 700px; border:0; }
 
+.dotted-line {
+  position: relative;
+  border-bottom: 1px dotted black;
+}
+
+
+In the above example, a <span> element with the class "line-text" is added inside the <div> with the "dotted-line" class. The CSS rules position the text element at the center of the dotted line by using absolute positioning, translation, and a background color to cover the line underneath. You can modify the text styling (font, color, padding) to suit your needs.
+
+
+
+
+
+

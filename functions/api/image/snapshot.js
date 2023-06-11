@@ -69,26 +69,26 @@ let getSnapShot = async (theUrl, snapshotItem, headlessUrl, preview, projectData
 
     if (preview == 0) {
         //reset the baseline
-        let theSQL = `update projectImages SET isBaseline = '0' where projectId = '${projectId}' and projectDataId = '${projectDataId}' and screenWidth ='${snapshotItem.width}' and screenHeight='${snapshotItem.height}' and browserDefault='${snapshotItem.browserDefault}' and browserName ='${snapshotItem.browserName}' and browserOs = '${snapshotItem.browserOs}'`
+        let theSQL = `update projectImages SET isBaseline = '0' where projectId = '${projectId}' and projectDataId = '${projectDataId}' and viewportWidth ='${snapshotItem.width}' and viewportHeight='${snapshotItem.height}' and browserDefault='${snapshotItem.browserDefault}' and browserName ='${snapshotItem.browserName}' and browserOs = '${snapshotItem.browserOs}'`
         //console.log(theSQL);
         const isBaselineResult = await context.env.DB.prepare(theSQL).run();
 
         //set the baseline
-        theSQL = `update projectImages SET 'isLatest' = '0','isBaseline' = '1' where isLatest = '1' and projectId = '${projectId}' and projectDataId = '${projectDataId}' and screenWidth ='${snapshotItem.width}' and screenHeight='${snapshotItem.height}' and browserDefault='${snapshotItem.browserDefault}' and browserName ='${snapshotItem.browserName}' and browserOs = '${snapshotItem.browserOs}'`
+        theSQL = `update projectImages SET 'isLatest' = '0','isBaseline' = '1' where isLatest = '1' and projectId = '${projectId}' and projectDataId = '${projectDataId}' and viewportwidth ='${snapshotItem.width}' and viewportHeight='${snapshotItem.height}' and browserDefault='${snapshotItem.browserDefault}' and browserName ='${snapshotItem.browserName}' and browserOs = '${snapshotItem.browserOs}'`
         //console.log(theSQL);
         const isLatestResult = await context.env.DB.prepare(theSQL).run();
 
         //add it to the database (make it the latest)
-        theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','screenWidth','screenHeight','browserDefault','browserName','browserOs','isLatest') VALUES ('${projectId}','${projectDataId}','${kvId}','${theUrl}',0,'${snapshotItem.width}','${snapshotItem.height}','${snapshotItem.browserDefault}','${snapshotItem.browserName}','${snapshotItem.browserOs}','1')`
+        theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','viewportWidth','viewportHeight','browserDefault','browserName','browserOs','isLatest') VALUES ('${projectId}','${projectDataId}','${kvId}','${theUrl}',0,'${snapshotItem.width}','${snapshotItem.height}','${snapshotItem.browserDefault}','${snapshotItem.browserName}','${snapshotItem.browserOs}','1')`
         const insertResult = await context.env.DB.prepare(theSQL).run();
 
     } else {
         //reset the preview
-        let theSQL = `update projectImages SET isPreview= '0' where projectId = '${projectId}' and projectDataId = '${projectDataId}' and screenWidth ='${snapshotItem.width}' and screenHeight='${snapshotItem.height}' and browserDefault='${snapshotItem.browserDefault}' and browserName ='${snapshotItem.browserName}' and browserOs = '${snapshotItem.browserOs}'`
+        let theSQL = `update projectImages SET isPreview= '0' where projectId = '${projectId}' and projectDataId = '${projectDataId}' and viewportHeight ='${snapshotItem.width}' and viewportHeight='${snapshotItem.height}' and browserDefault='${snapshotItem.browserDefault}' and browserName ='${snapshotItem.browserName}' and browserOs = '${snapshotItem.browserOs}'`
         //console.log(theSQL);
         const isPreviewResult = await context.env.DB.prepare(theSQL).run();
         //add it to the database (make it the latest)
-        theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','screenWidth','screenHeight','browserDefault','browserName','browserOs','isPreview') VALUES ('${projectId}','${projectDataId}','${kvId}','${theUrl}',0,'${snapshotItem.width}','${snapshotItem.height}','${snapshotItem.browserDefault}','${snapshotItem.browserName}','${snapshotItem.browserOs}','1')`
+        theSQL = `INSERT INTO projectImages ('projectId','projectDataId','kvId','baseUrl','draft','viewportWidth','viewportHeight','browserDefault','browserName','browserOs','isPreview') VALUES ('${projectId}','${projectDataId}','${kvId}','${theUrl}',0,'${snapshotItem.width}','${snapshotItem.height}','${snapshotItem.browserDefault}','${snapshotItem.browserName}','${snapshotItem.browserOs}','1')`
         const insertResult = await context.env.DB.prepare(theSQL).run();
     }
 
@@ -129,7 +129,7 @@ export async function onRequestGet(context) {
         //console.log(`SELECT name,url,previewUrl from projectData where projectId = '${projectId}' and id = '${projectDataId}' and isDeleted = 0`)
         //set a snapshot array
         let snapshotArray = [];
-        const query2 = context.env.DB.prepare(`SELECT userBrowserId,screenWidth,screenHeight,browserDefault,browserName,browserOs from projectSnapShots where projectSnapShots.projectId = '${projectId}' and projectSnapShots.isDeleted = 0 and projectSnapShots.isActive=1`);
+        const query2 = context.env.DB.prepare(`SELECT userBrowserId,viewportWidth,viewportHeight,browserDefault,browserName,browserOs from projectSnapShots where projectSnapShots.projectId = '${projectId}' and projectSnapShots.isDeleted = 0 and projectSnapShots.isActive=1`);
         const viewportResults = await query2.all();
 
         //loop through the results and build the pages / viewports to be fetched
@@ -140,8 +140,8 @@ export async function onRequestGet(context) {
             const queryResult2 = await query2.first();
             //set the snapshot
             let snapshot = {};
-            snapshot.height = viewportResults.results[i].screenHeight;
-            snapshot.width = viewportResults.results[i].screenWidth;
+            snapshot.height = viewportResults.results[i].viewportHeight;
+            snapshot.width = viewportResults.results[i].viewportWidth;
             //add the browser info to it
             snapshot.browserDefault = viewportResults.results[i].browserDefault;
             snapshot.browserName = viewportResults.results[i].browserName;

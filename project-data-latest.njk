@@ -21,6 +21,11 @@ permalink: /project/data/latest/
         <select onchange="osSelectChange(this)" name="osSelect" id="osSelect">
         </select>
     </div>
+    <div id="ssDetails" class="d-none">
+        <label for="cars">Choose a screensize:</label>
+        <select onchange="ssSelectChange(this)" name="ssSelect" id="ssSelect">
+        </select>
+    </div>
     <div id="thumbnailDiv"></div>
     <div id="comparsionDiv" class="d-none"><a href="javascript:compareImages(1)" id="showDiff"/>Show Differences</a><a href="javascript:compareImages(0)" class="d-none" id="hideDiff"/>Hide Differences</a></div>
     <div id="imagesWrapper" class="d-none">
@@ -33,12 +38,17 @@ permalink: /project/data/latest/
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6" id="baselineImageDiv">
-               
+            <div class="col-sm-6 " id="baselineImageDiv">
+            
+               <div id="baselineImageScroller" class="dotted-line" >
+               </div>
+             
             </div>
-            <div class="col-sm-6 other" id="snapshotImageDiv">
-                
+            <div class="col-sm-6  other" id="snapshotImageDiv">
+                <div id="snapshotImageScroller" class="dotted-line">
+               </div>
             </div>
+        
         </div>
 
             <div id="comparisonResult"></div>
