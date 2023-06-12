@@ -165,10 +165,10 @@ const ssSelectChange = (theElement) => {
         for (var i = 0; i < displayResults.length; ++i) {
             if (theElement.value == displayResults[i].id) {
                 baselineElement.style.height = `${displayResults[i].viewportHeight}px`;
-                baselineElement.style.width = resolutionWidth;
+                baselineElement.style.width = `${displayResults[i].viewportWidth}px`;
                 baselineElement.style.overflow = 'scroll';
                 snapshotElement.style.height = `${displayResults[i].viewportHeight}px`
-                snapshotElement.style.width = resolutionWidth;
+                snapshotElement.style.width =  `${displayResults[i].viewportWidth}px`;;
                 snapshotElement.style.overflow = 'scroll';
             }
         }
@@ -195,7 +195,7 @@ const osSelectChange = (theElement) => {
         // Create a new option element for the please select
         const option = document.createElement("option");
         option.value = ""; // Set the value of the option
-        option.text = "No display"; // Set the text displayed for the option
+        option.text = "No Device"; // Set the text displayed for the option
         selectElement.appendChild(option);
         //loop through the user aagents
         for (var i = 0; i < displayResults.length; ++i) {
