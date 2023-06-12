@@ -4,7 +4,7 @@
 let userAgents;
 let snapShots = [];
 let displayResults;
-let resolutionWidth = '500px';
+let resolutionWidth = 500;
 
 let whenDocumentReady = (f) => {
     /in/.test(document.readyState) ? setTimeout('whenDocumentReady(' + f + ')', 9) : f()
@@ -17,6 +17,9 @@ let differentImage = "";
 
 //compare images function 
 const compareImages = (setImageDifferent) => {
+    let setRes = resolutionWidth;
+    if (setRes > 500)
+        setRes = 500;
     //check we have both a baseline and a snapshop imates
     if (baselineImage != "" && snapshotImage != "") {
         //check if we want to show the difference
@@ -30,13 +33,13 @@ const compareImages = (setImageDifferent) => {
                     var image = new Image();
                     image.src = data.getImageDataUrl();
                     //add it to the element
-                    comparisonResultElement.innerHTML = `<img src="${image.src }" style="width:${resolutionWidth}" class=""/>`;
+                    comparisonResultElement.innerHTML = `<img src="${image.src }" style="width:${setRes}px" class=""/>`;
                     differentImage = image.src;
                 })
             } else {
                 //use the saved differences image
                 var comparisonResultElement = document.getElementById('snapshosnapshotImageScrollertImageDiv');
-                comparisonResultElement.innerHTML = `<img src="${differentImage}" style="width:${resolutionWidth}" class=""/>`;
+                comparisonResultElement.innerHTML = `<img src="${differentImage}" style="width:${setRes}px" class=""/>`;
             }
             //show the hide diff button
             document.getElementById('showDiff').classList.add("d-none");
@@ -44,7 +47,7 @@ const compareImages = (setImageDifferent) => {
         } else {
             //show the normal sbnapshot image
             var comparisonResultElement = document.getElementById('snapshotImageScroller');
-            comparisonResultElement.innerHTML = `<img src="${baselineImage}" style="width:${resolutionWidth}" class=""/>`;
+            comparisonResultElement.innerHTML = `<img src="${baselineImage}" style="width:${setRes}px" class=""/>`;
             //show the show differences buttons
             document.getElementById('showDiff').classList.remove("d-none");
             document.getElementById('hideDiff').classList.add("d-none");
@@ -53,14 +56,14 @@ const compareImages = (setImageDifferent) => {
 }
 
 
-
+let userAgentId;
 //thumbnail click function
 const clickThumbnail = (id) => {
     //console.log(snapShots)
+    userAgentId = id
     let theJson = JSON.stringify(userAgents[id]);
     let latestImagesDone = (res) => {
         res = JSON.parse(res)
-        //console.log(res)
         //get the element id
         const snapshotElement = document.getElementById("snapshotImageScroller");
         //get the baseline
@@ -69,6 +72,9 @@ const clickThumbnail = (id) => {
         baselineImage = "";
         snapshotImage = "";
         differentImage = "";
+        let setRes = resolutionWidth;
+        if (setRes > 500)
+            setRes = 500;
         if (getUrlParamater("preview") == 0) {
             document.getElementById("leftImage").innerHTML = "BASELINE"
             document.getElementById("rightImage").innerHTML = "SNAPSHOT"
@@ -79,7 +85,7 @@ const clickThumbnail = (id) => {
             } else {
                 //render it
                 baselineImage = `${apiUrl}image/image/?imageId=${res.baselineId}`;
-                baselineElement.innerHTML = `<img src="${baselineImage}" style="width:${resolutionWidth}" class="iphone13-div"/>`;
+                baselineElement.innerHTML = `<img src="${baselineImage}" style="width:${setRes}px" class=""/>`;
             }
             //check if a snapshot has been run
             if (res.snapshotId == undefined || res.snapshotId == "") {
@@ -88,7 +94,7 @@ const clickThumbnail = (id) => {
             } else {
                 //render it
                 snapshotImage = `${apiUrl}image/image/?imageId=${res.snapshotId}`;
-                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:${resolutionWidth}" class=""/>`;
+                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:${setRes}px" class=""/>`;
             }
 
 
@@ -102,7 +108,7 @@ const clickThumbnail = (id) => {
             } else {
                 //render it
                 baselineImage = `${apiUrl}image/image/?imageId=${res.previewId}`;
-                baselineElement.innerHTML = `<img src="${baselineImage}" style="width:${resolutionWidth}" class=""/>`;
+                baselineElement.innerHTML = `<img src="${baselineImage}" style="width:${setRes}px" class=""/>`;
             }
             //check if a snapshot has been run
             if (res.snapshotId == undefined || res.snapshotId == "") {
@@ -111,7 +117,7 @@ const clickThumbnail = (id) => {
             } else {
                 snapshotImage = `${apiUrl}image/image/?imageId=${res.snapshotId}`;
                 //render it
-                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:${resolutionWidth}" class=""/>`;
+                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:${setRes}" class=""/>`;
             }
         }
         //if we have a baseline and snapshot so the compare button
@@ -154,12 +160,15 @@ const ssSelectChange = (theElement) => {
     const baselineElement = document.getElementById("baselineImageScroller");
     //check if it is 0 and turn it off
     if (theElement.value == 0) {
+        resolutionWidth = 500;
         baselineElement.style.height = '';
-        baselineElement.style.width = viewportHeight;
+        baselineElement.style.width = `${resolutionWidth}px`;
         baselineElement.style.overflow = '';
         snapshotElement.style.height = '';
-        snapshotElement.style.width = viewportHeight;
+        snapshotElement.style.width = `${resolutionWidth}px`;
         snapshotElement.style.overflow = '';
+        
+
     } else {
         //look for the display result and set it.
         for (var i = 0; i < displayResults.length; ++i) {
@@ -168,12 +177,15 @@ const ssSelectChange = (theElement) => {
                 baselineElement.style.width = `${displayResults[i].viewportWidth}px`;
                 baselineElement.style.overflow = 'scroll';
                 snapshotElement.style.height = `${displayResults[i].viewportHeight}px`
-                snapshotElement.style.width =  `${displayResults[i].viewportWidth}px`;;
+                snapshotElement.style.width = `${displayResults[i].viewportWidth}px`;;
                 snapshotElement.style.overflow = 'scroll';
+                resolutionWidth = displayResults[i].viewportWidth;
             }
         }
     }
 
+    //render in the image move clickthumbnail
+    clickThumbnail(userAgentId)
 
 
 }
@@ -194,7 +206,7 @@ const osSelectChange = (theElement) => {
         }
         // Create a new option element for the please select
         const option = document.createElement("option");
-        option.value = ""; // Set the value of the option
+        option.value = "0"; // Set the value of the option
         option.text = "No Device"; // Set the text displayed for the option
         selectElement.appendChild(option);
         //loop through the user aagents

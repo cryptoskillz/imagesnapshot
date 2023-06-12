@@ -12672,6 +12672,15 @@ iframe { width: 50%; float: left; height: 700px; border:0; }
   }
 }
 
+#dotted-line-div {
+  width: 100% !important;
+  height: 300px !important;
+  background-image: linear-gradient(to bottom, transparent 50%, black 50%) !important;
+  background-size: 100% 10px !important;
+  background-repeat: repeat-y !important;
+  background-position: 0 150px !important; /* Adjust the pixel height of the dotted line */
+}
+
 
 
 
