@@ -167,7 +167,7 @@ const ssSelectChange = (theElement) => {
         snapshotElement.style.height = '';
         snapshotElement.style.width = `${resolutionWidth}px`;
         snapshotElement.style.overflow = '';
-        
+
 
     } else {
         //look for the display result and set it.
@@ -198,7 +198,7 @@ const osSelectChange = (theElement) => {
         displayResults = JSON.parse(res);
         //rest the state
         hideAllTheThings();
-            document.getElementById("ssSelect").classList.remove("d-none")
+        document.getElementById("ssSelect").classList.remove("d-none")
 
         // Get a reference to the select element
         const selectElement = document.getElementById("ssSelect");
