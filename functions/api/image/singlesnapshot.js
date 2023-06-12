@@ -119,6 +119,9 @@ export async function onRequestGet(context) {
         const projectDataId = searchParams.get('projectDataId');
         //get the project ID
         const projectId = searchParams.get('projectId');
+        //set the snapshop id
+        const snapshotId = searchParams.get('snapshotId');
+
         //set the URL
         const headlessUrl = `https://chrome.browserless.io/screenshot?token=${env.BROWSERLESSTOKEN}`;
         if (env.BROWSERLESSTOKEN == undefined)
@@ -129,7 +132,7 @@ export async function onRequestGet(context) {
         //console.log(`SELECT name,url,previewUrl from projectData where projectId = '${projectId}' and id = '${projectDataId}' and isDeleted = 0`)
         //set a snapshot array
         let snapshotArray = [];
-        const query2 = context.env.DB.prepare(`SELECT userBrowserId,viewportWidth,viewportHeight,browserDefault,browserName,browserOs from projectSnapShots where projectSnapShots.projectId = '${projectId}' and projectSnapShots.isDeleted = 0 and projectSnapShots.isActive=1`);
+        const query2 = context.env.DB.prepare(`SELECT userBrowserId,viewportWidth,viewportHeight,browserDefault,browserName,browserOs from projectSnapShots where projectSnapShots.id = '${snapshotId}' and projectSnapShots.isDeleted = 0 and projectSnapShots.isActive=1`);
         const viewportResults = await query2.all();
 
         //loop through the results and build the pages / viewports to be fetched

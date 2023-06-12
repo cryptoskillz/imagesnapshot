@@ -17,7 +17,12 @@ permalink: /project/data/snapshot/
 <p class="mb-4">
 </p>
    
-
+<div class="row">
+    <div class="col-sm-12" id="snapshotCounterDiv">
+    </div>
+    <div class="col-sm-12" id="snapshotUpdateDiv">
+    </div>
+</div>
 {% if env.ENVIRONMENT == 'local' %}
     <script type="text/javascript">{{theJs | safe}}</script>
 {% else %}
