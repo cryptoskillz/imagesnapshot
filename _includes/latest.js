@@ -176,9 +176,12 @@ const ssSelectChange = (theElement) => {
                 baselineElement.style.height = `${displayResults[i].viewportHeight}px`;
                 baselineElement.style.width = `${displayResults[i].viewportWidth}px`;
                 baselineElement.style.overflow = 'scroll';
+                //baselineElement.style.backgroundImage = `url('${adminUrl}assets/images/samsungs20galaxy.png')`;
+
                 snapshotElement.style.height = `${displayResults[i].viewportHeight}px`
                 snapshotElement.style.width = `${displayResults[i].viewportWidth}px`;;
                 snapshotElement.style.overflow = 'scroll';
+                //snapshotElement.style.backgroundImage = `url('${adminUrl}assets/images/samsungs20galaxy.png')`;
                 resolutionWidth = displayResults[i].viewportWidth;
             }
         }

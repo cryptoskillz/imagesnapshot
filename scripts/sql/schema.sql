@@ -50,17 +50,17 @@ INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","u
 INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,2,'macOS','Chrome','Chrome on MacOs',0);
 INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1284,2778,3,'Iphone','Chrome','Chrome on Iphone',0);
 INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,2778,2732,4,'Ipad','Chrome','Chrome on Ipad',0);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,5,'Android','Chrome','Chrome on Android',0);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,6,'Android','Chrome','Chrome on Samsung',0);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,7,'Android','Chrome','Chrome on LG',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,3200,1440,5,'Android','Chrome','Chrome on Android',1);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,3200,1440,6,'Android','Chrome','Chrome on Samsung',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,3200,1440,7,'Android','Chrome','Chrome on LG',0);
 
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,8,'Windows 10','Firefox','Firefox (Standard)',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,8,'Windows 10','Firefox','Firefox (Standard)',1);
 
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,9,'macOS','Safari','Safari (Standard)',0);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1284,2778,10,'Iphone','Safari','Safari on Iphone',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,9,'macOS','Safari','Safari (Standard)',1);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1284,2778,10,'Iphone','Safari','Safari on Iphone',1);
 INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,2778,2732,11,'Ipad','Safari','Safari on Ipad',0);
 
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,12,'Windows 10','Edge','Edge (Standard)',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,12,'Windows 10','Edge','Edge (Standard)',1);
 INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,13,'macOS','Edge','Edge on MacOs',0);
 INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,14,'Android','Edge','Edge on Android',0);
 
@@ -161,7 +161,7 @@ INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(4,'Mozi
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(5,'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.57 Mobile Safari/537.36',1);
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(6,'Mozilla/5.0 (Linux; Android 10; SM-A205U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.57 Mobile Safari/537.36',1);
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(7,'Mozilla/5.0 (Linux; Android 10; LM-Q720) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.57 Mobile Safari/537.36',1);
-INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(8,'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0',0);
+INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(8,'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0',1);
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(9,'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Safari/605.1.15',0);
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(10,'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1',0);
 INSERT INTO "userAgents" ("userBrowserId","agentName","isActive") VALUES(11,'Mozilla/5.0 (iPad; CPU OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1',0);
@@ -187,62 +187,68 @@ CREATE TABLE "displays" (
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
--- iPhone SE (1st generation)
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) 
-VALUES (1,'24 Inch Monitor', 'Windows 10', 1080, 1920, 1080, 1920);
+-- 24 inch monitor windows 10 chrome
+INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)  VALUES (1,'24 Inch Monitor', 'Windows 10', 1080, 1920, 1080, 1920);
+-- 7 inch monitor windows 10 chrome
+INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (1,'7 Inch laptop', 'Windows 10', 500, 720, 500, 720);
+-- 24 inch monitor windows 10 firefox
+INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)  VALUES (8,'24 Inch Monitor', 'Windows 10', 1080, 1920, 1080, 1920);
+-- 7 inch monitor windows 10 firefox
+INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (8,'7 Inch laptop', 'Windows 10', 500, 720, 500, 720);
+-- 24 inch monitor mac os firefox
+INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)  VALUES (9,'24 Inch Monitor', 'macOS', 1080, 1920, 1080, 1920);
+-- 7 inch monitor max os firefox
+INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (9,'7 Inch laptop', 'macOS', 500, 720, 500, 720);
+-- 24 inch monitor windows 10 edge
+INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)  VALUES (12,'24 Inch Monitor', 'Edge', 1080, 1920, 1080, 1920);
+-- 7 inch monitor windows 10 edge
+INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (12,'7 Inch laptop', 'Edge', 500, 720, 500, 720);
+-- samsung galaxy s20 android chrome 
+INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (5,'Samsung S20 Galaxy', 'Edge', 360, 800, 3200, 1440);
 
--- iPhone SE (1st generation)
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) 
-VALUES (1,'7 Inch laptop', 'Windows 10', 500, 720, 500, 720);
 
 
--- iPhone SE (1st generation)
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) 
-VALUES (10,'iPhone SE (1st generation)', 'iOS', 320, 568, 640, 1136);
 
--- iPhone SE (2nd generation)
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)
-VALUES (10,'iPhone SE (2nd generation)', 'iOS', 375, 667, 750, 1334);
-
--- iPhone 6, iPhone 6s, iPhone 7, iPhone 8
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)
-VALUES (10,'iPhone 6, iPhone 6s, iPhone 7, iPhone 8', 'iOS', 375, 667, 750, 1334);
-
--- iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8 Plus
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)
-VALUES (10,'iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8 Plus', 'iOS', 414, 736, 1080, 1920);
-
--- iPhone X, iPhone XS, iPhone 11 Pro
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)
-VALUES (10,'iPhone X, iPhone XS, iPhone 11 Pro', 'iOS', 375, 812, 1125, 2436);
-
--- iPhone XR, iPhone 11
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)
-VALUES (10,'iPhone XR, iPhone 11', 'iOS', 414, 896, 828, 1792);
-
--- iPhone XS Max, iPhone 11 Pro Max
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)
-VALUES (10,'iPhone XS Max, iPhone 11 Pro Max', 'iOS', 414, 896, 1242, 2688);
-
--- iPhone 12 mini
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)
-VALUES (10,'iPhone 12 mini', 'iOS', 375, 812, 1080, 2340);
 
 -- iPhone 12, iPhone 12 Pro
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)
-VALUES (10,'iPhone 12, iPhone 12 Pro', 'iOS', 390, 844, 1170, 2532);
+INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone 12, iPhone 12 Pro', 'iOS', 390, 844, 1170, 2532);
+
+
+-- iPhone SE (1st generation)
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone SE (1st generation)', 'iOS', 320, 568, 640, 1136);
+
+-- iPhone SE (2nd generation)
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone SE (2nd generation)', 'iOS', 375, 667, 750, 1334);
+
+-- iPhone 6, iPhone 6s, iPhone 7, iPhone 8
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone 6, iPhone 6s, iPhone 7, iPhone 8', 'iOS', 375, 667, 750, 1334);
+
+-- iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8 Plus
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8 Plus', 'iOS', 414, 736, 1080, 1920);
+
+-- iPhone X, iPhone XS, iPhone 11 Pro
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone X, iPhone XS, iPhone 11 Pro', 'iOS', 375, 812, 1125, 2436);
+
+-- iPhone XR, iPhone 11
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone XR, iPhone 11', 'iOS', 414, 896, 828, 1792);
+
+-- iPhone XS Max, iPhone 11 Pro Max
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) --VALUES (10,'iPhone XS Max, iPhone 11 Pro Max', 'iOS', 414, 896, 1242, 2688);
+
+-- iPhone 12 mini
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone 12 mini', 'iOS', 375, 812, 1080, 2340);
+
+-- iPhone 12, iPhone 12 Pro
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone 12, iPhone 12 Pro', 'iOS', 390, 844, 1170, 2532);
 
 -- iPhone 12 Pro Max
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)
-VALUES (10,'iPhone 12 Pro Max', 'iOS', 428, 926, 1284, 2778);
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone 12 Pro Max', 'iOS', 428, 926, 1284, 2778);
 
 -- iPhone 13 mini
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)
-VALUES (10,'iPhone 13 mini', 'iOS', 375, 812, 1080, 2340);
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone 13 mini', 'iOS', 375, 812, 1080, 2340);
 
 -- iPhone 13, iPhone 13 Pro
-INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight)
-VALUES (10,'iPhone 13, iPhone 13 Pro', 'iOS', 390, 844, 1170, 2532);
+--INSERT INTO displays (userBrowserId,model, platform, viewportWidth, viewportHeight, resolutionWidth, resolutionHeight) VALUES (10,'iPhone 13, iPhone 13 Pro', 'iOS', 390, 844, 1170, 2532);
 
 
 

@@ -5,7 +5,7 @@ snapshot
  ✔ redo snapshot it has a whole list of image and it calls the api one at a time as this will let us make the UI function better. @done (23-06-12 16:07)
 
  ✔ when you click the a new phone type we either have to hide the baseline and the snapshot or render them as if they width was larger before it will leave a white box @done (23-06-12 18:56)\
- ☐ hide the resolution when you click on browser
+ ✔ hide the resolution when you click on browser @done (23-06-12 19:01)
  ☐ make the browsers repsonsive
 
  Table join (branch v2 / v3)
