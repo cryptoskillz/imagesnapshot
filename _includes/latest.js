@@ -198,6 +198,8 @@ const osSelectChange = (theElement) => {
         displayResults = JSON.parse(res);
         //rest the state
         hideAllTheThings();
+            document.getElementById("ssSelect").classList.remove("d-none")
+
         // Get a reference to the select element
         const selectElement = document.getElementById("ssSelect");
         // Remove all existing options
@@ -259,6 +261,8 @@ const hideAllTheThings = () => {
     document.getElementById("thumbnailDiv").classList.add("d-none")
     document.getElementById("showDiff").classList.add("d-none")
     document.getElementById("hideDiff").classList.add("d-none")
+    document.getElementById("ssSelect").classList.add("d-none")
+
 }
 
 
