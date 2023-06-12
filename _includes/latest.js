@@ -30,13 +30,13 @@ const compareImages = (setImageDifferent) => {
                     var image = new Image();
                     image.src = data.getImageDataUrl();
                     //add it to the element
-                    comparisonResultElement.innerHTML = `<img src="${image.src }" style="width:${resolutionWidth}" class="img-snapshot"/>`;
+                    comparisonResultElement.innerHTML = `<img src="${image.src }" style="width:${resolutionWidth}" class=""/>`;
                     differentImage = image.src;
                 })
             } else {
                 //use the saved differences image
                 var comparisonResultElement = document.getElementById('snapshosnapshotImageScrollertImageDiv');
-                comparisonResultElement.innerHTML = `<img src="${differentImage}" style="width:${resolutionWidth}" class="img-snapshot"/>`;
+                comparisonResultElement.innerHTML = `<img src="${differentImage}" style="width:${resolutionWidth}" class=""/>`;
             }
             //show the hide diff button
             document.getElementById('showDiff').classList.add("d-none");
@@ -44,7 +44,7 @@ const compareImages = (setImageDifferent) => {
         } else {
             //show the normal sbnapshot image
             var comparisonResultElement = document.getElementById('snapshotImageScroller');
-            comparisonResultElement.innerHTML = `<img src="${baselineImage}" style="width:${resolutionWidth}" class="img-snapshot"/>`;
+            comparisonResultElement.innerHTML = `<img src="${baselineImage}" style="width:${resolutionWidth}" class=""/>`;
             //show the show differences buttons
             document.getElementById('showDiff').classList.remove("d-none");
             document.getElementById('hideDiff').classList.add("d-none");
@@ -79,7 +79,7 @@ const clickThumbnail = (id) => {
             } else {
                 //render it
                 baselineImage = `${apiUrl}image/image/?imageId=${res.baselineId}`;
-                baselineElement.innerHTML = `<img src="${baselineImage}" style="width:${resolutionWidth}" class="img-snapshot"/>`;
+                baselineElement.innerHTML = `<img src="${baselineImage}" style="width:${resolutionWidth}" class="iphone13-div"/>`;
             }
             //check if a snapshot has been run
             if (res.snapshotId == undefined || res.snapshotId == "") {
@@ -88,7 +88,7 @@ const clickThumbnail = (id) => {
             } else {
                 //render it
                 snapshotImage = `${apiUrl}image/image/?imageId=${res.snapshotId}`;
-                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:${resolutionWidth}" class="img-snapshot"/>`;
+                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:${resolutionWidth}" class=""/>`;
             }
 
 
@@ -102,7 +102,7 @@ const clickThumbnail = (id) => {
             } else {
                 //render it
                 baselineImage = `${apiUrl}image/image/?imageId=${res.previewId}`;
-                baselineElement.innerHTML = `<img src="${baselineImage}" style="width:${resolutionWidth}" class="img-snapshot"/>`;
+                baselineElement.innerHTML = `<img src="${baselineImage}" style="width:${resolutionWidth}" class=""/>`;
             }
             //check if a snapshot has been run
             if (res.snapshotId == undefined || res.snapshotId == "") {
@@ -111,7 +111,7 @@ const clickThumbnail = (id) => {
             } else {
                 snapshotImage = `${apiUrl}image/image/?imageId=${res.snapshotId}`;
                 //render it
-                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:${resolutionWidth}" class="img-snapshot"/>`;
+                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:${resolutionWidth}" class=""/>`;
             }
         }
         //if we have a baseline and snapshot so the compare button

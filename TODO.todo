@@ -2,7 +2,7 @@
 
 snapshot
 
- ☐ redo snapshot it has a whole list of image and it calls the api one at a time as this will let us make the UI function better.
+ ✔ redo snapshot it has a whole list of image and it calls the api one at a time as this will let us make the UI function better. @done (23-06-12 16:07)
 
  Table join (branch v2 / v3)
 
