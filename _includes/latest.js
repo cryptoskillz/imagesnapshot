@@ -135,7 +135,9 @@ const clickThumbnail = (id) => {
             document.getElementById("comparsionDiv").classList.add("d-none")
         }
         //show the images
-        document.getElementById("imagesWrapper").classList.remove("d-none")
+        document.getElementById("baselineImageScroller").classList.remove("d-none")
+        document.getElementById("snapshotImageScroller").classList.remove("d-none")
+
     }
     //get the baseline 
     //xhrcall(1, `${apiUrl}image/latestimages?projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}`, "", "json", "", latestImagesDone, token);
@@ -159,10 +161,9 @@ const ssSelectChange = (theElement) => {
         snapshotElement.style.width = viewportHeight;
         snapshotElement.style.overflow = '';
     } else {
-        //look for it
+        //look for the display result and set it.
         for (var i = 0; i < displayResults.length; ++i) {
             if (theElement.value == displayResults[i].id) {
-                console.log(displayResults[i].model)
                 baselineElement.style.height = `${displayResults[i].viewportHeight}px`;
                 baselineElement.style.width = resolutionWidth;
                 baselineElement.style.overflow = 'scroll';
@@ -241,7 +242,7 @@ const osSelectChange = (theElement) => {
 const hideAllTheThings = () => {
     document.getElementById("snapshotImageScroller").innerHTML = "";
     document.getElementById("baselineImageScroller").innerHTML = "";
-    document.getElementById("imagesWrapper").classList.add("d-none")
+    //document.getElementById("imagesWrapper").classList.add("d-none")
     document.getElementById("comparsionDiv").classList.add("d-none")
     document.getElementById("thumbnailDiv").classList.add("d-none")
     document.getElementById("showDiff").classList.add("d-none")
@@ -277,38 +278,6 @@ const clickBrowser = (browser) => {
         document.getElementById('osDetails').classList.remove('d-none')
     }
 
-
-    /*
-        const selectElement2 = document.getElementById("ssSelect");
-
-        // Create the "Please select" option
-        let option1 = document.createElement("option");
-        option1.value = "";
-        option1.text = "Please select";
-        selectElement2.appendChild(option1);
-
-        // Create the "no screensize" option
-        let option2 = document.createElement("option");
-        option2.value = "0";
-        option2.text = "no screensize";
-        selectElement2.appendChild(option2);
-
-        // Create the "7 inch monitor" option
-        let option3 = document.createElement("option");
-        option3.value = "1";
-        option3.text = "7 inch monitor";
-        selectElement2.appendChild(option3);
-
-            // Create the "7 inch monitor" option
-        let option4 = document.createElement("option");
-        option4.value = "2";
-        option4.text = "24 inch monitor";
-        selectElement2.appendChild(option4);
-
-        // Remove the "d-none" class from the ssDetails element
-        document.getElementById('ssDetails').classList.remove('d-none');
-
-    */
 }
 
 whenDocumentReady(isReady = () => {
@@ -330,7 +299,7 @@ whenDocumentReady(isReady = () => {
             else
                 document.getElementById('data-header').innerHTML = `Latest results for ${snapShots[0].projectName} (<a href="${snapShots[0].projectUrl}" target="_blank">${snapShots[0].projectUrl}</a>)`
 
-            let theHtml = "";
+            let theHtml = "Broswer: ";
             let addedChrome = 0;
             let addedEdge = 0;
             let addedFirefox = 0;
@@ -354,8 +323,8 @@ whenDocumentReady(isReady = () => {
                     theHtml = theHtml + `<a href = "javascript:clickBrowser('Safari')" > <i class="fa-brands fa-safari" alt="Safari"></i> </a>`
                 }
             }
-            document.getElementById('imageDetails').innerHTML = theHtml
-            document.getElementById('imageDetails').classList.remove('d-none');
+            document.getElementById('browserIcons').innerHTML = theHtml
+            document.getElementById('browserIcons').classList.remove('d-none');
         }
         //make the snapshot xhr call
         xhrcall(1, `${apiUrl}image/latest/?projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}`, "", "json", "", snapshotDone, token);

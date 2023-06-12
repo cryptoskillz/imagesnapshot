@@ -3,62 +3,47 @@ layout: external-layout
 permalink: /project/data/latest/
 ---
 {% set theJs %}
-    {% include 'latest.js' %}
+{% include 'latest.js' %}
 {% endset %}
-<div class="alert alert-success  d-none" role="alert" id="accountsSuccess">
+<div class="alert alert-success  d-none" role="alert" id="accountsSuccess"></div>
+<div class="alert alert-danger  d-none" role="alert" id="accountsAlert"></div>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+   <h1 class="h3 mb-0 text-gray-800" id="data-header"></h1>
 </div>
-<div class="alert alert-danger  d-none" role="alert" id="accountsAlert">
+<p class="mb-4"></p>
+<div id="imagesWrapper" class="">
+   <div class="row">
+      <div class="col-sm-2" id="imageOptions">
+         <div id="browserIcons" class="d-none">     
+         </div>
+         <div id="osDetails" class="d-none">
+            <label for="cars">OS: </label>
+            <select onchange="osSelectChange(this)" name="osSelect" id="osSelect">
+            </select>
+         </div>
+         <div id="ssDetails" class="d-none">
+            <label for="cars">Resolution: </label>
+            <select onchange="ssSelectChange(this)" name="ssSelect" id="ssSelect">
+            </select>
+         </div>
+         <div id="thumbnailDiv"></div>
+         <div id="comparsionDiv" class="d-none"><a href="javascript:compareImages(1)" id="showDiff"/>Show Differences</a><a href="javascript:compareImages(0)" class="d-none" id="hideDiff"/>Hide Differences</a></div>
+      </div>
+      <div class="col-sm-5" id="baselineImageDiv">
+         <h1 id="leftImage"></h1>
+         <div id="baselineImageScroller" class="dotted-line d-none" >
+         </div>
+      </div>
+      <div class="col-sm-5  other" id="snapshotImageDiv">
+         <h1 id="rightImage"></h1>
+         <div id="snapshotImageScroller" class="dotted-line d-none">
+         </div>
+      </div>
+   </div>
 </div>
-   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800" id="data-header"></h1>
-    </div>
-<p class="mb-4">
-</p>
-    <div id="imageDetails" class="d-none">     
-    </div>
-    <div id="osDetails" class="d-none">
-        <label for="cars">Choose an OS:</label>
-        <select onchange="osSelectChange(this)" name="osSelect" id="osSelect">
-        </select>
-    </div>
-    <div id="ssDetails" class="d-none">
-        <label for="cars">Choose a display resolution:</label>
-        <select onchange="ssSelectChange(this)" name="ssSelect" id="ssSelect">
-        </select>
-    </div>
-    <div id="thumbnailDiv"></div>
-    <div id="comparsionDiv" class="d-none"><a href="javascript:compareImages(1)" id="showDiff"/>Show Differences</a><a href="javascript:compareImages(0)" class="d-none" id="hideDiff"/>Hide Differences</a></div>
-    <div id="imagesWrapper" class="d-none">
-        <div class="row">
-            <div class="col-sm-6" >
-                <h1 id="leftImage"></h1>
-            </div>
-            <div class="col-sm-6 other" >
-                <h1 id="rightImage"></h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 " id="baselineImageDiv">
-            
-               <div id="baselineImageScroller" class="dotted-line" >
-               </div>
-             
-            </div>
-            <div class="col-sm-6  other" id="snapshotImageDiv">
-                <div id="snapshotImageScroller" class="dotted-line">
-               </div>
-            </div>
-        
-        </div>
-
-            <div id="comparisonResult"></div>
-
-  </div>
 <script src="https://cdn.jsdelivr.net/npm/resemblejs@5.0.0/resemble.min.js"></script>
-
 {% if env.ENVIRONMENT == 'local' %}
-    <script type="text/javascript">{{theJs | safe}}</script>
+<script type="text/javascript">{{theJs | safe}}</script>
 {% else %}
-    <script type="text/javascript">{{theJs | jsmin | safe}}</script>
+<script type="text/javascript">{{theJs | jsmin | safe}}</script>
 {% endif %}
-
