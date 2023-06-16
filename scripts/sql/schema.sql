@@ -28,7 +28,9 @@ CREATE TABLE "projectSnapShots" (
 	"id"	INTEGER,
 	"projectId" INTEGER,
 	"viewportWidth" INTEGER,
-	"viewportHeight" INTEGER,	
+	"viewportHeight" INTEGER,
+	"resolutionWidth" INTEGER,
+	"resolutionHeight" INTEGER,	
 	"userBrowserId" INTEGER,
 	"browserOs" TEXT,
 	"browserName"	TEXT,
@@ -46,23 +48,23 @@ CREATE TABLE "projectSnapShots" (
 
 
 
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,1,'Windows 10','Chrome','Chrome (Standard)',1);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,2,'macOS','Chrome','Chrome on MacOs',0);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1284,2778,3,'Iphone','Chrome','Chrome on Iphone',0);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,2778,2732,4,'Ipad','Chrome','Chrome on Ipad',0);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,3200,1440,5,'Android','Chrome','Chrome on Android',1);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,3200,1440,6,'Android','Chrome','Chrome on Samsung',0);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,3200,1440,7,'Android','Chrome','Chrome on LG',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1080, 1920, 1080, 1920,1,'Windows 10','Chrome','Chrome (Standard)',1);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1080, 1920, 1080, 1920,2,'macOS','Chrome','Chrome on MacOs',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1, 390, 844, 1170, 2532,3,'Iphone','Chrome','Chrome on Iphone',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,839,1194,2388,1668,4,'Ipad','Chrome','Chrome on Ipad',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,360, 800, 3200, 1440,5,'Android','Chrome','Chrome on Android',1);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,360, 800, 3200, 1440,6,'Android','Chrome','Chrome on Samsung',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,360, 800, 3200, 1440,7,'Android','Chrome','Chrome on LG',0);
 
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,8,'Windows 10','Firefox','Firefox (Standard)',1);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1080, 1920, 1080, 1920,8,'Windows 10','Firefox','Firefox (Standard)',1);
 
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,9,'macOS','Safari','Safari (Standard)',1);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1284,2778,10,'Iphone','Safari','Safari on Iphone',1);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,2778,2732,11,'Ipad','Safari','Safari on Ipad',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1080, 1920, 1080, 1920,9,'macOS','Safari','Safari (Standard)',1);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,390, 844, 1170, 2532,10,'Iphone','Safari','Safari on Iphone',1);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,839,1194,2388,1668,11,'Ipad','Safari','Safari on Ipad',0);
 
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,12,'Windows 10','Edge','Edge (Standard)',1);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1920,1080,13,'macOS','Edge','Edge on MacOs',0);
-INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1440,1920,14,'Android','Edge','Edge on Android',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1080, 1920, 1080, 1920,12,'Windows 10','Edge','Edge (Standard)',1);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,1080, 1920, 1080, 1920,13,'macOS','Edge','Edge on MacOs',0);
+INSERT INTO "projectSnapShots"  ("projectId","viewportWidth","viewportHeight","resolutionWidth","resolutionHeight","userBrowserId","browserOs","browserName","browserDefault","isActive") VALUES(1,360, 800, 3200, 1440,14,'Android','Edge','Edge on Android',0);
 
 CREATE TABLE "projectData" (
 	"id" INTEGER,

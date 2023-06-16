@@ -225,7 +225,7 @@ const osSelectChange = (theElement) => {
             selectElement.appendChild(option);
             //}
             //add it to the dropdowns
-            document.getElementById('ssDetails').classList.remove('d-none')
+            //document.getElementById('ssDetails').classList.remove('d-none')
         }
 
         //show the thumbnail
@@ -314,9 +314,9 @@ whenDocumentReady(isReady = () => {
             snapShots = JSON.parse(res);
 
             if (getUrlParamater("preview") == 1)
-                document.getElementById('data-header').innerHTML = `Preview results for ${snapShots[0].projectName} (<a href="${snapShots[0].projectUrl}" target="_blank">${snapShots[0].projectUrl}</a>)`
+                document.getElementById('data-header').innerHTML = `<a href="${snapShots[0].projectUrl}" target="_blank">${snapShots[0].projectName} preview</a> <br> <a href="{{env.ADMINURL}}emulate/?url=${snapShots[0].projectUrl}&device=iphone12" target="_blank">emulate</a>`
             else
-                document.getElementById('data-header').innerHTML = `Latest results for ${snapShots[0].projectName} (<a href="${snapShots[0].projectUrl}" target="_blank">${snapShots[0].projectUrl}</a>)`
+                document.getElementById('data-header').innerHTML = `<a href="${snapShots[0].projectUrl}" target="_blank">${snapShots[0].projectName}</a> <br> <a href="{{env.ADMINURL}}emulate?url=${snapShots[0].projectUrl}&device=iphone12" target="_blank">emulate</a>`
 
             let theHtml = "Broswer: ";
             let addedChrome = 0;

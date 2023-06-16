@@ -1,0 +1,124 @@
+---
+layout: external-layout
+
+permalink: /emulate/
+---
+{% set theJs %}
+{% include 'emulate.js' %}
+{% endset %}
+<!DOCTYPE html>
+<!-- saved from url=(0054) -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Image Snapshot emulate, A responsive frame emulator to aid with mobile development</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <style type="text/css">
+
+.iphone-12 {
+  background-color: #000;
+  border-radius: 30px;
+  width: 375px;
+  height: 812px;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.iphone-12:before {
+  position: absolute;
+  top: -4px; /* Adjust the top position to cover the white line */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 164px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.iphone-12:after {
+  position: absolute;
+  bottom: -12px; /* Adjust the bottom position to cover the white line */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.iphone-12 .screen {
+  /* Adjust the positioning and dimensions */
+  position: absolute;
+  top: 48px;
+  left: 16px;
+  right: 16px;
+  bottom: 60px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.iphone-12 .home-button {
+  /* Adjust the positioning */
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 54px;
+  height: 54px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.iphone-12 .screen iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+
+    </style>
+    <link href="./files/bootstrap-responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="../assets/js/html5shiv.js"></script><![endif]-->
+</head>
+
+<body>
+    <div class="iphone-12">
+  <div class="screen">
+    <iframe src="http://localhost:8789/" frameborder="0" id="browserFrame"></iframe>
+  </div>
+  <div class="home-button"></div>
+</div>
+   
+</body>
+
+</html>
+<script type="text/javascript">
+  
+let getUrlParamater = (param) => {
+    let searchParams = new URLSearchParams(window.location.search)
+    let res = searchParams.has(param) // true
+    if (res != false)
+        return (searchParams.get(param))
+    else
+        return ("");
+
+}
+
+  document.getElementById('browserFrame').src =  getUrlParamater("url");
+
+</script>
+{% if env.ENVIRONMENT == 'local' %}
+<script type="text/javascript">
+{{ theJs | safe }}
+</script>
+{% else %}
+<script type="text/javascript">
+{{ theJs | jsmin | safe }}
+</script>
+{% endif %}
