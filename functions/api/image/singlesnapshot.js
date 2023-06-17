@@ -29,9 +29,9 @@ let decodeJwt = async (req, secret) => {
 let getSnapShot = async (theUrl, snapshotItem, headlessUrl, preview, projectDataId, context, projectId) => {
     //output
     if (preview == 0)
-        console.log(`processing ${snapshotItem.browserDefault} : ${snapshotItem.height} : ${snapshotItem.width} : ${snapshotItem.agentName}`)
+        console.log(`processing ${snapshotItem.browserDefault} : ${snapshotItem.width} : ${snapshotItem.height} : ${snapshotItem.agentName}`)
     else
-        console.log(`processing preview ${snapshotItem.browserDefault} : ${snapshotItem.height} : ${snapshotItem.width} : ${snapshotItem.agentName}`)
+        console.log(`processing preview ${snapshotItem.browserDefault} : ${snapshotItem.width} : ${snapshotItem.height} : ${snapshotItem.agentName}`)
 
     //build the call
     const jsonData = {
