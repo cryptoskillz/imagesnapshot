@@ -299,6 +299,57 @@ const clickBrowser = (browser) => {
 
 }
 
+const resolveComment = (id) => {
+    //resolve the comment
+    const resolveCommentDone = (res) => {
+        //parse it
+        res = JSON.parse(res);
+        //check it was deleted
+        if (res.response == "ok") {
+            document.getElementById(`comment-${id}`).classList.add('d-none');
+        }
+    }
+    //call the delete comment endpoint
+    xhrcall(3, `${apiUrl}admin/comment?commentId=${id}`, "", "json", "", resolveCommentDone, getToken());
+}
+
+
+
+
+document.getElementById('addCommentButton').addEventListener('click', function() {
+    //get the comment textarea
+    const theComment = document.getElementById('theComment').value;
+    //process the add comment done
+    const addCommentdone = (res) => {
+        //parse it
+        res = JSON.parse(res);
+        //get the div
+         let commentsDiv = document.getElementById('commentsDiv');
+         //add the comment to ti
+         commentsDiv.innerHTML = commentsDiv.innerHTML +  `<div class="speech-bubble" id="comment-${res.record.id}">
+                ${res.record.comment}
+    <div class="resolved-icon">
+        <a href="javascript:resolveComment(${res.record.id});" class="resolved-link">
+            <i class="fas fa-check-circle"></i> 
+        </a>    
+    </div>
+  </div>`
+
+    }
+    //build the body object
+    let bodyObj = {
+        comment: theComment,
+        projectId: getUrlParamater("projectId"),
+        projectDataId: getUrlParamater("projectDataId")
+    }
+    //string it
+    var bodyObjectJson = JSON.stringify(bodyObj);
+    //call the post comment endpoint
+    xhrcall(0, `${apiUrl}admin/comment`, bodyObjectJson, "json", "", addCommentdone, "");
+
+});
+
+
 whenDocumentReady(isReady = () => {
 
 
@@ -311,7 +362,31 @@ whenDocumentReady(isReady = () => {
         userAgents = JSON.parse(res);
         //process the snapshot done
         const snapshotDone = (res) => {
-            snapShots = JSON.parse(res);
+            //parse the result 
+            res = JSON.parse(res);
+            //store the snapshots
+            snapShots = res.snapshot;
+            //store the comments
+            comments = res.comments;
+            //console.log(snapShots);
+            //console.log(comments);
+            let commentsHtml = '';
+            //build the comments
+            for (var i = 0; i < comments.length; ++i) {
+                commentsHtml = commentsHtml + `<div class="speech-bubble" id="comment-${comments[i].id}">
+                ${comments[i].comment}
+    <div class="resolved-icon">
+        <a href="javascript:resolveComment(${comments[i].id});" class="resolved-link">
+            <i class="fas fa-check-circle"></i> 
+        </a>    
+    </div>
+  </div>`;
+            }
+            //render it
+            if (commentsHtml != '') {
+                document.getElementById('commentsDiv').innerHTML = commentsHtml;
+            }
+
 
             if (getUrlParamater("preview") == 1)
                 document.getElementById('data-header').innerHTML = `<a href="${snapShots[0].projectUrl}" target="_blank">${snapShots[0].projectName} preview</a> <br> <a href="{{env.ADMINURL}}emulate/?url=${snapShots[0].projectUrl}&device=iphone12" target="_blank">emulate</a>`

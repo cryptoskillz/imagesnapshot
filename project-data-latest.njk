@@ -46,28 +46,20 @@ permalink: /project/data/latest/
             <div id="snapshotImageScroller" class="dotted-line d-none">
             </div>
         </div>
-         <div class="col-md-4 d-none">
+         <div class="col-md-4">
       <!-- Third Column Content: Comments and Comment Box -->
       <div class="comments-section">
         <h3>Comments</h3>
-    
+        <div id="commentsDiv">
 
-
-  <div class="speech-bubble">
-    Praesent ac ex at nisi venenatis dapibus.
-    <div class="resolved-icon">
-        <a href="#" class="resolved-link">
-            <i class="fas fa-check-circle"></i> <!-- Font Awesome check circle icon -->
-        </a>    
-    </div>
-  </div>
+        </div>
         <div class="comment-box">
           <h4>Add a Comment</h4>
           <form>
             <div class="form-group">
-              <textarea class="form-control" rows="3" placeholder="Your comment"></textarea>
+              <textarea class="form-control" rows="3" placeholder="Your comment" id="theComment"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <a id="addCommentButton" type="submit" class="btn btn-primary">Submit</a>
           </form>
         </div>
       </div>

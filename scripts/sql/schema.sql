@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS userAccess;
 DROP TABLE IF EXISTS userSettings;
 DROP TABLE IF EXISTS displays;
+DROP TABLE IF EXISTS projectComments;
 
 
 CREATE TABLE "projects" (
@@ -81,6 +82,24 @@ CREATE TABLE "projectData" (
 );
 
 INSERT INTO "projectData" ("projectId","name","url") VALUES(1,'purdy home page','https://purdyandfigg.com');
+
+
+CREATE TABLE "projectComments" (
+	"id" INTEGER,
+	"projectId" INTEGER,
+	"projectDataId" INTEGER,
+	"comment" TEXT,
+	"isResolved" INTEGER DEFAULT 0,
+	"isDeleted" INTEGER DEFAULT 0,
+	"createdAt" TEXT DEFAULT CURRENT_TIMESTAMP,
+	"updatedAt" TEXT,
+	"publishedAt" TEXT DEFAULT CURRENT_TIMESTAMP,
+	"deletedAt" TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+INSERT INTO "projectComments" ("projectId","projectDataId","comment") VALUES(1,1,'This is comment 1');
+INSERT INTO "projectComments" ("projectId","projectDataId","comment") VALUES(1,1,'This is comment 2');
 
 
 CREATE TABLE "projectImages" (

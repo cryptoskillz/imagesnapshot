@@ -31,5 +31,13 @@ export async function onRequestGet(context) {
         //add it to the array
         snapshotArray.push(snapshot);
     }
-    return new Response(JSON.stringify(snapshotArray), { status: 200 });
+    //get the comments
+    const query3 = context.env.DB.prepare(`SELECT id,comment from projectComments where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isDeleted = 0 and isResolved = 0`);
+    const queryResult3 = await query3.all();
+    //add it the json object    
+    let res = {}
+    res.snapshot = snapshotArray;
+    res.comments = queryResult3.results;
+    //return it.
+    return new Response(JSON.stringify(res), { status: 200 });
 }

@@ -2,7 +2,7 @@
 
 snapshot
 
- ☐ when there is a new snapshot delete the comments
+ ✔ when there is a new snapshot delete the comments @done (23-06-18 00:08)
 
  Table join (branch v2 / v3)
 
@@ -37,10 +37,10 @@ displays
 
  latest
 
- ☐ render comments from a xhr call
- ☐ resolve comments
+ ✔ render comments from a xhr call @done (23-06-18 00:08)
+ ✔ resolve comments @done (23-06-18 00:08)
  ☐ add comment (requires a comment password)
- ☐ add the comment sql 
+ ✔ add the comment sql @done (23-06-18 00:08)
  ☐ add the comment password to the project and display it for the logged in admin
 
  emualte

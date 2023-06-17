@@ -75,7 +75,7 @@ whenDocumentReady(isReady = () => {
     }
     //make the snapshot xhr callß
     let init = async () => {
-        xhrcall(1, `${apiUrl}image/createqueue/?projectId=${project.id}&preview=${getUrlParamater("preview")}`, "", "json", "", createqueueDone, token);
+        xhrcall(1, `${apiUrl}image/createqueue/?projectId=${project.id}&projectDataId=${window.localStorage.currentDataItemId}&preview=${getUrlParamater("preview")}`, "", "json", "", createqueueDone, token);
     }
     //start ting's
     init();

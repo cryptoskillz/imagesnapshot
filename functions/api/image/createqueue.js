@@ -49,6 +49,11 @@ export async function onRequestGet(context) {
         const preview = searchParams.get('preview');
         //get the project ID
         const projectId = searchParams.get('projectId');
+        //get the project dataid
+        const projectDataId = searchParams.get('projectDataId');
+        //delete the comments
+        const theSql = `delete from projectComments where projectId = '${projectId}' and projectDataId = '${projectDataId}'`
+        const queryDelete = await context.env.DB.prepare(theSql).run();
         //set the URL
 
         const query = context.env.DB.prepare(`SELECT id FROM projectSnapShots where projectSnapShots.projectId = '${projectId}' and projectSnapShots.isDeleted = 0 and projectSnapShots.isActive=1`);
