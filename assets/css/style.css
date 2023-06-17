@@ -125,6 +125,7 @@ ul,
 dl {
     margin-top: 0;
     margin-bottom: 1rem;
+     list-style-type: none
 }
 
 ol ol,
@@ -132,6 +133,7 @@ ul ul,
 ol ul,
 ul ol {
     margin-bottom: 0;
+     list-style-type: none
 }
 
 dt {
@@ -12680,8 +12682,39 @@ iframe { width: 50%; float: left; height: 700px; border:0; }
   background-repeat: repeat-y !important;
   background-position: 0 150px !important; /* Adjust the pixel height of the dotted line */
 }
+    .speech-bubble {
+      position: relative;
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #F2F2F2;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-overflow: ellipsis; /* Display ellipsis (...) if text overflows */
+      width: 95%;
+      min-width: 200px !important; /* Adjust the value to set the desired minimum width */
+    }
 
+    .speech-bubble:before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 10px;
+      border-style: solid;
+      border-color: #F2F2F2 transparent transparent transparent;
+    }
 
+    .resolved-icon {
+      position: absolute;
+      top: 50%;
+      right: -25px;
+      transform: translateY(-50%);
+      font-size: 24px;
+    }
 
-
+    .resolved-icon a {
+      color: green;
+      text-decoration: none;
+    }
 

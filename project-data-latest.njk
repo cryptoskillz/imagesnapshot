@@ -36,19 +36,43 @@ permalink: /project/data/latest/
     
     <div class="row">
 
-        <div class="col-sm-6" id="baselineImageDiv">
+        <div class="col-sm-4" id="baselineImageDiv">
             <h1 id="leftImage"></h1>
             <div id="baselineImageScroller" class="dotted-line d-none">
             </div>
         </div>
-        <div class="col-sm-6  other" id="snapshotImageDiv">
+        <div class="col-sm-4  other" id="snapshotImageDiv">
             <h1 id="rightImage"></h1>
             <div id="snapshotImageScroller" class="dotted-line d-none">
             </div>
         </div>
+         <div class="col-md-4 d-none">
+      <!-- Third Column Content: Comments and Comment Box -->
+      <div class="comments-section">
+        <h3>Comments</h3>
+    
+
+
+  <div class="speech-bubble">
+    Praesent ac ex at nisi venenatis dapibus.
+    <div class="resolved-icon">
+        <a href="#" class="resolved-link">
+            <i class="fas fa-check-circle"></i> <!-- Font Awesome check circle icon -->
+        </a>    
+    </div>
+  </div>
+        <div class="comment-box">
+          <h4>Add a Comment</h4>
+          <form>
+            <div class="form-group">
+              <textarea class="form-control" rows="3" placeholder="Your comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/resemblejs@5.0.0/resemble.min.js"></script>
 {% if env.ENVIRONMENT == 'local' %}
 <script type="text/javascript">
 {{ theJs | safe }}

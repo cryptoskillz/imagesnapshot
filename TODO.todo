@@ -2,11 +2,7 @@
 
 snapshot
 
- ✔ redo snapshot it has a whole list of image and it calls the api one at a time as this will let us make the UI function better. @done (23-06-12 16:07)
-
- ✔ when you click the a new phone type we either have to hide the baseline and the snapshot or render them as if they width was larger before it will leave a white box @done (23-06-12 18:56)\
- ✔ hide the resolution when you click on browser @done (23-06-12 19:01)
- ☐ make the browsers repsonsive
+ ☐ when there is a new snapshot delete the comments
 
  Table join (branch v2 / v3)
 
@@ -30,13 +26,29 @@ admin
 
 displays
 
- ☐ use chrome on android
- ☐ firefox on windows
- ☐ remove older iphones
- ☐ edge on windows
- ☐ add ipads
+ ✔ use chrome on android @done (23-06-17 18:24)
+ ✔ firefox on windows @done (23-06-17 18:24)
+ ✔ remove older iphones @done (23-06-17 18:24)
+ ✔ edge on windows @done (23-06-17 18:24)
+ ✔ add ipads @done (23-06-17 18:24)
 
- ☐ look at the dotted line div
+ ✔ look at the dotted line div @done (23-06-17 18:24)
+
+
+ latest
+
+ ☐ render comments from a xhr call
+ ☐ resolve comments
+ ☐ add comment (requires a comment password)
+ ☐ add the comment sql 
+ ☐ add the comment password to the project and display it for the logged in admin
+
+ emualte
+
+ ☐ move the css to seperate css file (as we may want to make this standalone)
+ ☐ move the js to a separte file
+ ☐ add more phones / devices
+ 
 
 
 

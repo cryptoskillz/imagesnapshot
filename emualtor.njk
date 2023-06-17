@@ -99,7 +99,7 @@ permalink: /emulate/
 
 </html>
 <script type="text/javascript">
-  
+  document.getElementById('device-dropdown').classList.remove('d-none')
 let getUrlParamater = (param) => {
     let searchParams = new URLSearchParams(window.location.search)
     let res = searchParams.has(param) // true
@@ -109,7 +109,8 @@ let getUrlParamater = (param) => {
         return ("");
 
 }
-
+ // Set the user agent string to mimic an iPhone 12
+  navigator.userAgent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1';
   document.getElementById('browserFrame').src =  getUrlParamater("url");
 
 </script>
