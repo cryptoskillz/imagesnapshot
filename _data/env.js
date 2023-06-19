@@ -27,5 +27,6 @@ module.exports = {
     DASHBOARDSTRAP: "Welcome to the content editor.",
     CANCREATEACCOUNT: process.env.CANCREATEACCOUNT,
     COMPLEXPASSWORD: process.env.COMPLEXPASSWORD,
-    BROWSERLESSTOKEN: process.env.BROWSERLESSTOKEN
+    BROWSERLESSTOKEN: process.env.BROWSERLESSTOKEN,
+    BTCADDRESS:process.env.BTCADDRESS
 }

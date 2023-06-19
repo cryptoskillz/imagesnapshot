@@ -1,0 +1,110 @@
+---
+permalink: /payment/
+---
+<style>
+.container {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.qr-code {
+    max-width: 200px;
+}
+</style>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Backpage generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/brochure/animate.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/brochure/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/brochure/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/brochure/materialdesignicons.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/brochure/light-color.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/brochure/style.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/brochure/responsive.css">
+</head>
+
+<body>
+    <div class="wrapper">    
+        <header>
+            <div class="custom-container">
+                <div class="header-data">
+                    <div class="logo">
+                        <!--<a href="#" title=""><img src="/assets/images/brochure/logo.png" alt=""></a>-->
+                        {{ENV.TITLE}}
+                    </div>
+                    <div class="mobile-menu-btn">
+                        <a href="#" title=""><i class="fa fa-bars"></i></a>
+                    </div><!-- mobile-menu-btn end-->
+                    <div class="up-social-links">
+                        <ul>
+                            <li><a href="/login/" title=""><i class="mdi mdi-login"></i></a></li>
+                        </ul>
+                    </div>
+                    <nav>
+                        <ul>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <!--header-data end-->
+            </div>
+        </header>
+        <!--header end-->
+        <div class="responsive-mobile-menu">
+            <span class="close-menu"><i class="mdi mdi-close"></i></span>
+            <div class="mobile-menu">
+                <ul>
+                   
+                </ul>
+            </div>
+            <!--mobile-menu end-->
+            <ul class="mb-social-links">
+                <li><a href="/login/" title=""><i class="mdi mdi-login"></i></a></li>
+            </ul>
+            <!--mb-social-links end-->
+            <div class="mb-copyright-text">
+                <p>© cryptoskillz</p>
+            </div>
+            <!--mb-copyright-text end-->
+        </div>
+        <!--responsive-mobile-menu end-->
+        <section class="main-section">
+            <div class="custom-container">
+                <div class="main-section-data">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="banner-text" style="padding-top:124px;">
+                                <h3>PAY US MONEY</h3>
+                                <p>Thank you for considering the use of our software. We believe in providing flexibility to our users, which is why we offer a 'Pay What You Want' model instead of a fixed monthly subscription. We understand the importance of sustainability, and while we don't impose mandatory fees, we rely on the support of our users to cover our costs and ensure the continued availability of our software.<br><br>
+                                If you find value in our software and would like to contribute to its development and maintenance, we gratefully accept Bitcoin donations. Please refer to the address on the right to make your contribution.<br><br>
+                                We appreciate your support and remain committed to delivering a high-quality software experience for our users. Your contributions enable us to innovate and improve our services. Thank you for being a part of our journey. </p>
+                            </div>
+                            <!--banner-text end-->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="banner-imgs">
+                                <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{env.BTCADDRESS}}" alt="">
+                            </div>
+                            <!--banner-imgs end-->
+                        </div>
+
+                  </div>
+                </div>
+                <!--main-section-data end-->
+            </div>
+        </section>
+        <footer>
+          
+        </footer>
+    </div>
+  
+</body>
+
+</html>
