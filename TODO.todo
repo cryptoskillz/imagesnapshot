@@ -18,7 +18,7 @@ misc
 
 admin
 
- ☐ feed in the other displays
+ ✔ feed in the other displays @done (23-06-19 14:11)
 
  latest
 
@@ -39,9 +39,9 @@ displays
 
  ✔ render comments from a xhr call @done (23-06-18 00:08)
  ✔ resolve comments @done (23-06-18 00:08)
- ☐ add comment (requires a comment password)
+ ✔ add comment (requires a comment password) @done (23-06-19 14:11)
  ✔ add the comment sql @done (23-06-18 00:08)
- ☐ add the comment password to the project and display it for the logged in admin
+ ✔ add the comment password to the project and display it for the logged in admin @done (23-06-19 14:11)
 
  emualte
 

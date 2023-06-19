@@ -319,14 +319,28 @@ const resolveComment = (id) => {
 document.getElementById('addCommentButton').addEventListener('click', function() {
     //get the comment textarea
     const theComment = document.getElementById('theComment').value;
+    //get the comment password
+    const thePassword = document.getElementById('commentPassword').value;
+    //set a boolean
+    let allowIt = 1;
+    //check we have valid data
+    if (theComment == "") {
+        allowIt = 0;
+        showAlert('Comment Cannot be blank', 2)
+    }
+    if (thePassword == "") {
+        allowIt = 0;
+        showAlert('Password Cannot be blank', 2)
+    }
     //process the add comment done
     const addCommentdone = (res) => {
+        showAlert('Comment added', 1)
         //parse it
         res = JSON.parse(res);
         //get the div
-         let commentsDiv = document.getElementById('commentsDiv');
-         //add the comment to ti
-         commentsDiv.innerHTML = commentsDiv.innerHTML +  `<div class="speech-bubble" id="comment-${res.record.id}">
+        let commentsDiv = document.getElementById('commentsDiv');
+        //add the comment to ti
+        commentsDiv.innerHTML = commentsDiv.innerHTML + `<div class="speech-bubble" id="comment-${res.record.id}">
                 ${res.record.comment}
     <div class="resolved-icon">
         <a href="javascript:resolveComment(${res.record.id});" class="resolved-link">
@@ -336,17 +350,21 @@ document.getElementById('addCommentButton').addEventListener('click', function()
   </div>`
 
     }
-    //build the body object
-    let bodyObj = {
-        comment: theComment,
-        projectId: getUrlParamater("projectId"),
-        projectDataId: getUrlParamater("projectDataId")
-    }
-    //string it
-    var bodyObjectJson = JSON.stringify(bodyObj);
-    //call the post comment endpoint
-    xhrcall(0, `${apiUrl}admin/comment`, bodyObjectJson, "json", "", addCommentdone, "");
 
+    //check it
+    if (allowIt == 1) {
+        //build the body object
+        let bodyObj = {
+            comment: theComment,
+            commentPassword: thePassword,
+            projectId: getUrlParamater("projectId"),
+            projectDataId: getUrlParamater("projectDataId")
+        }
+        //string it
+        var bodyObjectJson = JSON.stringify(bodyObj);
+        //call the post comment endpoint
+        xhrcall(0, `${apiUrl}admin/comment`, bodyObjectJson, "json", "", addCommentdone, "");
+    }
 });
 
 
@@ -366,6 +384,14 @@ whenDocumentReady(isReady = () => {
             res = JSON.parse(res);
             //store the snapshots
             snapShots = res.snapshot;
+            //set the comments password 
+            if (res.commentPassword != "") {
+                document.getElementById('commentPassword').value = res.commentPassword;
+                document.getElementById("commentHeader").innerHTML = `Add a comment (comment password is ${res.commentPassword})`
+            } else
+                document.getElementById("commentHeader").innerHTML = `Add a comment (ask the admin to share the password)`
+
+
             //store the comments
             comments = res.comments;
             //console.log(snapShots);
@@ -421,7 +447,7 @@ whenDocumentReady(isReady = () => {
             document.getElementById('browserIcons').classList.remove('d-none');
         }
         //make the snapshot xhr call
-        xhrcall(1, `${apiUrl}image/latest/?projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}`, "", "json", "", snapshotDone, token);
+        xhrcall(1, `${apiUrl}image/latest/?projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}`, "", "json", "", snapshotDone, getToken());
     };
     //fetch the different user agents for the project
     xhrcall(1, `${apiUrl}admin/userbrowsers?projectId=${getUrlParamater("projectId")}`, "", "json", "", browsersDone, token);

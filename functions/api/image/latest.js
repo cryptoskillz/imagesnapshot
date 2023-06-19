@@ -1,3 +1,28 @@
+const jwt = require('@tsndr/cloudflare-worker-jwt')
+
+//jwt decoder
+let decodeJwt = async (req, secret) => {
+    //get the bearer token
+    let bearer = req.get('authorization');
+    //check they sent a bearer token
+    if (bearer == null) {
+        //send blank
+        return ("")
+    } else {
+        //check if its a bearer token
+        try {
+            let details = await jwt.decode(bearer, secret)
+            return (details)
+        } catch (error) {
+            console.log(error)
+            return ("")
+        }
+
+    }
+
+
+}
+
 export async function onRequestGet(context) {
     //build the paramaters
     const {
@@ -13,6 +38,21 @@ export async function onRequestGet(context) {
     const { searchParams } = new URL(request.url);
     //get the project ID
     const projectId = searchParams.get('projectId');
+    //check if we have a toeken
+    const token = await decodeJwt(request.headers, env.SECRET);
+    let commentPassword = "";
+    if (token != "") {
+        //check if they are an admin
+        if (token.isAdmin == 1)
+        {
+            //get the comments password
+            const queryComment = context.env.DB.prepare(`SELECT commentPassword from projects where id = '${projectId}' and isDeleted = 0`);
+            const queryResultComment = await queryComment.first();
+            //set it
+            commentPassword = queryResultComment.commentPassword;
+        }
+    }
+
     //get the projectdatid
     const projectDataId = searchParams.get('projectDataId');
     const query = context.env.DB.prepare(`SELECT name,url from projectData where projectId = '${projectId}' and id = '${projectDataId}' and isDeleted = 0`);
@@ -38,6 +78,7 @@ export async function onRequestGet(context) {
     let res = {}
     res.snapshot = snapshotArray;
     res.comments = queryResult3.results;
+    res.commentPassword = commentPassword;
     //return it.
     return new Response(JSON.stringify(res), { status: 200 });
 }

@@ -39,6 +39,18 @@ export async function onRequestPost(context) {
     let theData;
     if (contentType != null) {
         theData = await request.json();
+        //console.log(t)
+        //if (theData.commentPassword != "")
+        //{
+              //get the comments password
+            const queryComment = context.env.DB.prepare(`SELECT COUNT(*) as total from projects where id = '${theData.projectId}' and commentPassword = '${theData.commentPassword}' and isDeleted = 0`);
+            const queryResultComment = await queryComment.first();
+            if (queryResultComment.total == 0)
+            {
+                return new Response(JSON.stringify({ error: `Wrong Password` }), { status: 400 });
+            }           
+        //}
+        //check the password
         const theSql = `INSERT INTO projectComments (comment, projectId,projectDataId) VALUES ('${theData.comment}',${theData.projectId},'${theData.projectDataId}' )`
         const query = await context.env.DB.prepare(theSql).run();
         if (query.success == true) {
@@ -47,7 +59,7 @@ export async function onRequestPost(context) {
             theJson.comment = theData.comment;
             return new Response(JSON.stringify({ record: theJson}), { status: 200 });
         } else {
-            return new Response(JSON.stringify({ error: `Record has not been added` }), { status: 400 });
+            return new Response(JSON.stringify({ error: `Comment has not been added` }), { status: 400 });
 
         }
 

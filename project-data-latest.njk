@@ -5,6 +5,7 @@ permalink: /project/data/latest/
 {% set theJs %}
 {% include 'latest.js' %}
 {% endset %}
+<br>
 <div class="alert alert-success  d-none" role="alert" id="accountsSuccess"></div>
 <div class="alert alert-danger  d-none" role="alert" id="accountsAlert"></div>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -54,11 +55,12 @@ permalink: /project/data/latest/
 
         </div>
         <div class="comment-box">
-          <h4>Add a Comment</h4>
+          <h4 id="commentHeader">Add a comment</h4>
           <form>
             <div class="form-group">
               <textarea class="form-control" rows="3" placeholder="Your comment" id="theComment"></textarea>
             </div>
+            <input type="text" a class="form-control"  id="commentPassword" name="commentPassword" placeholder="Password"><br>
             <a id="addCommentButton" type="submit" class="btn btn-primary">Submit</a>
           </form>
         </div>

@@ -47,7 +47,6 @@ export async function onRequestPut(context) {
         let theQueryValues = "updatedAt = CURRENT_TIMESTAMP";
         let theQueryWhere = "";
         //loop through the query data
-        //console.log(theData.tableData)
         for (const key in theData.tableData) {
             let tdata = theData.tableData;
             //check it is not the table name
@@ -62,7 +61,6 @@ export async function onRequestPut(context) {
         }
         //compile the query
         theQuery = theQuery + theQueryValues + theQueryWhere;
-        //console.log(theQuery);
         const info = await context.env.DB.prepare(theQuery)
             .run();
 
@@ -125,8 +123,6 @@ export async function onRequestPost(context) {
     if (contentType != null) {
         //get the data
         theData = await request.json();
-
-        //console.log(theData)
         //check if it is a user table and generate an API id
         let apiSecret = "";
         if (theData.table == "user")
@@ -156,7 +152,6 @@ export async function onRequestPost(context) {
         }
         //compile the query
         theQuery = theQuery + theQueryFields + " ) VALUES ( " + theQueryValues + " ); "
-        //console.log(theQuery)
         //run the query
         const info = await context.env.DB.prepare(theQuery)
             .run();
@@ -181,7 +176,6 @@ export async function onRequestGet(context) {
     } = context;
 
     let payLoad = await decodeJwt(request.headers, env.SECRET);
-    //console.log(payLoad)
     let query;
     let queryResults;
     //get the search paramaters
@@ -214,9 +208,6 @@ export async function onRequestGet(context) {
     //check if they also want the data
     //build the where statement if they sent up and id
     let sqlWhere = `where ${tableName}.isDeleted = 0 `;
-
-    //if ((recordId != "") && (foreignId == ""))
-    //console.log(recordId)
     //check if we have a record ID but not a foreign Id the we just want to check against the id.
     if ((recordId != "") && (foreignKey == ""))
         sqlWhere = sqlWhere + ` and id = ${recordId}`
@@ -229,12 +220,9 @@ export async function onRequestGet(context) {
     //process the fields
     let tmp = fields.split(",");
     //not we dont want to show the isDeleted flag if there. 
-    //console.log(tmp.length)
     let theQuery = ""
     if (tmp.length == 1) {
         theQuery = `SELECT * from ${tableName} ${sqlWhere} `
-        //console.log("theQuery a")
-        //console.log(theQuery)
         query = context.env.DB.prepare(theQuery);
     } else {
         let fields = "";
@@ -246,13 +234,10 @@ export async function onRequestGet(context) {
         }
 
         theQuery = `SELECT ${fields} from ${tableName} ${sqlWhere}`
-        //console.log("theQuery b")
-        console.log(theQuery)
         query = context.env.DB.prepare(theQuery);
     }
 
     queryResults = await query.all();
-    //console.log(queryResults.results)
     queryFin.data = queryResults.results;
     return new Response(JSON.stringify(queryFin), { status: 200 });
 }
