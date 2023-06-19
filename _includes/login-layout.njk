@@ -28,10 +28,7 @@
 
 <body class="bg-gradient-primary">
     <div class="container">
-        <div class="spinner-border float-right d-none" role="status" id="spinner">
-            <span class="sr-only">Loading...</span>
-        </div>
-
+        {% include 'layouts/spinner.njk' %}
         {{ content | safe }}
     </div>
     <!-- Bootstrap core JavaScript-->

@@ -77,6 +77,7 @@ export async function onRequestPost(context) {
             }
         }
 
+
         //check if we want to login a user
         if (registerData.action == 2) {
             if ((registerData.email == undefined) || (registerData.password == undefined))
@@ -88,6 +89,7 @@ export async function onRequestPost(context) {
             //get the result
             //note : we could make this return first and not all 
             const queryResult = await query.all();
+            //console.log(queryResult)
             //check the length
             if (queryResult.results.length > 0) {
                 //set the user
@@ -100,7 +102,6 @@ export async function onRequestPost(context) {
                 //check if they are deleted
                 if (user.isDeleted == 1)
                     return new Response(JSON.stringify({ error: "user does not exist" }), { status: 400 });
-
                 if (user.isAdmin == 1) {
                     //prepare the query
                     const query2 = context.env.DB.prepare(`SELECT COUNT(*) as total from projects where isDeleted = 0`);

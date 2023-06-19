@@ -3,7 +3,7 @@ const jwt = require('@tsndr/cloudflare-worker-jwt');
 //decode the jwt token
 let decodeJwt = async (req, secret) => {
     let bearer = req.get('authorization')
-    console.log(bearer);
+    //console.log(bearer);
     let details = "";
     if (bearer != null)
     {

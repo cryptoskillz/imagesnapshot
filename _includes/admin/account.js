@@ -303,7 +303,6 @@ whenDocumentReady(isReady = () => {
     //logout
     let urlParam = getUrlParamater('logout')
     if (urlParam != "") {
-        clearCache(1);
         showAlert('You are now logged out', 1, 0)
     }
 

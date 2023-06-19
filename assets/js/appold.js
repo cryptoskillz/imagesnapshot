@@ -560,10 +560,10 @@ let xhrcall = (type = 1, method, bodyObj = "", setHeader = "", redirectUrl = "",
       Note if we are not using strai and have a custom URL we can change it here like wise if we want to use 2 we can check the method to select the correct base url
     */
 
-    checkElement = document.getElementById("spinner");
+    checkElement = document.getElementById("spinner-container");
 
     if (typeof(checkElement) != 'undefined' && checkElement != null) {
-        document.getElementById("spinner").classList.remove("d-none");
+        document.getElementById("spinner-container").classList.remove("d-none");
     }
     let url = apiUrl + method;
     //store the type
@@ -611,7 +611,7 @@ let xhrcall = (type = 1, method, bodyObj = "", setHeader = "", redirectUrl = "",
         checkElement = document.getElementById("confirmation-modal-delete-button");
 
         if (typeof(checkElement) != 'undefined' && checkElement != null) {
-            document.getElementById("spinner").classList.add("d-none");
+            document.getElementById("spinner-container").classList.add("d-none");
         }
         //check if its an error
         let res = xhr.response;

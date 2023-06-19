@@ -901,10 +901,10 @@ let xhrcall = async (type = 1, method, bodyObj = "", setHeader = "", redirectUrl
       Note if we are not using strai and have a custom URL we can change it here like wise if we want to use 2 we can check the method to select the correct base url
     */
 
-    //checkElement = document.getElementById("spinner");
-    if (checkElement("spinner") == true) {
+    //checkElement = document.getElementById("spinner-container");
+    if (checkElement("spinner-container") == true) {
         //if (typeof(checkElement) != 'undefined' && checkElement != null) {
-        document.getElementById("spinner").classList.remove("d-none");
+        document.getElementById("spinner-container").classList.remove("d-none");
     }
     let url = method;
     let result = method.includes("http");
@@ -955,14 +955,14 @@ let xhrcall = async (type = 1, method, bodyObj = "", setHeader = "", redirectUrl
         //console.log(xhr.status)
         //console.log(xhr.response)
         if (xhr.status == 0)
-            document.getElementById("spinner").classList.add("d-none");
+            document.getElementById("spinner-container").classList.add("d-none");
     };
     xhr.onload = function() {
         if (checkElement("confirmation-modal-delete-button") == true) {
 
             //checkElement = document.getElementById("confirmation-modal-delete-button");
             //if (typeof(checkElement) != 'undefined' && checkElement != null) {
-            document.getElementById("spinner").classList.add("d-none");
+            document.getElementById("spinner-container").classList.add("d-none");
         }
         //check if its an error
         let res = xhr.response;
@@ -970,7 +970,7 @@ let xhrcall = async (type = 1, method, bodyObj = "", setHeader = "", redirectUrl
 
         //check for errors
         if ((xhr.status == 400) || (xhr.status == 403) || (xhr.status == 500)) {
-            document.getElementById("spinner").classList.add("d-none");
+            document.getElementById("spinner-container").classList.add("d-none");
             //process the response
             res = JSON.parse(res)
             errorMessage = res.error

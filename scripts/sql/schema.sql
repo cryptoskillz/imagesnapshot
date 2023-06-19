@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS projectComments;
 
 CREATE TABLE "projects" (
 	"id"	INTEGER,
+	"userId"	INTEGER,
 	"commentPassword" TEXT,
 	"guid" INTEGER,
 	"name"	TEXT,
@@ -24,7 +25,7 @@ CREATE TABLE "projects" (
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
-INSERT INTO "projects" ("id","guid","name","commentPassword") VALUES (1, '99ad01ac-062d-44f1-3c9d-69e1bf815700','Purdy','cheese');
+INSERT INTO "projects" ("id","UserId","guid","name","commentPassword") VALUES (1,1, '99ad01ac-062d-44f1-3c9d-69e1bf815700','Purdy','cheese');
 
 CREATE TABLE "projectSnapShots" (
 	"id"	INTEGER,
