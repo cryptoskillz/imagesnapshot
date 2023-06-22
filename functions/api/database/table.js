@@ -283,9 +283,8 @@ export async function onRequestGet(context) {
 
         }
 
-
     } catch (error) {
-        return new Response(`error : ${theQuery}`, { status: 400 });
+        return new Response(JSON.stringify(error), { status: 400 });
         return ("")
     }
 }
