@@ -17,17 +17,32 @@ var uuid = require('uuid');
 
 //JWT model
 const jwt = require('@tsndr/cloudflare-worker-jwt');
-//decode the jwt token
+
+
+//jwt decoder
 let decodeJwt = async (req, secret) => {
-    let bearer = req.get('authorization')
-    //console.log(bearer);
-    let details = "";
-    if (bearer != null) {
-        bearer = bearer.replace("Bearer ", "");
-        details = await jwt.decode(bearer, secret)
+    //get the bearer token
+    let bearer = req.get('authorization');
+    //check they sent a bearer token
+    if (bearer == null) {
+        //send blank
+        return ("")
+    } else {
+        //check if its a bearer token
+        try {
+            let details = await jwt.decode(bearer, secret)
+            return (details)
+        } catch (error) {
+            console.log(error)
+            return ("")
+        }
+
     }
-    return (details)
+
+
 }
+
+
 export async function onRequestPut(context) {
     //build the paramaters
     const {
