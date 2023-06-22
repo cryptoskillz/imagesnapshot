@@ -14,6 +14,14 @@ misc
 
  ☐ change the project id and project data id to a guid to make it harder to guess results
  ☐ add an api call to tie it into the CI's and such 
+ ☐ refactor the currentdata / currentdataitem it is confusing
+
+ snapshot
+
+ ☐ breaks with the second single snapshot
+ ☐ when you click here it does not set preview to 1
+ ☐ preview images is broke 
+ 
 
 
 admin
@@ -48,7 +56,7 @@ displays
  ✔ move the css to seperate css file (as we may want to make this standalone) @done (23-06-21 22:10)
  ✔ move the js to a separte file @done (23-06-21 22:10)
  ✔ add more phones / devices @done (23-06-21 22:10)
- 
+
 
 
 

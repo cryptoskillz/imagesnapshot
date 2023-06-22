@@ -117,7 +117,7 @@ const clickThumbnail = (id) => {
             } else {
                 snapshotImage = `${apiUrl}image/image/?imageId=${res.snapshotId}`;
                 //render it
-                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:${setRes}" class=""/>`;
+                snapshotElement.innerHTML = `<img src="${snapshotImage}" style="width:${setRes}px" class=""/>`;
             }
         }
         //if we have a baseline and snapshot so the compare button
@@ -147,7 +147,7 @@ const clickThumbnail = (id) => {
     }
     //get the baseline 
     //xhrcall(1, `${apiUrl}image/latestimages?projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}`, "", "json", "", latestImagesDone, token);
-    xhrcall(1, `${apiUrl}image/latestimages?projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}&snapshot=${theJson}`, "", "json", "", latestImagesDone, token);
+    xhrcall(1, `${apiUrl}image/latestimages?preview=${getUrlParamater("preview")}&projectId=${getUrlParamater("projectId")}&projectDataId=${getUrlParamater("projectDataId")}&snapshot=${theJson}`, "", "json", "", latestImagesDone, token);
 
 
 }

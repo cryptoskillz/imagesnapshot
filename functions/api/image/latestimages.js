@@ -34,7 +34,7 @@ export async function onRequestGet(context) {
     //get the snapshot data
     let snapshot = searchParams.get('snapshot');
     snapshot = JSON.parse(snapshot);
-    console.log(snapshot);
+    //console.log(snapshot);
     let theJson = {}
 
     //get the baseline
@@ -61,7 +61,7 @@ export async function onRequestGet(context) {
 
     theJson.previewId = ""
     //get the preview 
-    if (preview == 0) {
+    if (preview == 1) {
         //get the latest
         const theSQL = `SELECT kvId from projectImages where projectId = '${projectId}' and projectDataId = '${projectDataId}' and isPreview = 1 and viewportWidth = '${snapshot.viewportWidth}' and viewportHeight = '${snapshot.viewportHeight}' and browserDefault = '${snapshot.browserDefault}' and browserName = '${snapshot.browserName}' and browserOs = '${snapshot.browserOs}'`
         //console.log(theSQL)

@@ -94,5 +94,5 @@ whenDocumentReady(isReady = () => {
         document.getElementById("timeline").innerHTML = finHtml
     }
     //make the snapshot xhr call
-    xhrcall(1, `${apiUrl}admin/timeline/?projectId=${project.id}&projectDataId=${window.localStorage.currentDataItemId}`, "", "json", "", timelineDone, token);
+    xhrcall(1, `${apiUrl}admin/timeline/?projectId=${window.localStorage.projectId}&projectDataId=${window.localStorage.currentDataItemId}`, "", "json", "", timelineDone, token);
 })

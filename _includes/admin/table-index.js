@@ -18,6 +18,18 @@ let projectSelectChange = (id, theElement) => {
     //       until iam sure I have not broken anything further down the chain.
     //window.localStorage.currentDataItem = "";
     //console.log(id)
+
+
+    //check if its a project and set the project id
+
+    if (window.location.pathname == "/projects/")
+    {
+        window.localStorage.projectId = id; 
+    }
+    else
+    {
+      //we should move the current data item in here  
+    }
     for (var i = 0; i < level1Data.data.length; ++i) {
         if (id == level1Data.data[i].id) {
             window.localStorage.currentDataItem = JSON.stringify(level1Data.data[i])

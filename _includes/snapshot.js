@@ -60,7 +60,7 @@ whenDocumentReady(isReady = () => {
         //get the result of ID's so we can process them async
         for (var i = 0; i < createqueueResults.length; ++i) {
             //store the call
-            let tmpUrl = `${apiUrl}image/singlesnapshot/?projectId=${project.id}&projectDataId=${window.localStorage.currentDataItemId}&preview=${getUrlParamater("preview")}&snapshotId=${createqueueResults[i].id}`
+            let tmpUrl = `${apiUrl}image/singlesnapshot/?projectId=${window.localStorage.projectId}&projectDataId=${window.localStorage.currentDataItemId}&preview=${getUrlParamater("preview")}&snapshotId=${createqueueResults[i].id}`
             let tmpXhrCalls = { "url": `${tmpUrl}`, "doneFunction": "snapshotDone", "xhrType": 1 }
             urls.push(tmpXhrCalls);
         }
@@ -75,7 +75,7 @@ whenDocumentReady(isReady = () => {
     }
     //make the snapshot xhr callß
     let init = async () => {
-        xhrcall(1, `${apiUrl}image/createqueue/?projectId=${project.id}&projectDataId=${window.localStorage.currentDataItemId}&preview=${getUrlParamater("preview")}`, "", "json", "", createqueueDone, token);
+        xhrcall(1, `${apiUrl}image/createqueue/?projectId=${window.localStorage.projectId}&projectDataId=${window.localStorage.currentDataItemId}&preview=${getUrlParamater("preview")}`, "", "json", "", createqueueDone, token);
     }
     //start ting's
     init();
