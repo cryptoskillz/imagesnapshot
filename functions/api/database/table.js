@@ -18,7 +18,6 @@ var uuid = require('uuid');
 //JWT model
 const jwt = require('@tsndr/cloudflare-worker-jwt');
 
-
 //jwt decoder
 let decodeJwt = async (req, secret) => {
     //get the bearer token
@@ -215,7 +214,7 @@ export async function onRequestGet(context) {
     let theToken = ""
     try {
         theToken = await decodeJwt(request.headers, env.SECRET);
-        console.log(theToken)
+        //console.log(theToken)
         if (theToken == "")
             return new Response(JSON.stringify({ error: "Token required" }), { status: 400 });
         else {
@@ -279,12 +278,22 @@ export async function onRequestGet(context) {
                 //set a user id
                 let userId = "";
                 //check if its the super admin (always id 1)
-                if (theToken.id != 1) {
+                if (theToken.id != 1 && theToken.id != undefined) {
                     //add to the where
                     if (sqlWhere == "")
                         sqlWhere = sqlWhere + `userId = ${theToken.id}`
                     else
                         sqlWhere = sqlWhere + ` and userId = ${theToken.id}`
+                }
+                else
+                {
+                    if (theToken.payload.id != 1 && theToken.payload.id != undefined) {
+                        //add to the where
+                        if (sqlWhere == "")
+                            sqlWhere = sqlWhere + `userId = ${theToken.payload.id}`
+                        else
+                            sqlWhere = sqlWhere + ` and userId = ${theToken.payload.id}`
+                    }
                 }
                 //build the query
                 theQuery = `SELECT ${fields} from ${tableName} ${sqlWhere} `;
