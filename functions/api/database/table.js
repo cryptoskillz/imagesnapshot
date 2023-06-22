@@ -173,23 +173,26 @@ export async function onRequestPost(context) {
                 }
             }
 
-            let tmpId;
-            if (theToken.id != 1 && theToken.id != undefined) {
-                tmpId = theToken.id
-            } else {
-                if (theToken.payload.id != 1 && theToken.payload.id != undefined) {
-                    tmpId = theToken.payload.id
-                }
-            }
-            //add the user id
-            theQueryFields = theQueryFields + `,'userId'`
-            theQueryValues = theQueryValues + `,'${theToken.id}'`
+
 
             //this is a hack we should rationalise this at some point.
             if (theData.table == "projects") {
                 const guid = uuid.v4();
                 theQueryFields = theQueryFields + `,'guid'`
                 theQueryValues = theQueryValues + `,'${guid}'`
+
+                let tmpId = 0;
+                if (theToken.id != undefined) {
+                    tmpId = theToken.id
+                } else {
+                    if (theToken.payload.id != undefined) {
+                        tmpId = theToken.payload.id
+                    }
+                }
+
+                theQueryFields = theQueryFields + `,'userId'`
+                theQueryValues = theQueryValues + `,'${theToken.id}'`
+
             }
             //compile the query
             theQuery = theQuery + theQueryFields + " ) VALUES ( " + theQueryValues + " ); "
@@ -307,23 +310,28 @@ export async function onRequestGet(context) {
 
 
                 */
-                if (theToken.id != 1 && theToken.id != undefined) {
+
+                let tmpId = 0;
+                if (theToken.id != undefined) {
+                    tmpId = theToken.id
+                } else {
+                    if (theToken.payload.id != undefined) {
+                        tmpId = theToken.payload.id
+                    }
+                }
+
+
+                if (tmpId != 1 && tmpId != 0) {
+                    console.log('in')
                     //add to the where
                     if (sqlWhere == "")
-                        sqlWhere = sqlWhere + `userId = ${theToken.id}`
+                        sqlWhere = sqlWhere + `userId = ${tmpId}`
                     else
-                        sqlWhere = sqlWhere + ` and userId = ${theToken.id}`
-                } else {
-                    if (theToken.payload.id != 1 && theToken.payload.id != undefined) {
-                        //add to the where
-                        if (sqlWhere == "")
-                            sqlWhere = sqlWhere + `userId = ${theToken.payload.id}`
-                        else
-                            sqlWhere = sqlWhere + ` and userId = ${theToken.payload.id}`
-                    }
+                        sqlWhere = sqlWhere + ` and userId = ${tmpId}`
                 }
                 //build the query
                 theQuery = `SELECT ${fields} from ${tableName} ${sqlWhere} `;
+                //console.log(theQuery)
                 //run it
                 query = context.env.DB.prepare(theQuery);
             }
