@@ -286,6 +286,6 @@ export async function onRequestGet(context) {
         }
 
     } catch (error) {
-        return new Response(theQuery, { status: 400 });
+        return new Response(theToken, { status: 400 });
     }
 }
