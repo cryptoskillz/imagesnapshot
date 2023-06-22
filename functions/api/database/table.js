@@ -199,10 +199,8 @@ export async function onRequestGet(context) {
     let theQuery = ""
     let theToken = ""
     try {
-
-
-
-        const theToken = await decodeJwt(request.headers, env.SECRET);
+        theToken = await decodeJwt(request.headers, env.SECRET);
+        console.log(theToken)
         if (theToken == "")
             return new Response(JSON.stringify({ error: "Token required" }), { status: 400 });
         else {
