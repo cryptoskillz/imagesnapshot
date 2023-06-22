@@ -173,6 +173,14 @@ export async function onRequestPost(context) {
                 }
             }
 
+            let tmpId;
+            if (theToken.id != 1 && theToken.id != undefined) {
+                tmpId = theToken.id
+            } else {
+                if (theToken.payload.id != 1 && theToken.payload.id != undefined) {
+                    tmpId = theToken.payload.id
+                }
+            }
             //add the user id
             theQueryFields = theQueryFields + `,'userId'`
             theQueryValues = theQueryValues + `,'${theToken.id}'`
@@ -262,7 +270,7 @@ export async function onRequestGet(context) {
             //process the fields
             let tmp = fields.split(",");
             //not we dont want to show the isDeleted flag if there. 
-            
+
             if (tmp.length == 1) {
                 theQuery = `SELECT * from ${tableName} ${sqlWhere} `
                 query = context.env.DB.prepare(theQuery);
@@ -278,15 +286,34 @@ export async function onRequestGet(context) {
                 //set a user id
                 let userId = "";
                 //check if its the super admin (always id 1)
+                /*
+
+                for some reason locally it is just token.id but on production is is TheToken.payload.is
+
+                will look into this later.
+
+                local
+
+                {
+                    id: 1, username: 'cryptoskillz', isAdmin: 1, iat: 1687423976 
+                }
+
+                production 
+
+                {
+                    header: null,
+                    payload: { id: 1, username: 'cryptoskillz', isAdmin: 1, iat: 1687423976 }
+                }
+
+
+                */
                 if (theToken.id != 1 && theToken.id != undefined) {
                     //add to the where
                     if (sqlWhere == "")
                         sqlWhere = sqlWhere + `userId = ${theToken.id}`
                     else
                         sqlWhere = sqlWhere + ` and userId = ${theToken.id}`
-                }
-                else
-                {
+                } else {
                     if (theToken.payload.id != 1 && theToken.payload.id != undefined) {
                         //add to the where
                         if (sqlWhere == "")
