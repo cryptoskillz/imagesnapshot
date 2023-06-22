@@ -196,6 +196,8 @@ export async function onRequestGet(context) {
         data, // arbitrary space for passing data between middlewares
     } = context;
 
+    let theQuery = ""
+
     try {
 
 
@@ -248,7 +250,7 @@ export async function onRequestGet(context) {
             //process the fields
             let tmp = fields.split(",");
             //not we dont want to show the isDeleted flag if there. 
-            let theQuery = ""
+            
             if (tmp.length == 1) {
                 theQuery = `SELECT * from ${tableName} ${sqlWhere} `
                 query = context.env.DB.prepare(theQuery);
@@ -284,7 +286,7 @@ export async function onRequestGet(context) {
         }
 
     } catch (error) {
-        return new Response(JSON.stringify(error), { status: 400 });
+        return new Response(theQuery, { status: 400 });
         return ("")
     }
 }
