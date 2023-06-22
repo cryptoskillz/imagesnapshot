@@ -22,6 +22,8 @@
 
     -->
     <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/emulate.css" rel="stylesheet">
+
     <!-- Custom styles for this page -->
 <script>
   //env var from the env var
@@ -61,9 +63,10 @@ Image Snapshot
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Device
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Iphone 12</a>
-  
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="">
+    <a class="dropdown-item" href="javascript:changeEmulator(1);">Iphone 12</a>
+      <a class="dropdown-item" href="javascript:changeEmulator(2);">Google Pixel 7</a>
+
   </div>
 </div>
 

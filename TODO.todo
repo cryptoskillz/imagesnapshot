@@ -45,9 +45,9 @@ displays
 
  emualte
 
- ☐ move the css to seperate css file (as we may want to make this standalone)
- ☐ move the js to a separte file
- ☐ add more phones / devices
+ ✔ move the css to seperate css file (as we may want to make this standalone) @done (23-06-21 22:10)
+ ✔ move the js to a separte file @done (23-06-21 22:10)
+ ✔ add more phones / devices @done (23-06-21 22:10)
  
 
 
