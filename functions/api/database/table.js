@@ -197,7 +197,7 @@ export async function onRequestGet(context) {
     } = context;
 
     let theQuery = ""
-
+    let theToken = ""
     try {
 
 
