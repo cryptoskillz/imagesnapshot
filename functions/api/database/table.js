@@ -281,7 +281,7 @@ export async function onRequestGet(context) {
             queryFin.data = queryResults.results;
             return new Response(JSON.stringify(queryFin), { status: 200 });
         } catch (error) {
-            return new Response(JSON.stringify(error), { status: 400 });
+            return new Response(`error : ${theQuery}`, { status: 400 });
             return ("")
         }
     }
